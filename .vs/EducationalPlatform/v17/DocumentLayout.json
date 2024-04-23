@@ -1,0 +1,337 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\option.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\option.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\dto\\teacherdetailswithoutsubjectandquizesnamesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\dto\\teacherdetailswithoutsubjectandquizesnamesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\questioncorrectanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\questioncorrectanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\data\\eduplatformcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\data\\eduplatformcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\dto\\teacherdetailswithsubjectandquizesnamesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\dto\\teacherdetailswithsubjectandquizesnamesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\answerresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\answerresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\entities\\studentanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\studentanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\services\\istudentservices .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\services\\istudentservices .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/./EduPlatformDb/True/SqlTable/dbo.Teachers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|c:\\users\\windows 10\\downloads\\compressed\\educationalplatform-main\\educationalplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Subject.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Subject.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Subject.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Subject.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Subject.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAwBEAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T21:51:59.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Question.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Question.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Question.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Question.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Question.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T21:17:09.544Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Teacher.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Teacher.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Teacher.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Teacher.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Teacher.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA5wBMAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T14:22:12.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Enrollment.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Enrollment.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Enrollment.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Enrollment.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Enrollment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T14:19:27.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Option.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Option.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Option.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Option.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Option.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T21:44:39.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TeacherDetailsWithoutSubjectAndQuizesNamesDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\DTO\\TeacherDetailsWithoutSubjectAndQuizesNamesDTO.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\TeacherDetailsWithoutSubjectAndQuizesNamesDTO.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\DTO\\TeacherDetailsWithoutSubjectAndQuizesNamesDTO.cs",
+              "RelativeToolTip": "EducationalPlatform\\DTO\\TeacherDetailsWithoutSubjectAndQuizesNamesDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAUAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T21:10:43.191Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "QuestionCorrectAnswer.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\QuestionCorrectAnswer.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\QuestionCorrectAnswer.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\QuestionCorrectAnswer.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\QuestionCorrectAnswer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T21:32:54.404Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\appsettings.json",
+              "RelativeDocumentMoniker": "EducationalPlatform\\appsettings.json",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\appsettings.json",
+              "RelativeToolTip": "EducationalPlatform\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-23T14:17:20.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EduPlatformContext.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Data\\EduPlatformContext.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Data\\EduPlatformContext.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Data\\EduPlatformContext.cs",
+              "RelativeToolTip": "EducationalPlatform\\Data\\EduPlatformContext.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAcwDYAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T11:06:41.558Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Quiz.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Quiz.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Quiz.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Quiz.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Quiz.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAzwA8AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T21:04:29.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Student.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Student.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Student.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Student.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAgwBIAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T21:07:13.755Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Result.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Result.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Result.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Result.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Result.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:09:42.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TeacherController.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Controllers\\TeacherController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\TeacherController.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Controllers\\TeacherController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\TeacherController.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAAwDsAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T11:12:42.596Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TeacherDetailsWithSubjectAndQuizesNamesDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\DTO\\TeacherDetailsWithSubjectAndQuizesNamesDTO.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\TeacherDetailsWithSubjectAndQuizesNamesDTO.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\DTO\\TeacherDetailsWithSubjectAndQuizesNamesDTO.cs",
+              "RelativeToolTip": "EducationalPlatform\\DTO\\TeacherDetailsWithSubjectAndQuizesNamesDTO.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAQwAoAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T21:11:56.122Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Answer.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Answer.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Answer.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\Answer.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\Answer.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAAAkAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T14:24:58.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AnswerResult.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\AnswerResult.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\AnswerResult.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\AnswerResult.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\AnswerResult.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:35:38.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "StudentAnswer.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\StudentAnswer.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\StudentAnswer.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Entities\\StudentAnswer.cs",
+              "RelativeToolTip": "EducationalPlatform\\Entities\\StudentAnswer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T19:58:01.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IStudentServices .cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\services\\IStudentServices .cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\services\\IStudentServices .cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\services\\IStudentServices .cs",
+              "RelativeToolTip": "EducationalPlatform\\services\\IStudentServices .cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T07:18:03.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "dbo.Teachers [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/./EduPlatformDb/True/SqlTable/dbo.Teachers.sql",
+              "ToolTip": "dbo.Teachers [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-04-18T11:13:06.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Program.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Program.cs",
+              "ToolTip": "C:\\Users\\Windows 10\\Downloads\\Compressed\\EducationalPlatform-main\\EducationalPlatform\\Program.cs",
+              "RelativeToolTip": "EducationalPlatform\\Program.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAEwC0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-16T09:43:36.277Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
