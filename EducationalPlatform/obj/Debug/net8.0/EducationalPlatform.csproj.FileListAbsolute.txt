@@ -286,3 +286,14 @@ C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPla
 C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.genruntimeconfig.cache
 C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\ref\EducationalPlatform.dll
 C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.sourcelink.json
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.csproj.AssemblyReference.cache
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.GeneratedMSBuildEditorConfig.editorconfig
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.AssemblyInfoInputs.cache
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.AssemblyInfo.cs
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.csproj.CoreCompileInputs.cache
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.MvcApplicationPartsAssemblyInfo.cs
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.MvcApplicationPartsAssemblyInfo.cache
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.sourcelink.json
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\refint\EducationalPlatform.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.pdb
