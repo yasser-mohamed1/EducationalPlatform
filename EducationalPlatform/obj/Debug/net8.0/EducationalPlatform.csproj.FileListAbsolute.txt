@@ -285,3 +285,4 @@ C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPla
 C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.pdb
 C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.genruntimeconfig.cache
 C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\ref\EducationalPlatform.dll
+C:\Users\Windows 10\Downloads\Compressed\EducationalPlatform-main\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.sourcelink.json

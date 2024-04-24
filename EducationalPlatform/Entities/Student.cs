@@ -15,7 +15,6 @@ namespace EducationalPlatform.Entities
         public char ?gender { get; set; }
         public string? Level { get; set; }
         public string? Address { get; set; }
-        public List<Subject> Subjects { get; set; } = new List<Subject>();
         public List<Quiz>? Quizs { get; set; }
         public List<Result>? Result { get; set; }
     }

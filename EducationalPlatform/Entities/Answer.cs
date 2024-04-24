@@ -14,7 +14,7 @@ namespace EducationalPlatform.Entities
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student Student { get; set; }
-        public Result? Result { get; set; }
+        public AnswerResult AnswerResult { get; set; }
 
     }
 }

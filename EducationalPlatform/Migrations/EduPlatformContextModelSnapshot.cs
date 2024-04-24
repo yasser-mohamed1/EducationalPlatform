@@ -33,9 +33,6 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
@@ -44,8 +41,6 @@ namespace EducationalPlatform.Migrations
                     b.HasIndex("QuestionId")
                         .IsUnique();
 
-                    b.HasIndex("ResultId");
-
                     b.HasIndex("StudentId");
 
                     b.ToTable("Answers");
@@ -53,21 +48,13 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.AnswerResult", b =>
                 {
-                    b.Property<int?>("AnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("AnswerId"));
-
-                    b.Property<int>("AnswerId1")
+                    b.Property<int>("AnswerId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ResultId")
                         .HasColumnType("int");
 
                     b.HasKey("AnswerId");
-
-                    b.HasIndex("AnswerId1");
 
                     b.HasIndex("ResultId");
 
@@ -588,21 +575,6 @@ namespace EducationalPlatform.Migrations
                     b.ToTable("QuizStudent");
                 });
 
-            modelBuilder.Entity("StudentSubject", b =>
-                {
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentsId", "SubjectsId");
-
-                    b.HasIndex("SubjectsId");
-
-                    b.ToTable("StudentSubject");
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Answer", b =>
                 {
                     b.HasOne("EducationalPlatform.Entities.Question", "Question")
@@ -610,10 +582,6 @@ namespace EducationalPlatform.Migrations
                         .HasForeignKey("EducationalPlatform.Entities.Answer", "QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Result", "Result")
-                        .WithMany()
-                        .HasForeignKey("ResultId");
 
                     b.HasOne("EducationalPlatform.Entities.Student", "Student")
                         .WithMany()
@@ -623,16 +591,14 @@ namespace EducationalPlatform.Migrations
 
                     b.Navigation("Question");
 
-                    b.Navigation("Result");
-
                     b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.AnswerResult", b =>
                 {
                     b.HasOne("EducationalPlatform.Entities.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId1")
+                        .WithOne("AnswerResult")
+                        .HasForeignKey("EducationalPlatform.Entities.AnswerResult", "AnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -817,23 +783,11 @@ namespace EducationalPlatform.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentSubject", b =>
-                {
-                    b.HasOne("EducationalPlatform.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Subject", null)
-                        .WithMany()
-                        .HasForeignKey("SubjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Answer", b =>
                 {
+                    b.Navigation("AnswerResult")
+                        .IsRequired();
+
                     b.Navigation("StudentAnswers");
                 });
 
