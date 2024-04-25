@@ -32,13 +32,12 @@ namespace EducationalPlatform.Controllers
                 = new TeacherDetailsWithoutSubjectAndQuizesNamesDTO();
                 dto.Id = teacher.Id;
                 dto.Address = teacher.Address;
-                dto.Phones = teacher.Phones;
-                
-                dto.Email = teacher.Email;
+                teacher.User = context.Users.FirstOrDefault(u => u.userId == teacher.Id);
+                dto.Phone = teacher.User.PhoneNumber;
+                dto.Email = teacher.User.Email;
                 dto.FirstName = teacher.FirstName;
                 dto.LastName = teacher.LastName;
                 
-                dto.gender = teacher.gender;
                 dtos.Add(dto);
             }
             return Ok(dtos);
@@ -55,13 +54,12 @@ namespace EducationalPlatform.Controllers
             {
                 dto.Id = teacher.Id;
                 dto.Address = teacher.Address;
-                dto.Phones = teacher.Phones;
-               
-                dto.Email = teacher.Email;
+                teacher.User = context.Users.FirstOrDefault(u => u.userId == teacher.Id);
+                dto.Phone = teacher.User.PhoneNumber;
+                dto.Email = teacher.User.Email;
                 dto.FirstName = teacher.FirstName;
                 dto.LastName = teacher.LastName;
                 
-                dto.gender = teacher.gender;
             }
             return Ok(dto);
         }

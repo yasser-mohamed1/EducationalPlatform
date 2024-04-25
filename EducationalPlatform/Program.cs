@@ -23,9 +23,39 @@ namespace EducationalPlatform
             builder.Services.AddCors();
             builder.Services.AddDbContext<EduPlatformContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+               .AddRoles<IdentityRole>()
+               .AddEntityFrameworkStores<EduPlatformContext>();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+           ).AddJwtBearer(options =>
+           {
+               options.SaveToken = true;
+               options.RequireHttpsMetadata = false;
+               options.TokenValidationParameters = new TokenValidationParameters()
+               {
+                   ValidateIssuer = true,
+                   ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+                   ValidateAudience = true,
+                   ValidAudience = builder.Configuration["JWT:ValidAduience"],
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+               };
+           }
+           );
+
+            builder.Services.AddCors(corsOptions => {
+                corsOptions.AddPolicy("MyPolicy", corsPolicyBuilder =>
+                {
+                    corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
 
 
-         
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,9 +65,10 @@ namespace EducationalPlatform
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("MyPolicy");//Customize policy open 1,2,3 declare ConfigureService method
             app.UseHttpsRedirection();
 
-           // app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors(o=>o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());

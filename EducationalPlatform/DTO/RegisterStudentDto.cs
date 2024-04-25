@@ -19,11 +19,12 @@ namespace EducationalPlatform.DTO
         [Required, RegularExpression("^\\+20\\d{10}$")]
         public string Phone { get ; set; }
 
-        [Required, RegularExpression(@"^(m|f|M|F)$")]
-        public char gender { get; set; }
+        [Required, StringLength(100)]
+        public string Level { get; set; }
 
         [Required, StringLength(256)]
         public string Password { get; set; }
+
         [Compare("Password")]
         public string confirmPassword { get; set; }
     }

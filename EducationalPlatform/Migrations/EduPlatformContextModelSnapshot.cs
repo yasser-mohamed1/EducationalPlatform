@@ -80,16 +80,6 @@ namespace EducationalPlatform.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -122,6 +112,12 @@ namespace EducationalPlatform.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("userId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"));
 
                     b.HasKey("Id");
 
@@ -164,7 +160,8 @@ namespace EducationalPlatform.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectId")
+                        .IsUnique();
 
                     b.ToTable("Enrollments");
                 });
@@ -272,17 +269,7 @@ namespace EducationalPlatform.Migrations
             modelBuilder.Entity("EducationalPlatform.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -293,21 +280,6 @@ namespace EducationalPlatform.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Level")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("gender")
-                        .HasColumnType("nvarchar(1)");
-
-                    b.Property<string>("userName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -367,16 +339,9 @@ namespace EducationalPlatform.Migrations
             modelBuilder.Entity("EducationalPlatform.Entities.Teacher", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -388,22 +353,6 @@ namespace EducationalPlatform.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phones")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
-
-                    b.Property<string>("userName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -620,9 +569,9 @@ namespace EducationalPlatform.Migrations
                         .IsRequired();
 
                     b.HasOne("EducationalPlatform.Entities.Subject", "Subject")
-                        .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Enrollment")
+                        .HasForeignKey("EducationalPlatform.Entities.Enrollment", "SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Student");
@@ -680,6 +629,18 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("EducationalPlatform.Entities.Student", b =>
+                {
+                    b.HasOne("EducationalPlatform.Entities.ApplicationUser", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("EducationalPlatform.Entities.Student", "Id")
+                        .HasPrincipalKey("EducationalPlatform.Entities.ApplicationUser", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EducationalPlatform.Entities.StudentAnswer", b =>
                 {
                     b.HasOne("EducationalPlatform.Entities.Answer", "Answer")
@@ -700,6 +661,18 @@ namespace EducationalPlatform.Migrations
                         .IsRequired();
 
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.Teacher", b =>
+                {
+                    b.HasOne("EducationalPlatform.Entities.ApplicationUser", "User")
+                        .WithOne("Teacher")
+                        .HasForeignKey("EducationalPlatform.Entities.Teacher", "Id")
+                        .HasPrincipalKey("EducationalPlatform.Entities.ApplicationUser", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -791,6 +764,13 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("StudentAnswers");
                 });
 
+            modelBuilder.Entity("EducationalPlatform.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("EducationalPlatform.Entities.Question", b =>
                 {
                     b.Navigation("Answer")
@@ -813,6 +793,8 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
+                    b.Navigation("Enrollment");
+
                     b.Navigation("Quizs");
                 });
 

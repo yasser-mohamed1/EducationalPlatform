@@ -36,7 +36,6 @@ namespace EducationalPlatform.Controllers
                     user.Student = new();
                     user.Student.FirstName = studentDto.FirstName;
                     user.Student.LastName = studentDto.LastName;
-                    user.Student.gender = studentDto.gender;
                     await context.Students.AddAsync(user.Student);
                     await context.SaveChangesAsync();
                     return Ok("Student Registeration Success");

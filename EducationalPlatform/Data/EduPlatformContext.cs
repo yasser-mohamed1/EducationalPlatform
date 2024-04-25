@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.Reflection.Metadata;
 
 namespace EducationalPlatform.Data
 {
@@ -18,7 +19,24 @@ namespace EducationalPlatform.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(u => u.Student)
+                .WithOne(s => s.User)
+                .HasForeignKey<Student>(s => s.Id)
+                .HasPrincipalKey<ApplicationUser>(u => u.userId);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(u => u.Teacher)
+                .WithOne(t => t.User)
+                .HasForeignKey<Teacher>(t => t.Id)
+                .HasPrincipalKey<ApplicationUser>(u => u.userId);
+
+            modelBuilder.Entity<Subject>()
+                .HasOne(s => s.Enrollment)
+                .WithOne(e => e.Subject)
+                .HasForeignKey<Enrollment>(e => e.SubjectId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Result>()
                 .HasOne(r=>r.Student)
