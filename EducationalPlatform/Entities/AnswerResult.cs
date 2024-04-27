@@ -9,7 +9,5 @@ namespace EducationalPlatform.Entities
 		[Key]
 		public int AnswerId { get; set; }
 		public Answer Answer { get; set; }
-
-
 	}
 }

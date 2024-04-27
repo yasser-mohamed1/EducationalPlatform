@@ -10,6 +10,7 @@ namespace EducationalPlatform.Entities
         [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ProfileImageUrl { get; set; }
         public string? Level { get; set; }
         public virtual ApplicationUser User { get; set; }
         public List<Quiz>? Quizs { get; set; }

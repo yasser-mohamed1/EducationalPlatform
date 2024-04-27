@@ -39,6 +39,7 @@ namespace EducationalPlatform.Controllers
                     user.Teacher.FirstName = teacherDto.FirstName;
                     user.Teacher.LastName = teacherDto.LastName;
                     user.Teacher.Address = teacherDto.Address;
+                    user.Teacher.ProfileImageUrl = teacherDto.ProfileImageUrl;
                     await context.Teachers.AddAsync(user.Teacher);
                     await context.SaveChangesAsync();
                     return Ok("Teacher Registeration Success");
