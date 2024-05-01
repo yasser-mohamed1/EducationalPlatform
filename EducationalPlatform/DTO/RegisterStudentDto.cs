@@ -25,7 +25,6 @@ namespace EducationalPlatform.DTO
         [Required, StringLength(256)]
         public string Password { get; set; }
 
-        [Compare("Password")]
-        public string confirmPassword { get; set; }
+        public string? ProfileImageUrl { get; set; }
     }
 }

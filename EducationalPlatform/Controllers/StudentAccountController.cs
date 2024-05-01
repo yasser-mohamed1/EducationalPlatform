@@ -4,6 +4,7 @@ using EducationalPlatform.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducationalPlatform.Controllers
 {
@@ -11,8 +12,8 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class StudentAccountController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly EduPlatformContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public StudentAccountController(UserManager<ApplicationUser> userManager, EduPlatformContext context)
         {
@@ -36,6 +37,8 @@ namespace EducationalPlatform.Controllers
                     user.Student = new();
                     user.Student.FirstName = studentDto.FirstName;
                     user.Student.LastName = studentDto.LastName;
+                    user.Student.Level = studentDto.Level;
+                    user.Student.ProfileImageUrl = studentDto.ProfileImageUrl;
                     await context.Students.AddAsync(user.Student);
                     await context.SaveChangesAsync();
                     return Ok("Student Registeration Success");
@@ -44,5 +47,6 @@ namespace EducationalPlatform.Controllers
             }
             return BadRequest(ModelState);
         }
+
     }
 }

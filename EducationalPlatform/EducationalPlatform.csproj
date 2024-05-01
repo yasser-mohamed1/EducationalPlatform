@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="DTO\Student_Dto\" />
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

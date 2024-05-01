@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "eZyubWi/MEqmfOOuwCijaDDuidkd0+9MSoV5xgUl0lI=",
+  "Source": "EducationalPlatform",
+  "BasePath": "_content/EducationalPlatform",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EducationalPlatform\\wwwroot",
+      "Source": "EducationalPlatform",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\18154bb4-2b51-4269-939a-d9fd9966d841.jpg",
+      "SourceId": "EducationalPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "RelativePath": "uploads/18154bb4-2b51-4269-939a-d9fd9966d841.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\18154bb4-2b51-4269-939a-d9fd9966d841.jpg"
+    },
+    {
+      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\4ae93104-9f1a-4838-a066-0bbaabd26086.jpg",
+      "SourceId": "EducationalPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "RelativePath": "uploads/4ae93104-9f1a-4838-a066-0bbaabd26086.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\4ae93104-9f1a-4838-a066-0bbaabd26086.jpg"
+    }
+  ]
+}

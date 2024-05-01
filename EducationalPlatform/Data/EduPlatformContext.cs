@@ -12,7 +12,7 @@ namespace EducationalPlatform.Data
         {
             
         }
-
+        
         public EduPlatformContext(DbContextOptions options) 
             : base(options)
         {

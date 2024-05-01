@@ -56,8 +56,8 @@ namespace EducationalPlatform.Controllers
                             );
 
                         JwtSecurityToken mytoken = new JwtSecurityToken(
-                            issuer: config["JWT:ValidIssuer"],
-                            audience: config["JWT:ValidAduience"],
+                            //issuer: config["JWT:ValidIssuer"],
+                            //audience: config["JWT:ValidAduience"],
                             claims: claims,
                             expires: DateTime.Now.AddHours(1),
                             signingCredentials: signinCred

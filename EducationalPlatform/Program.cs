@@ -48,6 +48,13 @@ namespace EducationalPlatform
            }
            );
 
+            builder.Services.AddScoped<Func<HttpContext, UserManager<ApplicationUser>>>(serviceProvider =>
+            {
+                var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+                return httpContext => httpContextAccessor.HttpContext?.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
+            });
+
+
             builder.Services.AddCors(corsOptions => {
                 corsOptions.AddPolicy("MyPolicy", corsPolicyBuilder =>
                 {
@@ -71,7 +78,6 @@ namespace EducationalPlatform
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(o=>o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.MapControllers();
 
             app.Run();

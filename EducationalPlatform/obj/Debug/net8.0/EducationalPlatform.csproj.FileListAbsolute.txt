@@ -430,3 +430,4 @@ E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\scopedcss\bundle\Edu
 E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\Educatio.F19CEAD4.Up2Date
 E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.genruntimeconfig.cache
 E:\EducationalPlatform\EducationalPlatform\obj\Debug\net8.0\ref\EducationalPlatform.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\EducationalPlatform.staticwebassets.runtime.json

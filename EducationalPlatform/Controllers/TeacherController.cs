@@ -4,6 +4,8 @@ using EducationalPlatform.Data;
 using EducationalPlatform.Entities;
 using Microsoft.EntityFrameworkCore;
 using EducationalPlatform.DTO;
+using static EducationalPlatform.DTO.TeacherDto;
+using Microsoft.AspNetCore.Identity;
 
 namespace EducationalPlatform.Controllers
 {
@@ -11,63 +13,72 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-        private readonly EduPlatformContext context;
+        private readonly IWebHostEnvironment _env;
+        private readonly EduPlatformContext _context;
+        private readonly Func<HttpContext, UserManager<ApplicationUser>> _userManagerFactory;
 
-        public TeacherController(EduPlatformContext context)
+        public TeacherController(EduPlatformContext context, Func<HttpContext, 
+            UserManager<ApplicationUser>> userManagerFactory, IWebHostEnvironment env)
         {
-            this.context = context;
+            _env = env;
+            _context = context;
+            _userManagerFactory = userManagerFactory;
         }
 
+        // GET: api/Teacher
         [HttpGet]
-        public IActionResult GetAllTeachers()
+        public async Task<ActionResult> GetTeachers()
         {
-            List<Teacher> teachers = context.Teachers.ToList();
+            var teachers = await _context.Teachers
+                .Include(t => t.User)
+                .Select(t => new TeacherDTO
+                {
+                    Id = t.Id,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    ProfileImageUrl = t.ProfileImageUrl,
+                    Address = t.Address,
+                    Email = t.User.Email,
+                    Phone = t.User.PhoneNumber
+                })
+                .ToListAsync();
 
-            List<TeacherDto> dtos = [];
-
-            foreach(var teacher in teachers)
-            {
-                TeacherDto dto = new ();
-                dto.Id = teacher.Id;
-                dto.Address = teacher.Address;
-                teacher.User = context.Users.FirstOrDefault(u => u.userId == teacher.Id);
-                dto.userName = teacher.User.UserName;
-                dto.Phone = teacher.User.PhoneNumber;
-                dto.Email = teacher.User.Email;
-                dto.FirstName = teacher.FirstName;
-                dto.LastName = teacher.LastName;
-                
-                dtos.Add(dto);
-            }
-            
-            return Ok(dtos);
+            return Ok(teachers);
         }
 
-        [HttpGet("id:int")]
-        public IActionResult GetTeacher(int id)
+        // GET: api/Teacher/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetTeacher(int id)
         {
-            Teacher? teacher = context.Teachers
-                .FirstOrDefault(t => t.Id == id);
-            TeacherDetailsWithSubjectAndQuizesNamesDTO dto = new ();
-            if(teacher is not null)
+            var teacher = await _context.Teachers
+                .Include(t => t.User) 
+                .Where(t => t.Id == id)
+                .Select(t => new TeacherDTO
+                {
+                    Id = t.Id,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    ProfileImageUrl = t.ProfileImageUrl,
+                    Address = t.Address,
+                    Email = t.User.Email, 
+                    Phone = t.User.PhoneNumber
+                })
+                .FirstOrDefaultAsync();
+
+            if (teacher == null)
             {
-                dto.Id = teacher.Id;
-                dto.Address = teacher.Address;
-                teacher.User = context.Users.FirstOrDefault(u => u.userId == teacher.Id);
-                dto.Phone = teacher.User.PhoneNumber;
-                dto.Email = teacher.User.Email;
-                dto.FirstName = teacher.FirstName;
-                dto.LastName = teacher.LastName;
+                return NotFound();
             }
-            return Ok(dto);
+
+            return Ok(teacher);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTeacher(int id, UpdateTeacherDto teacher)
+        public IActionResult UpdateTeacher(int id, UpdateTeacherDto dto)
         {
-            if (id != teacher.Id)
+            if (!TeacherExists(id))
             {
-                return BadRequest("ID mismatch between route parameter and request body.");
+                return NotFound($"No Teacher was found with id : {id}");
             }
 
             if (!ModelState.IsValid)
@@ -75,30 +86,50 @@ namespace EducationalPlatform.Controllers
                 return BadRequest(ModelState);
             }
 
-            var existingTeacher = context.Teachers.Find(id);
-            existingTeacher.User = context.Users.FirstOrDefault(u => u.userId == id);
+            var existingTeacher = _context.Teachers.Include(t => t.User).FirstOrDefault(t => t.Id == id);
+            
             if (existingTeacher == null)
             {
                 return NotFound();
             }
+            if(!string.IsNullOrEmpty(dto.FirstName))
+            {
+                existingTeacher.FirstName = dto.FirstName;
+            }
+            if(!string.IsNullOrEmpty(dto.LastName))
+            {
+                existingTeacher.LastName = dto.LastName;
+            }
+            if(!string.IsNullOrEmpty(dto.Phone))
+            {
+                existingTeacher.User.PhoneNumber = dto.Phone;
+            }
+            if(!string.IsNullOrEmpty(dto.ProfileImageUrl))
+            {
+                existingTeacher.ProfileImageUrl = dto.ProfileImageUrl;
+            }
+            if(!string.IsNullOrEmpty(dto.Address))
+            {
+                existingTeacher.Address = dto.Address;
+            }
 
-            existingTeacher.FirstName = teacher.FirstName;
-            existingTeacher.LastName = teacher.LastName;
-            existingTeacher.User.Email = teacher.Email;
-            existingTeacher.User.PhoneNumber = teacher.Phone;
-            existingTeacher.ProfileImageUrl = teacher.ProfileImageUrl;
-            existingTeacher.Address = teacher.Address;
+            if (!string.IsNullOrEmpty(dto.Password))
+            {
+                var userManager = _userManagerFactory.Invoke(HttpContext);
+                var newPasswordHash = userManager.PasswordHasher.HashPassword(existingTeacher.User, dto.Password);
+                existingTeacher.User.PasswordHash = newPasswordHash;
+            }
 
             try
             {
-                //context.Entry(existingTeacher).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(existingTeacher).State = EntityState.Modified;
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!TeacherExists(id))
                 {
-                    return NotFound("Teacher Not Found");
+                    return NotFound($"No Teacher was found with id : {id}");
                 }
                 else
                 {
@@ -112,23 +143,70 @@ namespace EducationalPlatform.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteTeacher(int id)
         {
-            var user = context.Users.Single(u => u.userId == id);
+            var user = _context.Users.FirstOrDefault(u => u.userId == id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound($"No Teacher was found with id : {id}");
             }
 
-            context.Users.Remove(user);
+            _context.Users.Remove(user);
 
-            context.SaveChanges();
+            _context.SaveChanges();
 
             return NoContent();
         }
 
         private bool TeacherExists(int id)
         {
-            return context.Teachers.Any(e => e.Id == id);
+            return _context.Teachers.Any(e => e.Id == id);
         }
+
+        [HttpPost("{id}/profile-image")]
+        public async Task<IActionResult> UploadProfileImage(int id, [FromForm] ImageUploadModel model)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+
+            if (model.ImageFile == null || model.ImageFile.Length == 0)
+            {
+                return BadRequest("Image file is required.");
+            }
+
+            // Check if the teacher already has a profile image
+            if (!string.IsNullOrEmpty(teacher.ProfileImageUrl))
+            {
+                // Delete the old profile image from the server
+                var oldImagePath = Path.Combine(_env.WebRootPath, teacher.ProfileImageUrl.TrimStart('/'));
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await model.ImageFile.CopyToAsync(stream);
+            }
+
+            teacher.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
+            await _context.SaveChangesAsync();
+
+            return Ok(new { filePath });
+        }
+
 
     }
 
