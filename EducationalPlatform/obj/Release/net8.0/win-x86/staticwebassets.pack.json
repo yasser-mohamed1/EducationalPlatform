@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\uploads\\4ae93104-9f1a-4838-a066-0bbaabd26086.jpg"
     },
     {
+      "Id": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\7d5e20ac-cca0-4b24-b7dc-4a7aa9c7dac9.jpg",
+      "PackagePath": "staticwebassets\\uploads\\7d5e20ac-cca0-4b24-b7dc-4a7aa9c7dac9.jpg"
+    },
+    {
+      "Id": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\e93c6fef-122e-4131-849d-280178dbb112.jpg",
+      "PackagePath": "staticwebassets\\uploads\\e93c6fef-122e-4131-849d-280178dbb112.jpg"
+    },
+    {
       "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.EducationalPlatform.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

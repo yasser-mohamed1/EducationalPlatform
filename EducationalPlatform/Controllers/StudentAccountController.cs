@@ -12,17 +12,19 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class StudentAccountController : ControllerBase
     {
-        private readonly EduPlatformContext context;
+        private readonly EduPlatformContext _context;
+        private readonly IWebHostEnvironment _env;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public StudentAccountController(UserManager<ApplicationUser> userManager, EduPlatformContext context)
+        public StudentAccountController(UserManager<ApplicationUser> userManager, EduPlatformContext context, IWebHostEnvironment env)
         {
+            _env = env;
+            _context = context;
             this.userManager = userManager;
-            this.context = context;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Registeration(RegisterStudentDto studentDto)
+        public async Task<IActionResult> Registeration([FromForm] RegisterStudentDto studentDto)
         {
             if(ModelState.IsValid) 
             {
@@ -38,14 +40,36 @@ namespace EducationalPlatform.Controllers
                     user.Student.FirstName = studentDto.FirstName;
                     user.Student.LastName = studentDto.LastName;
                     user.Student.Level = studentDto.Level;
-                    user.Student.ProfileImageUrl = studentDto.ProfileImageUrl;
-                    await context.Students.AddAsync(user.Student);
-                    await context.SaveChangesAsync();
+                    if (studentDto.ProfileImage != null && studentDto.ProfileImage.Length > 0)
+                    {
+                        user.Student.ProfileImageUrl = UploadProfileImage(studentDto.ProfileImage);
+                    }
+                    await _context.Students.AddAsync(user.Student);
+                    await _context.SaveChangesAsync();
                     return Ok("Student Registeration Success");
                 }
                 return BadRequest(result.Errors);
             }
             return BadRequest(ModelState);
+        }
+
+        private string UploadProfileImage(IFormFile ImageFile)
+        {
+            var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                ImageFile.CopyTo(stream);
+            }
+
+            return ("/uploads/" + fileName);
         }
 
     }

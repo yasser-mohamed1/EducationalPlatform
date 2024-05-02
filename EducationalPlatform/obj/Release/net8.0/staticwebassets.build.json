@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lDAi/Rij+WJeKC9O1kAVgUztGgYLS6Vlo9R7atCSSxo=",
+  "Hash": "zaSBRZ9uYeRvwh7ujy6M2rAxJL47UtE8MSlnswVaNdg=",
   "Source": "EducationalPlatform",
   "BasePath": "_content/EducationalPlatform",
   "Mode": "Default",
@@ -53,6 +53,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\4ae93104-9f1a-4838-a066-0bbaabd26086.jpg"
+    },
+    {
+      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\7d5e20ac-cca0-4b24-b7dc-4a7aa9c7dac9.jpg",
+      "SourceId": "EducationalPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "RelativePath": "uploads/7d5e20ac-cca0-4b24-b7dc-4a7aa9c7dac9.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\7d5e20ac-cca0-4b24-b7dc-4a7aa9c7dac9.jpg"
+    },
+    {
+      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\e93c6fef-122e-4131-849d-280178dbb112.jpg",
+      "SourceId": "EducationalPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "RelativePath": "uploads/e93c6fef-122e-4131-849d-280178dbb112.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\e93c6fef-122e-4131-849d-280178dbb112.jpg"
     }
   ]
 }

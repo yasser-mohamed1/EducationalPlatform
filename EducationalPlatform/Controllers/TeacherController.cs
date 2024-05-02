@@ -74,7 +74,7 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateTeacher(int id, UpdateTeacherDto dto)
+        public IActionResult UpdateTeacher(int id, [FromForm]UpdateTeacherDto dto)
         {
             if (!TeacherExists(id))
             {
@@ -104,11 +104,11 @@ namespace EducationalPlatform.Controllers
             {
                 existingTeacher.User.PhoneNumber = dto.Phone;
             }
-            if(!string.IsNullOrEmpty(dto.ProfileImageUrl))
+            if (dto.ProfileImage != null && dto.ProfileImage.Length > 0)
             {
-                existingTeacher.ProfileImageUrl = dto.ProfileImageUrl;
+                UploadProfileImage(id, dto.ProfileImage);
             }
-            if(!string.IsNullOrEmpty(dto.Address))
+            if (!string.IsNullOrEmpty(dto.Address))
             {
                 existingTeacher.Address = dto.Address;
             }
@@ -161,26 +161,20 @@ namespace EducationalPlatform.Controllers
             return _context.Teachers.Any(e => e.Id == id);
         }
 
-        [HttpPost("{id}/profile-image")]
-        public async Task<IActionResult> UploadProfileImage(int id, [FromForm] ImageUploadModel model)
+        private string UploadProfileImage(int id, IFormFile ImageFile)
         {
-            var teacher = await _context.Teachers.FindAsync(id);
+            var student = _context.Students.Find(id);
 
-            if (teacher == null)
+            if (student == null)
             {
-                return NotFound();
+                return "";
             }
 
-            if (model.ImageFile == null || model.ImageFile.Length == 0)
-            {
-                return BadRequest("Image file is required.");
-            }
-
-            // Check if the teacher already has a profile image
-            if (!string.IsNullOrEmpty(teacher.ProfileImageUrl))
+            // Check if the student already has a profile image
+            if (!string.IsNullOrEmpty(student.ProfileImageUrl))
             {
                 // Delete the old profile image from the server
-                var oldImagePath = Path.Combine(_env.WebRootPath, teacher.ProfileImageUrl.TrimStart('/'));
+                var oldImagePath = Path.Combine(_env.WebRootPath, student.ProfileImageUrl.TrimStart('/'));
                 if (System.IO.File.Exists(oldImagePath))
                 {
                     System.IO.File.Delete(oldImagePath);
@@ -193,20 +187,19 @@ namespace EducationalPlatform.Controllers
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
             var filePath = Path.Combine(uploadsFolder, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await model.ImageFile.CopyToAsync(stream);
+                ImageFile.CopyTo(stream);
             }
 
-            teacher.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
-            await _context.SaveChangesAsync();
+            student.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
+            _context.SaveChanges();
 
-            return Ok(new { filePath });
+            return filePath;
         }
-
 
     }
 

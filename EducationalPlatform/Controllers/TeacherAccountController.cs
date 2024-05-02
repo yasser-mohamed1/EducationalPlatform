@@ -11,17 +11,19 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class TeacherAccountController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly EduPlatformContext context;
+        private readonly IWebHostEnvironment _env;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public TeacherAccountController(UserManager<ApplicationUser> userManager, EduPlatformContext context)
+        public TeacherAccountController(UserManager<ApplicationUser> userManager, EduPlatformContext context, IWebHostEnvironment env)
         {
+            _env = env;
             this.userManager = userManager;
             this.context = context;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Registeration(RegisterTeacherDto teacherDto)
+        public async Task<IActionResult> Registeration([FromForm] RegisterTeacherDto teacherDto)
         {
             if (ModelState.IsValid)
             {
@@ -39,7 +41,10 @@ namespace EducationalPlatform.Controllers
                     user.Teacher.FirstName = teacherDto.FirstName;
                     user.Teacher.LastName = teacherDto.LastName;
                     user.Teacher.Address = teacherDto.Address;
-                    user.Teacher.ProfileImageUrl = teacherDto.ProfileImageUrl;
+                    if (teacherDto.ProfileImage != null && teacherDto.ProfileImage.Length > 0)
+                    {
+                        user.Teacher.ProfileImageUrl = UploadProfileImage(teacherDto.ProfileImage);
+                    }
                     await context.Teachers.AddAsync(user.Teacher);
                     await context.SaveChangesAsync();
                     return Ok("Teacher Registeration Success");
@@ -48,5 +53,25 @@ namespace EducationalPlatform.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        private string UploadProfileImage(IFormFile ImageFile)
+        {
+            var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                ImageFile.CopyTo(stream);
+            }
+
+            return ("/uploads/" + fileName);
+        }
+
     }
 }

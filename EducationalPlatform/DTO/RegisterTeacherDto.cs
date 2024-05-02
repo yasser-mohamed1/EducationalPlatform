@@ -25,7 +25,6 @@ namespace EducationalPlatform.DTO
         [Required, StringLength(256)]
         public string Password { get; set; }
 
-        [MaxLength(1000)]
-        public string? ProfileImageUrl { get; set; }
+        public IFormFile? ProfileImage { get; set; }
     }
 }

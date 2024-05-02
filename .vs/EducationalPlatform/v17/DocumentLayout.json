@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\EducationalPlatform\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\dto\\updateteacherdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\dto\\updateteacherdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\dto\\updatestudentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\dto\\updatestudentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +18,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UpdateStudentDTO.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
+              "RelativeToolTip": "EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T20:00:00.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UpdateTeacherDto.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
+              "RelativeToolTip": "EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T17:43:39.695Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"

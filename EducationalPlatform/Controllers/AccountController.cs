@@ -65,6 +65,7 @@ namespace EducationalPlatform.Controllers
 
                         return Ok(new
                         {
+                            id = user.userId,
                             token = new JwtSecurityTokenHandler().WriteToken(mytoken),
                             expiration = mytoken.ValidTo
                         }

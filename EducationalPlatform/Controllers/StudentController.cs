@@ -71,10 +71,9 @@ namespace EducationalPlatform.Controllers
             return Ok(student);
         }
 
-
         // PUT: api/Student/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudent(int id, UpdateStudentDTO dto)
+        public async Task<IActionResult> PutStudent(int id, [FromForm] UpdateStudentDTO dto)
         {
             if (!StudentExists(id))
             {
@@ -105,11 +104,11 @@ namespace EducationalPlatform.Controllers
             {
                 existingStudent.User.PhoneNumber = dto.Phone;
             }
-            if(!string.IsNullOrEmpty(dto.ProfileImageUrl))
+            if (dto.ProfileImage != null && dto.ProfileImage.Length > 0)
             {
-                existingStudent.ProfileImageUrl = dto.ProfileImageUrl;
+                UploadProfileImage(id, dto.ProfileImage);
             }
-            if(!string.IsNullOrEmpty(dto.Level))
+            if (!string.IsNullOrEmpty(dto.Level))
             {
                 existingStudent.Level = dto.Level;
             }
@@ -145,7 +144,7 @@ namespace EducationalPlatform.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.userId == id);
             if (user == null)
             {
                 return NotFound($"No Student was found with id : {id}");
@@ -162,19 +161,13 @@ namespace EducationalPlatform.Controllers
             return _context.Students.Any(e => e.Id == id);
         }
 
-        [HttpPost("{id}/profile-image")]
-        public async Task<IActionResult> UploadProfileImage(int id, [FromForm] ImageUploadModel model)
+        private string UploadProfileImage(int id, IFormFile ImageFile)
         {
-            var student = await _context.Students.FindAsync(id);
+            var student =  _context.Students.Find(id);
 
             if (student == null)
             {
-                return NotFound();
-            }
-
-            if (model.ImageFile == null || model.ImageFile.Length == 0)
-            {
-                return BadRequest("Image file is required.");
+                return "";
             }
 
             // Check if the student already has a profile image
@@ -194,20 +187,19 @@ namespace EducationalPlatform.Controllers
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
             var filePath = Path.Combine(uploadsFolder, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await model.ImageFile.CopyToAsync(stream);
+                 ImageFile.CopyTo(stream);
             }
 
             student.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
 
-            return Ok(new { filePath });
+            return filePath;
         }
-
 
 
     }
