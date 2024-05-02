@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MCMh4PA2mCWqHVnIpuPz4/4LDrMpEZ5xDN/vUHFaCCo=",
+  "Hash": "OGHLe9o4NGDk49hHgjP8Bi1pCjUqUcaPBJIEbIbilU8=",
   "Source": "EducationalPlatform",
   "BasePath": "_content/EducationalPlatform",
   "Mode": "Default",
@@ -148,6 +148,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\901eea67-a622-4993-926e-993f051172d8.jpg"
+    },
+    {
+      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\aeae8be7-4c86-4ba2-a53e-e0e11d77ad8d.jpg",
+      "SourceId": "EducationalPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "RelativePath": "uploads/aeae8be7-4c86-4ba2-a53e-e0e11d77ad8d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\aeae8be7-4c86-4ba2-a53e-e0e11d77ad8d.jpg"
     },
     {
       "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\b4589087-a09f-4c93-a069-11332dd1cf08.jpg",

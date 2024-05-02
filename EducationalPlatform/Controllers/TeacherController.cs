@@ -163,18 +163,18 @@ namespace EducationalPlatform.Controllers
 
         private string UploadProfileImage(int id, IFormFile ImageFile)
         {
-            var student = _context.Students.Find(id);
+            var teacher = _context.Teachers.Find(id);
 
-            if (student == null)
+            if (teacher == null)
             {
                 return "";
             }
 
             // Check if the student already has a profile image
-            if (!string.IsNullOrEmpty(student.ProfileImageUrl))
+            if (!string.IsNullOrEmpty(teacher.ProfileImageUrl))
             {
                 // Delete the old profile image from the server
-                var oldImagePath = Path.Combine(_env.WebRootPath, student.ProfileImageUrl.TrimStart('/'));
+                var oldImagePath = Path.Combine(_env.WebRootPath, teacher.ProfileImageUrl.TrimStart('/'));
                 if (System.IO.File.Exists(oldImagePath))
                 {
                     System.IO.File.Delete(oldImagePath);
@@ -195,7 +195,7 @@ namespace EducationalPlatform.Controllers
                 ImageFile.CopyTo(stream);
             }
 
-            student.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
+            teacher.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
             _context.SaveChanges();
 
             return filePath;

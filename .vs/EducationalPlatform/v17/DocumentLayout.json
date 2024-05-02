@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\EducationalPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\dto\\updateteacherdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\dto\\updateteacherdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\dto\\updatestudentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\dto\\updatestudentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,34 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UpdateStudentDTO.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
-              "RelativeToolTip": "EducationalPlatform\\DTO\\UpdateStudentDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T20:00:00.529Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UpdateTeacherDto.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
-              "RelativeToolTip": "EducationalPlatform\\DTO\\UpdateTeacherDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T17:43:39.695Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -53,6 +27,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\StudentController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\StudentController.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAAAA8AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T23:07:17.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TeacherController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\TeacherController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\TeacherController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\TeacherController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\TeacherController.cs",
+              "ViewState": "AQIAALgAAAAAAAAAAAAAAMUAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T23:06:30.157Z",
+              "EditorCaption": ""
             }
           ]
         }
