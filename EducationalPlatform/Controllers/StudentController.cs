@@ -195,7 +195,7 @@ namespace EducationalPlatform.Controllers
                  ImageFile.CopyTo(stream);
             }
 
-            student.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
+            student.ProfileImageUrl = "http://edu1.runasp.net/uploads/" + fileName; // Update the profile image URL
              _context.SaveChanges();
 
             return filePath;

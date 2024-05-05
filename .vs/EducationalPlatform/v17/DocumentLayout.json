@@ -9,6 +9,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\studentaccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\studentaccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\teacheraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\teacheraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +38,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StudentController.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentController.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\StudentController.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentController.cs",
-              "RelativeToolTip": "EducationalPlatform\\Controllers\\StudentController.cs",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAAAA8AAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T23:07:17.644Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "TeacherController.cs",
               "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\TeacherController.cs",
               "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\TeacherController.cs",
               "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\TeacherController.cs",
               "RelativeToolTip": "EducationalPlatform\\Controllers\\TeacherController.cs",
-              "ViewState": "AQIAALgAAAAAAAAAAAAAAMUAAAATAAAA",
+              "ViewState": "AQIAAL4AAAAAAAAAAAAAAMYAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T23:06:30.157Z",
+              "WhenOpened": "2024-05-05T14:40:07.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\StudentController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\StudentController.cs",
+              "ViewState": "AQIAALMAAAAAAAAAAAAAAMUAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T14:38:55.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TeacherAccountController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\TeacherAccountController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\TeacherAccountController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\TeacherAccountController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\TeacherAccountController.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAAAEwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T14:37:38.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StudentAccountController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentAccountController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\StudentAccountController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\StudentAccountController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\StudentAccountController.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAiwEYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T14:36:53.643Z",
               "EditorCaption": ""
             }
           ]

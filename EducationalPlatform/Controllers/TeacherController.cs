@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using EducationalPlatform.DTO;
 using static EducationalPlatform.DTO.TeacherDto;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EducationalPlatform.Controllers
 {
@@ -195,7 +196,7 @@ namespace EducationalPlatform.Controllers
                 ImageFile.CopyTo(stream);
             }
 
-            teacher.ProfileImageUrl = "/uploads/" + fileName; // Update the profile image URL
+            teacher.ProfileImageUrl = "http://edu1.runasp.net/uploads/" + fileName; // Update the profile image URL
             _context.SaveChanges();
 
             return filePath;

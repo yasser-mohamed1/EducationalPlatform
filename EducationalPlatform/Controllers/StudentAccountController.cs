@@ -69,8 +69,7 @@ namespace EducationalPlatform.Controllers
                 ImageFile.CopyTo(stream);
             }
 
-            return ("/uploads/" + fileName);
+            return ("http://edu1.runasp.net/uploads/" + fileName);
         }
-
     }
 }
