@@ -71,12 +71,19 @@ namespace EducationalPlatform
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
+            app.UseRouting();
 
             app.UseCors("MyPolicy");//Customize policy open 1,2,3 declare ConfigureService method
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            
 
             app.MapControllers();
 
