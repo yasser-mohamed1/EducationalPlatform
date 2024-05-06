@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\f745272b-deec-4e79-95fb-9aeb176d3793.jpg",
+      "PackagePath": "staticwebassets\\uploads\\f745272b-deec-4e79-95fb-9aeb176d3793.jpg"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.EducationalPlatform.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.build.EducationalPlatform.props",
+      "PackagePath": "build\\EducationalPlatform.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.buildMultiTargeting.EducationalPlatform.props",
+      "PackagePath": "buildMultiTargeting\\EducationalPlatform.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.buildTransitive.EducationalPlatform.props",
+      "PackagePath": "buildTransitive\\EducationalPlatform.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

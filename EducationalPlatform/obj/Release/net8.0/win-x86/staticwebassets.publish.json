@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "Qa2GeK42HlM2Q1malPz9hWE7YT7Gf9OYv+rud0H7bRo=",
+  "Source": "EducationalPlatform",
+  "BasePath": "_content/EducationalPlatform",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EducationalPlatform\\wwwroot",
+      "Source": "EducationalPlatform",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\f745272b-deec-4e79-95fb-9aeb176d3793.jpg",
+      "SourceId": "EducationalPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "BasePath": "_content/EducationalPlatform",
+      "RelativePath": "uploads/f745272b-deec-4e79-95fb-9aeb176d3793.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\f745272b-deec-4e79-95fb-9aeb176d3793.jpg"
+    }
+  ]
+}
