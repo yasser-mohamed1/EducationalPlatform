@@ -156,12 +156,18 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SubjectId1")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectId")
-                        .IsUnique();
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("SubjectId1")
+                        .IsUnique()
+                        .HasFilter("[SubjectId1] IS NOT NULL");
 
                     b.ToTable("Enrollments");
                 });
@@ -238,6 +244,36 @@ namespace EducationalPlatform.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Quizzes");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.QuizQuestion", b =>
+                {
+                    b.Property<int?>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("QuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuestionId", "QuizId");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("QuizQuestions");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.QuizStudent", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "QuizId");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("QuizStudents");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Result", b =>
@@ -500,36 +536,6 @@ namespace EducationalPlatform.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("QuestionQuiz", b =>
-                {
-                    b.Property<int>("QuestionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("quizzesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionsId", "quizzesId");
-
-                    b.HasIndex("quizzesId");
-
-                    b.ToTable("Quiz_Question", (string)null);
-                });
-
-            modelBuilder.Entity("QuizStudent", b =>
-                {
-                    b.Property<int>("QuizsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuizsId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("QuizStudent");
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Answer", b =>
                 {
                     b.HasOne("EducationalPlatform.Entities.Question", "Question")
@@ -575,10 +581,14 @@ namespace EducationalPlatform.Migrations
                         .IsRequired();
 
                     b.HasOne("EducationalPlatform.Entities.Subject", "Subject")
-                        .WithOne("Enrollment")
-                        .HasForeignKey("EducationalPlatform.Entities.Enrollment", "SubjectId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("EducationalPlatform.Entities.Subject", null)
+                        .WithOne("enrollment")
+                        .HasForeignKey("EducationalPlatform.Entities.Enrollment", "SubjectId1");
 
                     b.Navigation("Student");
 
@@ -614,6 +624,44 @@ namespace EducationalPlatform.Migrations
                         .HasForeignKey("SubjectId");
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.QuizQuestion", b =>
+                {
+                    b.HasOne("EducationalPlatform.Entities.Question", "Question")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducationalPlatform.Entities.Quiz", "Quiz")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.QuizStudent", b =>
+                {
+                    b.HasOne("EducationalPlatform.Entities.Quiz", "Quiz")
+                        .WithMany("QuizStudents")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducationalPlatform.Entities.Student", "Student")
+                        .WithMany("quizStudents")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Result", b =>
@@ -732,36 +780,6 @@ namespace EducationalPlatform.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuestionQuiz", b =>
-                {
-                    b.HasOne("EducationalPlatform.Entities.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Quiz", null)
-                        .WithMany()
-                        .HasForeignKey("quizzesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QuizStudent", b =>
-                {
-                    b.HasOne("EducationalPlatform.Entities.Quiz", null)
-                        .WithMany()
-                        .HasForeignKey("QuizsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Answer", b =>
                 {
                     b.Navigation("AnswerResult")
@@ -785,6 +803,15 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("CorrectAnswers");
 
                     b.Navigation("Options");
+
+                    b.Navigation("QuizQuestions");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.Quiz", b =>
+                {
+                    b.Navigation("QuizQuestions");
+
+                    b.Navigation("QuizStudents");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Result", b =>
@@ -795,13 +822,15 @@ namespace EducationalPlatform.Migrations
             modelBuilder.Entity("EducationalPlatform.Entities.Student", b =>
                 {
                     b.Navigation("Result");
+
+                    b.Navigation("quizStudents");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
-                    b.Navigation("Enrollment");
-
                     b.Navigation("Quizs");
+
+                    b.Navigation("enrollment");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Teacher", b =>

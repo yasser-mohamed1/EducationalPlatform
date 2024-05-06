@@ -10,7 +10,9 @@ namespace EducationalPlatform.Entities
         public int? SubjectId { get; set; }
         public Subject? Subject { get; set; }
         public string Description { get; set; }
-        public virtual List<Question>? Questions { get; set; } = new List<Question>();
-        public virtual List<Student>? Students { get; set; }
+        public List<QuizQuestion> QuizQuestions { get; set; }
+        
+        public virtual List<QuizStudent> QuizStudents { get; set;}
+
     }
 }

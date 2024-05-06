@@ -10,7 +10,8 @@ namespace EducationalPlatform.Entities
         public string Level { get; set; }
         public string Describtion { get; set; }
         public int pricePerHour { get; set; }
-        public Enrollment? Enrollment { get; set; }
+        public Enrollment? enrollment { get; set; }
+
         [ForeignKey("Teacher")]
         [Required]
         public int TeacherId { get; set; }

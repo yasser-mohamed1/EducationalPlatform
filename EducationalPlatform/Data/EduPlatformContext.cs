@@ -32,27 +32,43 @@ namespace EducationalPlatform.Data
                 .HasForeignKey<Teacher>(t => t.Id)
                 .HasPrincipalKey<ApplicationUser>(u => u.userId);
 
-            modelBuilder.Entity<Subject>()
-                .HasOne(s => s.Enrollment)
-                .WithOne(e => e.Subject)
-                .HasForeignKey<Enrollment>(e => e.SubjectId)
-                .OnDelete(DeleteBehavior.NoAction);
+		    modelBuilder.Entity<Enrollment>()
+	       .HasOne(e => e.Subject)
+	       .WithMany()
+	       .HasForeignKey(e => e.SubjectId)
+	       .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Result>()
+			modelBuilder.Entity<Result>()
                 .HasOne(r=>r.Student)
                 .WithMany(s=>s.Result)
                 .HasForeignKey(e=>e.StudentId);
             modelBuilder.Entity<AnswerResult>()
                 .HasKey(a => a.AnswerId);
-            modelBuilder.Entity<Quiz>()
-                .HasMany(q => q.Questions)
-                .WithMany(qe => qe.quizzes)
-                .UsingEntity(n => n.ToTable("Quiz_Question"));
+           
 			modelBuilder.Entity<StudentAnswer>()
 				.HasKey(e => new { e.AnswerId, e._StudentAnswer });
 			modelBuilder.Entity<QuestionCorrectAnswer>()
 				.HasKey(e => new { e.QuestionId,e.CorrectAnswer });
-
+           modelBuilder.Entity<QuizStudent>()
+                .HasKey(p => new {p.StudentId,p.QuizId});
+            modelBuilder.Entity<QuizStudent>()
+                .HasOne(p => p.Student)
+                .WithMany(p => p.quizStudents)
+                .HasForeignKey(p=>p.StudentId);
+            modelBuilder.Entity<QuizStudent>()
+               .HasOne(p => p.Quiz)
+               .WithMany(p => p.QuizStudents)
+               .HasForeignKey(p => p.QuizId);
+            modelBuilder.Entity<QuizQuestion>()
+                .HasKey(p => new { p.QuestionId, p.QuizId });
+            modelBuilder.Entity<QuizQuestion>()
+                .HasOne(p => p.Question)
+                .WithMany(p => p.QuizQuestions)
+                .HasForeignKey(p => p.QuestionId);
+			modelBuilder.Entity<QuizQuestion>()
+			  .HasOne(p => p.Quiz)
+			  .WithMany(p => p.QuizQuestions)
+			  .HasForeignKey(p => p.QuizId);
 			base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }
@@ -67,5 +83,8 @@ namespace EducationalPlatform.Data
 		public DbSet<QuestionCorrectAnswer> QuestionCorrectAnswers { get; set; }
 		public DbSet<Result> Results { get; set; }
 		public DbSet<StudentAnswer> StudentAnswers { get; set; }
+        public DbSet<QuizQuestion>QuizQuestions { get; set; }
+        public DbSet<QuizStudent>QuizStudents { get; set; }
+
 	}
 }

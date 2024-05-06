@@ -8,7 +8,7 @@ namespace EducationalPlatform.Entities
         public int Id { get; set; }
         public string Content { get; set; }
         [Required]
-        public List<Quiz> quizzes { get; set; }
+        public List<QuizQuestion> QuizQuestions { get; set; } 
         public List<QuestionCorrectAnswer>? CorrectAnswers { get; set; }  
         public List<Option> Options { get; set; }
         public Answer Answer { get; set; }

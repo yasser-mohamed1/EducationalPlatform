@@ -1,16 +1,16 @@
 using EducationalPlatform.Data;
 using EducationalPlatform.Entities;
+using EducationalPlatform.services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
 namespace EducationalPlatform
 {
     public class Program
     {
-        public static void Main(string[] args)
+		public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -47,13 +47,14 @@ namespace EducationalPlatform
                };
            }
            );
-
+            builder.Services.AddDbContext<EduPlatformContext>();
+            builder.Services.AddScoped<ISubjectServices, SubjectService>();
             builder.Services.AddScoped<Func<HttpContext, UserManager<ApplicationUser>>>(serviceProvider =>
             {
                 var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
                 return httpContext => httpContextAccessor.HttpContext?.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
             });
-
+           
 
             builder.Services.AddCors(corsOptions => {
                 corsOptions.AddPolicy("MyPolicy", corsPolicyBuilder =>
@@ -61,7 +62,7 @@ namespace EducationalPlatform
                     corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
-
+            
 
             var app = builder.Build();
 
@@ -90,4 +91,5 @@ namespace EducationalPlatform
             app.Run();
         }
     }
+
 }

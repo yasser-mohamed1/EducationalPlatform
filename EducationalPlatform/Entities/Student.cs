@@ -13,7 +13,9 @@ namespace EducationalPlatform.Entities
         public string? ProfileImageUrl { get; set; }
         public string? Level { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public List<Quiz>? Quizs { get; set; }
+      
         public List<Result>? Result { get; set; }
+        public List<QuizStudent> quizStudents { get; set; }
+
     }
 }
