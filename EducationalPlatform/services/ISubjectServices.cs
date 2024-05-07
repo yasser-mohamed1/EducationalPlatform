@@ -7,9 +7,9 @@ namespace EducationalPlatform.services
 	{
 		public Task<List<SubjectDto >> GetAllSubjectAsync();
 		public Task DeleteSubjectByIdAsync (int id);
-		public Task UpdateSubjectByIdAsync(int id);
-		public void CreateSubject(SubjectDto subject);
-
+		public Task UpdateSubjectByIdAsync(int id,SubjectDto ss);
+		public Task CreateSubjectAsync(SubjectDto subject);
+		public Task<SubjectDto> GetSubjectByIdAsync(int id);
 
 
 	}
