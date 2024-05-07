@@ -18,8 +18,25 @@ namespace EducationalPlatform.Controllers
 		[HttpPost]
 		public IActionResult AddSubject(SubjectDto Sub)
 		{
-			subjectServices.CreateSubject(Sub);
-			return Ok(ModelState);
+			if (ModelState.IsValid)
+			{
+				subjectServices.CreateSubject(Sub);
+				return Ok(Sub);
+			}
+			else
+				return BadRequest();
+			
+		}
+		[HttpGet]
+		public async Task<IActionResult>GetAllSubject()
+		{
+			if (ModelState.IsValid)
+			{
+				List<SubjectDto> Allsub = await subjectServices.GetAllSubjectAsync();
+
+				return Ok(Allsub);
+			}
+			return BadRequest();
 		}
 	}
 }

@@ -4564,11 +4564,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Field Training Project\\EducaionalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
+      "projectUniqueName": "D:\\Field Training Project\\New folder (2)\\EducationalPlatform\\EducationalPlatform.csproj",
       "projectName": "EducationalPlatform",
-      "projectPath": "D:\\Field Training Project\\EducaionalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
+      "projectPath": "D:\\Field Training Project\\New folder (2)\\EducationalPlatform\\EducationalPlatform.csproj",
       "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
-      "outputPath": "D:\\Field Training Project\\EducaionalPlatform\\EducationalPlatform\\obj\\",
+      "outputPath": "D:\\Field Training Project\\New folder (2)\\EducationalPlatform\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

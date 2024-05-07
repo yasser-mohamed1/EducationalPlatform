@@ -30,23 +30,24 @@ namespace EducationalPlatform.services
 			}
 		}
 
-		public List<SubjectDto> GetAllSubjectAsync()
+		public async Task<List<SubjectDto>> GetAllSubjectAsync()
 		{
-			var Subjects = Context.Subjects.Include(s=>s.Teacher)
-					.Select(s => new SubjectDto
-					{
-						Id = s.Id,
-						pricePerHour = s.pricePerHour,
-						Level = s.Level,
-						TeacherId = s.Teacher.Id,
-						Describtion=s.Describtion,
-						AddingTime = s.AddingTime,
-						subjName = s.subjName,
+			List<SubjectDto> Subjects = Context.Subjects.Include(s => s.Teacher)
+				.Select(s => new SubjectDto
+				{
+					Id = s.Id,
+					pricePerHour = s.pricePerHour,
+					Level = s.Level,
+					TeacherId = s.Teacher.Id,
+					Describtion = s.Describtion,
+					AddingTime = s.AddingTime,
+					subjName = s.subjName,
+				}).ToList();
 
-					}).ToList();
 			return Subjects;
-			throw new NotImplementedException();
+			// throw new NotImplementedException(); // This line is unnecessary and can be removed.
 		}
+
 
 		public Task UpdateSubjectByIdAsync(int id)
 		{
