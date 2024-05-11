@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static EducationalPlatform.DTO.TeacherDto;
 
 namespace EducationalPlatform.Controllers
 {
@@ -200,6 +201,41 @@ namespace EducationalPlatform.Controllers
 
             return filePath;
         }
+
+        [HttpGet("search")]
+        public IActionResult SearchTeachersAndSubjects(string teacherName = null, string subjectName = null)
+        {
+            var query = _context.Teachers
+                .Include(t => t.Subjects)
+                .Select(t => new TeacherWithSubjectDTO
+                {
+                    Id = t.Id,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    ProfileImageUrl = t.ProfileImageUrl,
+                    Address = t.Address,
+                    Email = t.User.Email,
+                    Phone = t.User.PhoneNumber,
+                    Subjects = t.Subjects.Select(s => s.subjName).ToList()
+                })
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(teacherName))
+            {
+                query = query.Where(t => t.FirstName.Contains(teacherName) || t.LastName.Contains(teacherName));
+            }
+
+            if (!string.IsNullOrEmpty(subjectName))
+            {
+                query = query.Where(t => t.Subjects.Any(s => s.Contains(subjectName)));
+            }
+
+            var result = query.ToList();
+
+            return Ok(result);
+        }
+
+
 
 
     }

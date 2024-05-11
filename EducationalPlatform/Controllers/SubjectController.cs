@@ -15,7 +15,7 @@ namespace EducationalPlatform.Controllers
 		{
 			subjectServices = _subjectServices;
 		}
-		[HttpPost("Add Subject")]
+		[HttpPost]
 		public async Task<IActionResult> AddSubject(SubjectDto Sub)
 		{
 			if (ModelState.IsValid)
@@ -27,7 +27,7 @@ namespace EducationalPlatform.Controllers
 				return BadRequest();
 
 		}
-		[HttpGet("Get Subject By Id")]
+		[HttpGet("{id}")]
 		public async Task<IActionResult> GetSubjectByIdAsync(int id)
 		{
 			SubjectDto s = await subjectServices.GetSubjectByIdAsync(id);
@@ -47,7 +47,7 @@ namespace EducationalPlatform.Controllers
 			return BadRequest();
 		}
 
-		[HttpDelete("Delete Subject")]
+		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteSubject(int id)
 		{
 			SubjectDto s=await subjectServices.GetSubjectByIdAsync(id);
@@ -59,7 +59,8 @@ namespace EducationalPlatform.Controllers
 				return Ok(s);
 			}
 		}
-		[HttpPost("Update subject")]
+
+		[HttpPut("{id}")]
 		public async Task<IActionResult>UpdateSubjectByid(int id, SubjectDto subject)
 		{
 			if (ModelState.IsValid)
