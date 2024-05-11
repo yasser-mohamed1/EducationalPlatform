@@ -32,19 +32,25 @@ namespace EducationalPlatform.Data
                 .HasForeignKey<Teacher>(t => t.Id)
                 .HasPrincipalKey<ApplicationUser>(u => u.userId);
 
-		    modelBuilder.Entity<Enrollment>()
-	       .HasOne(e => e.Subject)
-	       .WithMany()
-	       .HasForeignKey(e => e.SubjectId)
-	       .OnDelete(DeleteBehavior.Restrict);
-
+		   
 			modelBuilder.Entity<Result>()
                 .HasOne(r=>r.Student)
                 .WithMany(s=>s.Result)
                 .HasForeignKey(e=>e.StudentId);
             modelBuilder.Entity<AnswerResult>()
                 .HasKey(a => a.AnswerId);
-           
+			modelBuilder.Entity<Enrollment>()
+		 .HasOne(e => e.Subject)
+		 .WithMany()
+		 .HasForeignKey(e => e.SubjectIdd)
+		 .OnDelete(DeleteBehavior.Restrict);// or DeleteBehavior.SetNull, depending on your requirements
+         modelBuilder.Entity<Student>()
+                .HasMany(e=>e.Enrollments)
+                .WithOne(e=>e.Student)
+                .HasForeignKey(e=>e.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
 			modelBuilder.Entity<StudentAnswer>()
 				.HasKey(e => new { e.AnswerId, e._StudentAnswer });
 			modelBuilder.Entity<QuestionCorrectAnswer>()

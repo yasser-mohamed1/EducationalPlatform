@@ -10,7 +10,6 @@ namespace EducationalPlatform.Entities
         public string Level { get; set; }
         public string Describtion { get; set; }
         public int pricePerHour { get; set; }
-        public Enrollment? enrollment { get; set; }
 
         [ForeignKey("Teacher")]
         [Required]
@@ -18,5 +17,6 @@ namespace EducationalPlatform.Entities
         public virtual Teacher Teacher { get; set; }
         public DateTime? AddingTime { get; set; }
         public virtual List<Quiz>? Quizs { get; set; } = new List<Quiz>();
+        public virtual Enrollment? Enrollment { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace EducationalPlatform.Entities
       
         public List<Result>? Result { get; set; }
         public List<QuizStudent> quizStudents { get; set; }
+        public virtual List<Enrollment>? Enrollments { get; set; }
 
     }
 }

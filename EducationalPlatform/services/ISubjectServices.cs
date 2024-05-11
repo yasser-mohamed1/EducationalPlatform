@@ -1,5 +1,6 @@
 ﻿using EducationalPlatform.DTO;
 using EducationalPlatform.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducationalPlatform.services
 {
@@ -10,7 +11,8 @@ namespace EducationalPlatform.services
 		public Task UpdateSubjectByIdAsync(int id,SubjectDto ss);
 		public Task CreateSubjectAsync(SubjectDto subject);
 		public Task<SubjectDto> GetSubjectByIdAsync(int id);
-
+        public Task<string> GetTeacherNameForAsubject(int id);
+		public bool SubjectExists(int id);
 
 	}
 }

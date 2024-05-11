@@ -99,6 +99,26 @@ namespace EducationalPlatform.services
 			else
 			{ return null; }	
 		}
+
+		public async Task<String> GetTeacherNameForAsubject(int id)
+		{
+
+			Subject s=await Context.Subjects.Include(e=>e.Teacher).FirstOrDefaultAsync(t=>t.Id==id);
+			if (s != null)
+			{
+				string ss = s.Teacher.FirstName + " " + s.Teacher.LastName;
+				return ss;
+			}
+			else
+			{
+				return "The Teacher Not Found";
+			}
+		}
+
+		public bool SubjectExists(int id)
+		{
+			return Context.Students.Any(x => x.Id == id);
+		}
 	}
 }
 

@@ -153,21 +153,14 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubjectId1")
+                    b.Property<int>("SubjectIdd")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectId");
-
-                    b.HasIndex("SubjectId1")
-                        .IsUnique()
-                        .HasFilter("[SubjectId1] IS NOT NULL");
+                    b.HasIndex("SubjectIdd");
 
                     b.ToTable("Enrollments");
                 });
@@ -354,6 +347,9 @@ namespace EducationalPlatform.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Enrollmentid")
+                        .HasColumnType("int");
+
                     b.Property<string>("Level")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -369,6 +365,8 @@ namespace EducationalPlatform.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Enrollmentid");
 
                     b.HasIndex("TeacherId");
 
@@ -575,20 +573,16 @@ namespace EducationalPlatform.Migrations
             modelBuilder.Entity("EducationalPlatform.Entities.Enrollment", b =>
                 {
                     b.HasOne("EducationalPlatform.Entities.Student", "Student")
-                        .WithMany()
+                        .WithMany("Enrollments")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EducationalPlatform.Entities.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("SubjectIdd")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Subject", null)
-                        .WithOne("enrollment")
-                        .HasForeignKey("EducationalPlatform.Entities.Enrollment", "SubjectId1");
 
                     b.Navigation("Student");
 
@@ -708,11 +702,17 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
+                    b.HasOne("EducationalPlatform.Entities.Enrollment", "Enrollment")
+                        .WithMany()
+                        .HasForeignKey("Enrollmentid");
+
                     b.HasOne("EducationalPlatform.Entities.Teacher", "Teacher")
                         .WithMany("Subjects")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Enrollment");
 
                     b.Navigation("Teacher");
                 });
@@ -821,6 +821,8 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Student", b =>
                 {
+                    b.Navigation("Enrollments");
+
                     b.Navigation("Result");
 
                     b.Navigation("quizStudents");
@@ -829,8 +831,6 @@ namespace EducationalPlatform.Migrations
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
                     b.Navigation("Quizs");
-
-                    b.Navigation("enrollment");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Teacher", b =>
