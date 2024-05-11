@@ -1037,3 +1037,10 @@ D:\Field Training Project\New folder (2)\EducationalPlatform\obj\Debug\net8.0\re
 D:\Field Training Project\New folder (2)\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.pdb
 D:\Field Training Project\New folder (2)\EducationalPlatform\obj\Debug\net8.0\EducationalPlatform.genruntimeconfig.cache
 D:\Field Training Project\New folder (2)\EducationalPlatform\obj\Debug\net8.0\ref\EducationalPlatform.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\System.Web.Mvc.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\System.Web.Razor.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\System.Web.Helpers.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\System.Web.WebPages.Deployment.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\System.Web.WebPages.Razor.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\System.Web.WebPages.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll
