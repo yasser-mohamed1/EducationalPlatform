@@ -37,10 +37,11 @@ namespace EducationalPlatform.Controllers
                     Id = t.Id,
                     FirstName = t.FirstName,
                     LastName = t.LastName,
-                    ProfileImageUrl = t.ProfileImageUrl,
+                    Governorate = t.Governorate,
                     Address = t.Address,
                     Email = t.User.Email,
-                    Phone = t.User.PhoneNumber
+                    Phone = t.User.PhoneNumber,
+                    ProfileImageUrl = t.ProfileImageUrl
                 })
                 .ToListAsync();
 
@@ -59,10 +60,11 @@ namespace EducationalPlatform.Controllers
                     Id = t.Id,
                     FirstName = t.FirstName,
                     LastName = t.LastName,
-                    ProfileImageUrl = t.ProfileImageUrl,
+                    Governorate = t.Governorate,
                     Address = t.Address,
                     Email = t.User.Email, 
-                    Phone = t.User.PhoneNumber
+                    Phone = t.User.PhoneNumber,
+                    ProfileImageUrl = t.ProfileImageUrl
                 })
                 .FirstOrDefaultAsync();
 

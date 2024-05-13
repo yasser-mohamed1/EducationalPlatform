@@ -1,11 +1,11 @@
-﻿using EducationalPlatform.Entities;
+﻿using EducationalPlatform.DTO;
 using EducationalPlatform.services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationalPlatform.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class OptionController : ControllerBase
 	{
