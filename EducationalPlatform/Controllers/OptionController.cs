@@ -1,11 +1,11 @@
-﻿using EducationalPlatform.Entities;
+﻿using EducationalPlatform.DTO;
 using EducationalPlatform.services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationalPlatform.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class OptionController : ControllerBase
 	{
@@ -31,11 +31,11 @@ namespace EducationalPlatform.Controllers
 			}
 
 			[HttpPost]
-			public async Task<IActionResult> AddOption([FromBody] OptionDto optionDto)
+			public async Task<IActionResult> AddOption([FromBody] CreateOptionDTO dto)
 			{
 				try
 				{
-					await _optionServices.AddOption(optionDto.QuestionId, optionDto.OptionContent);
+					await _optionServices.AddOption(dto.QuestionId, dto.Content);
 					return Ok("Option added successfully");
 				}
 				catch (Exception ex)

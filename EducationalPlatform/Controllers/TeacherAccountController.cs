@@ -41,6 +41,7 @@ namespace EducationalPlatform.Controllers
                     user.Teacher.FirstName = teacherDto.FirstName;
                     user.Teacher.LastName = teacherDto.LastName;
                     user.Teacher.Address = teacherDto.Address;
+                    user.Teacher.Governorate = teacherDto.Governorate;
                     if (teacherDto.ProfileImage != null && teacherDto.ProfileImage.Length > 0)
                     {
                         user.Teacher.ProfileImageUrl = UploadProfileImage(teacherDto.ProfileImage);

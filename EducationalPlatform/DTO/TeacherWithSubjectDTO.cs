@@ -10,6 +10,7 @@ namespace EducationalPlatform.DTO
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
+        public string Governorate { get; set; }
         public virtual List<string> Subjects { get; set; } = [];
         public string? ProfileImageUrl { get; internal set; }
     }

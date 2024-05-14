@@ -132,3 +132,10 @@ E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\Educationa
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\EducationalPlatform.genruntimeconfig.cache
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\ref\EducationalPlatform.dll
 E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\EducationalPlatform.staticwebassets.runtime.json
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\System.Web.Mvc.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\System.Web.Razor.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\System.Web.Helpers.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\System.Web.WebPages.Deployment.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\System.Web.WebPages.Razor.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\System.Web.WebPages.dll
+E:\EducationalPlatform\EducationalPlatform\bin\Release\net8.0\win-x86\Microsoft.Web.Infrastructure.dll

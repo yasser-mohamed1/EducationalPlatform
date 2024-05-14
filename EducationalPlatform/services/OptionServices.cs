@@ -1,5 +1,7 @@
 ﻿using EducationalPlatform.Data;
+using EducationalPlatform.DTO;
 using EducationalPlatform.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -56,7 +58,7 @@ namespace EducationalPlatform.services
 			}
 		}
 
-		public async Task<Option> GetOptionById(int id)
+		public async Task<OptionDto> GetOptionById(int id)
 		{
 			var option = await _context.Options.FindAsync(id);
 
@@ -64,11 +66,35 @@ namespace EducationalPlatform.services
 			{
 				throw new ArgumentException("Option not found.", nameof(id));
 			}
-
-			return option;
+			OptionDto dto = new();
+			dto.Id = id;
+			dto.OptionContent = option.Content;
+			dto.QuestionId = option.QuestionId;
+			return dto;
 		}
 
-		public async Task RemoveOption(int id)
+        public async Task<IEnumerable<OptionDto>> GetOptions(int questionId)
+        {
+            var question = await _context.Questiones.FindAsync(questionId);
+            if (question == null)
+            {
+                throw new ArgumentException("Question not found.", nameof(questionId));
+            }
+            var options = await _context.Options
+                .Where(o => o.QuestionId == questionId)
+                .Select(o => new OptionDto
+                {
+					Id = o.Id,
+					QuestionId = o.QuestionId,
+                    OptionContent = o.Content
+                })
+                .ToListAsync();
+
+            return options;
+        }
+
+
+        public async Task RemoveOption(int id)
 		{
 			var option = await _context.Options.FindAsync(id);
 

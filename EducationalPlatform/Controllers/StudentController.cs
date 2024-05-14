@@ -203,7 +203,7 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpGet("search")]
-        public IActionResult SearchTeachersAndSubjects(string teacherName = null, string subjectName = null)
+        public IActionResult SearchTeachers(string teacherName = null, string Governorate = null)
         {
             var query = _context.Teachers
                 .Include(t => t.Subjects)
@@ -216,24 +216,32 @@ namespace EducationalPlatform.Controllers
                     Address = t.Address,
                     Email = t.User.Email,
                     Phone = t.User.PhoneNumber,
+                    Governorate = t.Governorate,
                     Subjects = t.Subjects.Select(s => s.subjName).ToList()
                 })
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(teacherName))
+            if (string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(teacherName))
             {
-                query = query.Where(t => t.FirstName.Contains(teacherName) || t.LastName.Contains(teacherName));
+                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(teacherName));
             }
 
-            if (!string.IsNullOrEmpty(subjectName))
+            if (!string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(teacherName))
             {
-                query = query.Where(t => t.Subjects.Any(s => s.Contains(subjectName)));
+                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(teacherName) &&
+                t.Governorate == Governorate);
+            }
+
+            if(!string.IsNullOrEmpty(Governorate) && string.IsNullOrEmpty(teacherName))
+            {
+                query = query.Where(t => t.Governorate == Governorate);
             }
 
             var result = query.ToList();
 
             return Ok(result);
         }
+
 
 
 

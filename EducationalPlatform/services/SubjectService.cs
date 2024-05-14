@@ -31,7 +31,7 @@ namespace EducationalPlatform.services
 			List<SubjectDto> Subjects =await Context.Subjects.Include(s => s.Teacher)
 				.Select(s => new SubjectDto
 				{
-					
+					Id = s.Id,
 					pricePerHour = s.pricePerHour,
 					Level = s.Level,
 					TeacherId = s.Teacher.Id,
@@ -63,7 +63,7 @@ namespace EducationalPlatform.services
 			}
 		}
 
-		public async Task CreateSubjectAsync(SubjectDto subject)
+		public async Task CreateSubjectAsync(CreateSubjectDTO subject)
 		{
 
 			Subject s = new Subject
@@ -87,7 +87,7 @@ namespace EducationalPlatform.services
 			{
 				return new SubjectDto
 				{
-					
+					Id = s.Id,	
 					subjName = s.subjName,
 					Describtion = s.Describtion,
 					Level = s.Level,

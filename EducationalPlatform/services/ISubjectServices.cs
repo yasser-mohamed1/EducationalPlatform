@@ -9,7 +9,7 @@ namespace EducationalPlatform.services
 		public Task<List<SubjectDto >> GetAllSubjectAsync();
 		public Task DeleteSubjectByIdAsync (int id);
 		public Task UpdateSubjectByIdAsync(int id,SubjectDto ss);
-		public Task CreateSubjectAsync(SubjectDto subject);
+		public Task CreateSubjectAsync(CreateSubjectDTO subject);
 		public Task<SubjectDto> GetSubjectByIdAsync(int id);
         public Task<string> GetTeacherNameForAsubject(int id);
 		public bool SubjectExists(int id);

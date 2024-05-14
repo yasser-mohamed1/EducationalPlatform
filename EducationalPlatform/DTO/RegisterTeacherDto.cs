@@ -16,6 +16,9 @@ namespace EducationalPlatform.DTO
         [Required, StringLength(256)]
         public string Email { get; set; }
 
+        [Required, StringLength(256)]
+        public string Governorate { get; set; }
+
         [Required, RegularExpression("^\\+20\\d{10}$")]
         public string Phone { get; set; }
 
