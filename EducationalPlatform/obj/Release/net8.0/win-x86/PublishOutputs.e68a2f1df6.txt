@@ -6,6 +6,12 @@ E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\EducationalPlatform.pdb
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Azure.Core.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Azure.Identity.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\System.Web.Mvc.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\System.Web.Razor.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\System.Web.Helpers.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\System.Web.WebPages.Deployment.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\System.Web.WebPages.Razor.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\System.Web.WebPages.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -29,6 +35,7 @@ E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.OpenApi.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.SqlServer.Server.dll
+E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.Web.Infrastructure.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 E:\EducationalPlatform\EducationalPlatform\obj\Release\net8.0\win-x86\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll

@@ -31,11 +31,11 @@ namespace EducationalPlatform.Controllers
 			}
 
 			[HttpPost]
-			public async Task<IActionResult> AddOption([FromBody] OptionDto optionDto)
+			public async Task<IActionResult> AddOption([FromBody] CreateOptionDTO dto)
 			{
 				try
 				{
-					await _optionServices.AddOption(optionDto.QuestionId, optionDto.OptionContent);
+					await _optionServices.AddOption(dto.QuestionId, dto.Content);
 					return Ok("Option added successfully");
 				}
 				catch (Exception ex)

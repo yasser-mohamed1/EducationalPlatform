@@ -204,6 +204,32 @@ namespace EducationalPlatform.Controllers
             return filePath;
         }
 
+        // GET: api/teacher/{teacherId}/subjects
+        [HttpGet("{teacherId}/subjects")]
+        public async Task<ActionResult<IEnumerable<SubjectDto>>> GetTeacherSubjects(int teacherId)
+        {
+            var teacher = await _context.Teachers
+                .Include(t => t.Subjects)
+                .FirstOrDefaultAsync(t => t.Id == teacherId);
+
+            if (teacher == null)
+            {
+                return NotFound("Teacher not found");
+            }
+
+            var subjects = teacher.Subjects.Select(s => new SubjectDto
+            {
+                Id = s.Id,
+                subjName = s.subjName,
+                Level = s.Level,
+                Describtion = s.Describtion,
+                pricePerHour = s.pricePerHour,
+                AddingTime = s.AddingTime
+            });
+
+            return Ok(subjects);
+        }
+
     }
 
 }
