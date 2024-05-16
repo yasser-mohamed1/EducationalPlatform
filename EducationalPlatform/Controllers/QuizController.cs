@@ -170,7 +170,7 @@ namespace EducationalPlatform.Controllers
             return _context.Quizzes.Any(e => e.Id == id);
         }
 
-        public bool SubjectExists(int id)
+        private bool SubjectExists(int id)
         {
             return _context.Students.Any(x => x.Id == id);
         }

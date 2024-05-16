@@ -205,6 +205,26 @@ namespace EducationalPlatform.Controllers
         [HttpGet("search")]
         public IActionResult SearchTeachers(string searchQuery = null, string Governorate = null)
         {
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                var querys = _context.Subjects.Include(s => s.Teacher)
+                    .Where(s => s.subjName.Contains(searchQuery))
+                    .Select(s => new SearchSubjectDto()
+                    {
+                        Id = s.Id,
+                        subjName = s.subjName,
+                        Level = s.Level,
+                        Describtion = s.Describtion,
+                        pricePerHour = s.pricePerHour,
+                        TeacherId = s.TeacherId
+                    }).AsQueryable();
+                var results = querys.ToList();
+
+                if(results.Count > 0)
+                {
+                    return Ok(results);
+                }
+            }
             var query = _context.Teachers
                 .Include(t => t.Subjects)
                 .Select(t => new TeacherWithSubjectDTO
@@ -217,16 +237,13 @@ namespace EducationalPlatform.Controllers
                     Email = t.User.Email,
                     Phone = t.User.PhoneNumber,
                     Governorate = t.Governorate,
-                    Subjects = t.Subjects.Select(s => new SearchSubjectDto()
+                    Subjects = t.Subjects.Select(s => new SubjectDto()
                     { 
                         Id = s.Id,
                         subjName = s.subjName,
                         Level = s.Level,
                         Describtion = s.Describtion,
                         pricePerHour = s.pricePerHour,
-                        teacherName = t.FirstName + " " + t.LastName,
-                        profileImageUrl = t.ProfileImageUrl,
-                        TeacherId = s.TeacherId
                     })
                     .ToList()
                 })

@@ -11,7 +11,7 @@ namespace EducationalPlatform.DTO
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Governorate { get; set; }
-        public virtual List<SearchSubjectDto> Subjects { get; set; } = [];
         public string? ProfileImageUrl { get; internal set; }
+        public virtual List<SubjectDto> Subjects { get; set; } = [];
     }
 }
