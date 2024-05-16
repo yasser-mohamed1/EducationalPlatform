@@ -119,6 +119,29 @@ namespace EducationalPlatform.services
 		{
 			return Context.Students.Any(x => x.Id == id);
 		}
+
+		public async Task<TeacherBannerDto> GetTheTeacherForAsubject(int subid)
+		{
+			bool ex=await Context.Subjects.AnyAsync(x=>x.Id==subid);
+			if (!ex) return null;
+			else
+			{
+				Subject s=await Context.Subjects.Include(c=>c.Teacher).FirstOrDefaultAsync(x=>x.Id==subid);
+				if (s != null)
+				{
+					Teacher T = s.Teacher;
+					return new TeacherBannerDto
+					{
+						ProfileImageURl = T.ProfileImageUrl,
+						FirstName = T.FirstName,
+						LastName = T.LastName,
+						Id = T.Id,
+
+					};
+				}
+				else return null;
+			}
+		}
 	}
 }
 

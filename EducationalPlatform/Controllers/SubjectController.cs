@@ -98,5 +98,18 @@ namespace EducationalPlatform.Controllers
 
             return Ok(quizzes);
         }
+		[HttpGet("{subjectId}/Teacher",Name ="Get The Teacher Banner")]
+		public async Task<IActionResult>GetTeacherForAsubject(int subjectId)
+		{
+			TeacherBannerDto T=await subjectServices.GetTheTeacherForAsubject(subjectId);
+			if(T!=null)
+			{
+				return Ok(T);
+			}
+			else
+			{
+				return BadRequest("The Teacher Not Found");
+			}
+		}
     }
 }
