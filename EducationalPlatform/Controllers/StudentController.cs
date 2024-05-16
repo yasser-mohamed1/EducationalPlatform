@@ -216,6 +216,8 @@ namespace EducationalPlatform.Controllers
                         Level = s.Level,
                         Describtion = s.Describtion,
                         pricePerHour = s.pricePerHour,
+                        teacherName = s.Teacher.FirstName + " " + s.Teacher.LastName,
+                        profileImageUrl = s.Teacher.ProfileImageUrl,
                         TeacherId = s.TeacherId
                     }).AsQueryable();
                 var results = querys.ToList();
@@ -251,8 +253,7 @@ namespace EducationalPlatform.Controllers
 
             if (!string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(t => ((t.FirstName + " " + t.LastName).Contains(searchQuery) ||
-                t.Subjects.Any(s => s.subjName.Contains(searchQuery))) &&
+                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(searchQuery) &&
                 t.Governorate == Governorate);
             }
 
@@ -263,8 +264,7 @@ namespace EducationalPlatform.Controllers
 
             if (string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(searchQuery) ||
-                t.Subjects.Any(s => s.subjName.Contains(searchQuery)));
+                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(searchQuery));
             }
 
             var result = query.ToList();
