@@ -209,10 +209,16 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CorrectAnswer")
+                    b.Property<int>("OptionId")
                         .HasColumnType("int");
 
-                    b.HasKey("QuestionId", "CorrectAnswer");
+                    b.HasKey("QuestionId", "OptionId");
+
+                    b.HasIndex("OptionId")
+                        .IsUnique();
+
+                    b.HasIndex("QuestionId")
+                        .IsUnique();
 
                     b.ToTable("QuestionCorrectAnswers");
                 });
@@ -224,6 +230,9 @@ namespace EducationalPlatform.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -606,11 +615,19 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.QuestionCorrectAnswer", b =>
                 {
-                    b.HasOne("EducationalPlatform.Entities.Question", "Question")
-                        .WithMany("CorrectAnswers")
-                        .HasForeignKey("QuestionId")
+                    b.HasOne("EducationalPlatform.Entities.Option", "Option")
+                        .WithOne("correctAnswer")
+                        .HasForeignKey("EducationalPlatform.Entities.QuestionCorrectAnswer", "OptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("EducationalPlatform.Entities.Question", "Question")
+                        .WithOne("CorrectAnswer")
+                        .HasForeignKey("EducationalPlatform.Entities.QuestionCorrectAnswer", "QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Option");
 
                     b.Navigation("Question");
                 });
@@ -799,12 +816,18 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("EducationalPlatform.Entities.Option", b =>
+                {
+                    b.Navigation("correctAnswer");
+                });
+
             modelBuilder.Entity("EducationalPlatform.Entities.Question", b =>
                 {
                     b.Navigation("Answer")
                         .IsRequired();
 
-                    b.Navigation("CorrectAnswers");
+                    b.Navigation("CorrectAnswer")
+                        .IsRequired();
 
                     b.Navigation("Options");
 

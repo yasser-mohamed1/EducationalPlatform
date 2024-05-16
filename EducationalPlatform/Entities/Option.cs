@@ -6,5 +6,6 @@
 		public string Content { get; set; }
 		public Question Question { get; set; }
 		public int QuestionId { get; set; }
+		public QuestionCorrectAnswer? correctAnswer { get; set; }
 	}
 }

@@ -203,7 +203,7 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpGet("search")]
-        public IActionResult SearchTeachers(string teacherName = null, string Governorate = null)
+        public IActionResult SearchTeachers(string searchQuery = null, string Governorate = null)
         {
             var query = _context.Teachers
                 .Include(t => t.Subjects)
@@ -217,34 +217,42 @@ namespace EducationalPlatform.Controllers
                     Email = t.User.Email,
                     Phone = t.User.PhoneNumber,
                     Governorate = t.Governorate,
-                    Subjects = t.Subjects.Select(s => s.subjName).ToList()
+                    Subjects = t.Subjects.Select(s => new SearchSubjectDto()
+                    { 
+                        Id = s.Id,
+                        subjName = s.subjName,
+                        Level = s.Level,
+                        Describtion = s.Describtion,
+                        pricePerHour = s.pricePerHour,
+                        teacherName = t.FirstName + " " + t.LastName,
+                        profileImageUrl = t.ProfileImageUrl,
+                        TeacherId = s.TeacherId
+                    })
+                    .ToList()
                 })
                 .AsQueryable();
 
-            if (string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(teacherName))
+            if (!string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(teacherName));
-            }
-
-            if (!string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(teacherName))
-            {
-                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(teacherName) &&
+                query = query.Where(t => ((t.FirstName + " " + t.LastName).Contains(searchQuery) ||
+                t.Subjects.Any(s => s.subjName.Contains(searchQuery))) &&
                 t.Governorate == Governorate);
             }
 
-            if(!string.IsNullOrEmpty(Governorate) && string.IsNullOrEmpty(teacherName))
+            if(!string.IsNullOrEmpty(Governorate) && string.IsNullOrEmpty(searchQuery))
             {
                 query = query.Where(t => t.Governorate == Governorate);
+            }
+
+            if (string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(searchQuery))
+            {
+                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(searchQuery) ||
+                t.Subjects.Any(s => s.subjName.Contains(searchQuery)));
             }
 
             var result = query.ToList();
 
             return Ok(result);
         }
-
-
-
-
-
     }
 }
