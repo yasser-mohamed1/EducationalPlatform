@@ -16,6 +16,20 @@ namespace EducationalPlatform.Controllers
 				_optionServices = optionServices;
 			}
 
+			[HttpGet("{id}/options")]
+			public async Task<ActionResult<IEnumerable<OptionDto>>> GetOptions(int questionId)
+			{
+				try
+				{
+					var options = await _optionServices.GetOptions(questionId);
+					return Ok(options);
+				}
+				catch (Exception ex)
+				{
+					return StatusCode(500, ex.Message);
+				}
+			}
+		
 			[HttpGet("{id}")]
 			public async Task<IActionResult> GetOptionById(int id)
 			{

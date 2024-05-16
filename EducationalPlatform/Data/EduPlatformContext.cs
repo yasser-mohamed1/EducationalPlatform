@@ -54,8 +54,19 @@ namespace EducationalPlatform.Data
 			modelBuilder.Entity<StudentAnswer>()
 				.HasKey(e => new { e.AnswerId, e._StudentAnswer });
 			modelBuilder.Entity<QuestionCorrectAnswer>()
-				.HasKey(e => new { e.QuestionId,e.CorrectAnswer });
-           modelBuilder.Entity<QuizStudent>()
+				.HasKey(e => new { e.QuestionId,e.OptionId });
+            modelBuilder.Entity<QuestionCorrectAnswer>()
+           .HasOne(qca => qca.Question)
+           .WithOne(q => q.CorrectAnswer)
+           .HasForeignKey<QuestionCorrectAnswer>(qca => qca.QuestionId);
+
+            modelBuilder.Entity<QuestionCorrectAnswer>()
+                .HasOne(qca => qca.Option)
+                .WithOne(o => o.correctAnswer)
+                .HasForeignKey<QuestionCorrectAnswer>(qca => qca.OptionId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<QuizStudent>()
                 .HasKey(p => new {p.StudentId,p.QuizId});
             modelBuilder.Entity<QuizStudent>()
                 .HasOne(p => p.Student)

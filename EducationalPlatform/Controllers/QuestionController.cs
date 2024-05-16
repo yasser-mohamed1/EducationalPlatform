@@ -39,7 +39,7 @@ namespace EducationalPlatform.Controllers
 
             if (question == null)
             {
-                return NotFound();
+                return NotFound($"No Question was found with this : {id}");
             }
 
             var questionDto = new QuestionDto
@@ -55,13 +55,21 @@ namespace EducationalPlatform.Controllers
         [HttpPost]
         public async Task<ActionResult<QuestionDto>> CreateQuestion(CreateQuestionDTO dto)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!QuizExists(dto.QuizId))
+            {
+                return NotFound($"No Quiz was found with this : {dto.QuizId}");
+            }
+
             var question = new Question
             {
                 Content = dto.Content
             };
-
             
-
             _context.Questiones.Add(question);
             await _context.SaveChangesAsync();
 
@@ -69,27 +77,28 @@ namespace EducationalPlatform.Controllers
             quizQuestion.QuizId = dto.QuizId;
             quizQuestion.QuestionId = question.Id;
             _context.QuizQuestions.Add(quizQuestion);
-            await _context.SaveChangesAsync();
             question.QuizQuestions.Add(quizQuestion);
+            await _context.SaveChangesAsync();
             return Ok(dto);
         }
 
         // PUT: api/question/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateQuestion(int id, QuestionDto questionDto)
+        public async Task<IActionResult> UpdateQuestion(int id, CreateQuestionDTO questionDto)
         {
-            if (id != questionDto.Id)
+            if (!QuestionExists(id))
             {
-                return BadRequest();
+                return NotFound($"No Question was found with this : {id}");
             }
 
-            var question = new Question
+            if (!ModelState.IsValid)
             {
-                Id = questionDto.Id,
-                Content = questionDto.Content
-            };
+                return BadRequest(ModelState);
+            }
 
-            _context.Entry(question).State = EntityState.Modified;
+            Question? question = await _context.Questiones.FindAsync(id);
+
+            question.Content = questionDto.Content;
 
             try
             {
@@ -117,7 +126,7 @@ namespace EducationalPlatform.Controllers
             var question = await _context.Questiones.FindAsync(id);
             if (question == null)
             {
-                return NotFound();
+                return NotFound($"No Question was found with this : {id}");
             }
 
             _context.Questiones.Remove(question);
@@ -129,6 +138,11 @@ namespace EducationalPlatform.Controllers
         private bool QuestionExists(int id)
         {
             return _context.Questiones.Any(e => e.Id == id);
+        }
+
+        private bool QuizExists(int id)
+        {
+            return _context.Quizzes.Any(e => e.Id == id);
         }
     }
 

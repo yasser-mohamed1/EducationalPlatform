@@ -18,6 +18,31 @@ namespace EducationalPlatform.Controllers
             _context = context;
         }
 
+        // GET: api/quiz/{quizId}/questions
+        [HttpGet("{quizId}/questions")]
+        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuizQuestions(int quizId)
+        {
+
+            var quiz = await _context.Quizzes
+                .Include(q => q.QuizQuestions)
+                .ThenInclude(qq => qq.Question)
+                .FirstOrDefaultAsync(q => q.Id == quizId);
+
+            if (quiz == null)
+            {
+                return NotFound("Quiz not found");
+            }
+
+            var questions = quiz.QuizQuestions.Select(qq => new QuestionDto
+            {
+                Id = qq.Question.Id,
+                Content = qq.Question.Content,
+                QuizId = qq.Quiz.Id
+            }).ToList();
+
+            return Ok(questions);
+        }
+
         // GET: api/quiz
         [HttpGet]
         public async Task<ActionResult<IEnumerable<QuizDto>>> GetQuizzes()
@@ -26,7 +51,8 @@ namespace EducationalPlatform.Controllers
             {
                 Id = q.Id,
                 SubjectId = (int)q.SubjectId,
-                Description = q.Description
+                Description = q.Description,
+                CreatedDate = q.CreatedDate
             }).ToListAsync();
 
             return Ok(quizzes);
@@ -40,14 +66,15 @@ namespace EducationalPlatform.Controllers
 
             if (quiz == null)
             {
-                return NotFound();
+                return NotFound($"No Quiz with found with this : {id}");
             }
 
             var quizDto = new QuizDto
             {
                 Id = quiz.Id,
                 SubjectId = (int)quiz.SubjectId,
-                Description = quiz.Description
+                Description = quiz.Description,
+                CreatedDate = quiz.CreatedDate
             };
 
             return Ok(quizDto);
@@ -57,10 +84,21 @@ namespace EducationalPlatform.Controllers
         [HttpPost]
         public async Task<ActionResult<QuizDto>> CreateQuiz(CreateQuizDTO dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if(!SubjectExists(dto.SubjectId))
+            {
+                return NotFound($"No Subject with found with this : {dto.SubjectId}");
+            }
+
             var quiz = new Quiz
             {
                 SubjectId = dto.SubjectId,
-                Description = dto.Description
+                Description = dto.Description,
+                CreatedDate = DateTime.Now
             };
 
             _context.Quizzes.Add(quiz);
@@ -71,21 +109,26 @@ namespace EducationalPlatform.Controllers
 
         // PUT: api/quiz/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateQuiz(int id, QuizDto quizDto)
+        public async Task<IActionResult> UpdateQuiz(int id, CreateQuizDTO dto)
         {
-            if (id != quizDto.Id)
+            if (!QuizExists(id))
             {
-                return BadRequest();
+                return NotFound($"No Quiz with found with this : {id}");
             }
 
-            var quiz = new Quiz
+            if (!ModelState.IsValid)
             {
-                Id = quizDto.Id,
-                SubjectId = quizDto.SubjectId,
-                Description = quizDto.Description
-            };
+                return BadRequest(ModelState);
+            }
 
-            _context.Entry(quiz).State = EntityState.Modified;
+            Quiz? quiz = await _context.Quizzes.FindAsync(id);
+
+            if (!string.IsNullOrEmpty(quiz.Description)) 
+            { 
+                quiz.Description = dto.Description;
+            }
+            if(quiz.SubjectId != null || quiz.SubjectId != 0)
+                quiz.SubjectId = dto.SubjectId;
 
             try
             {
@@ -103,7 +146,7 @@ namespace EducationalPlatform.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(quiz);
         }
 
         // DELETE: api/quiz/{id}
@@ -113,7 +156,7 @@ namespace EducationalPlatform.Controllers
             var quiz = await _context.Quizzes.FindAsync(id);
             if (quiz == null)
             {
-                return NotFound();
+                return NotFound($"No Quiz with found with this : {id}");
             }
 
             _context.Quizzes.Remove(quiz);
@@ -125,6 +168,11 @@ namespace EducationalPlatform.Controllers
         private bool QuizExists(int id)
         {
             return _context.Quizzes.Any(e => e.Id == id);
+        }
+
+        private bool SubjectExists(int id)
+        {
+            return _context.Students.Any(x => x.Id == id);
         }
     }
 }

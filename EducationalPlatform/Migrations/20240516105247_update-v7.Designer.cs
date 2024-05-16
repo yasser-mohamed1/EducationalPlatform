@@ -4,6 +4,7 @@ using EducationalPlatform.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationalPlatform.Migrations
 {
     [DbContext(typeof(EduPlatformContext))]
-    partial class EduPlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20240516105247_update-v7")]
+    partial class updatev7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -618,7 +621,7 @@ namespace EducationalPlatform.Migrations
                     b.HasOne("EducationalPlatform.Entities.Option", "Option")
                         .WithOne("correctAnswer")
                         .HasForeignKey("EducationalPlatform.Entities.QuestionCorrectAnswer", "OptionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EducationalPlatform.Entities.Question", "Question")
@@ -826,7 +829,8 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Answer")
                         .IsRequired();
 
-                    b.Navigation("CorrectAnswer");
+                    b.Navigation("CorrectAnswer")
+                        .IsRequired();
 
                     b.Navigation("Options");
 
