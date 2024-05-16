@@ -618,7 +618,7 @@ namespace EducationalPlatform.Migrations
                     b.HasOne("EducationalPlatform.Entities.Option", "Option")
                         .WithOne("correctAnswer")
                         .HasForeignKey("EducationalPlatform.Entities.QuestionCorrectAnswer", "OptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EducationalPlatform.Entities.Question", "Question")
@@ -826,8 +826,7 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Answer")
                         .IsRequired();
 
-                    b.Navigation("CorrectAnswer")
-                        .IsRequired();
+                    b.Navigation("CorrectAnswer");
 
                     b.Navigation("Options");
 

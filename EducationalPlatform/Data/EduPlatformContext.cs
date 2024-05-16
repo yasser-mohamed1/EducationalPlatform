@@ -63,7 +63,8 @@ namespace EducationalPlatform.Data
             modelBuilder.Entity<QuestionCorrectAnswer>()
                 .HasOne(qca => qca.Option)
                 .WithOne(o => o.correctAnswer)
-                .HasForeignKey<QuestionCorrectAnswer>(qca => qca.OptionId);
+                .HasForeignKey<QuestionCorrectAnswer>(qca => qca.OptionId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<QuizStudent>()
                 .HasKey(p => new {p.StudentId,p.QuizId});

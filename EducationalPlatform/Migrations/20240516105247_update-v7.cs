@@ -41,7 +41,7 @@ namespace EducationalPlatform.Migrations
                 column: "OptionId",
                 principalTable: "Options",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
