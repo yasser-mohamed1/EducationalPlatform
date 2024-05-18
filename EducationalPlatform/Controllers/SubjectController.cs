@@ -22,7 +22,28 @@ namespace EducationalPlatform.Controllers
 			subjectServices = _subjectServices;
             _context = context;
         }
-		[HttpPost]
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SubjectDto>>> GetSubjects()
+        {
+            var subjects = await _context.Subjects.Select(subject => new SubjectDto
+            {
+                Id = subject.Id,
+                subjName = subject.subjName,
+                Level = subject.Level,
+                Describtion = subject.Describtion,
+                pricePerHour = subject.pricePerHour,
+                TeacherId = subject.TeacherId,
+                AddingTime = subject.AddingTime.ToString(),
+                ProfileImageURl = subject.Teacher.ProfileImageUrl,
+                TeacherName = subject.Teacher.FirstName + " " + subject.Teacher.LastName,
+                Term = subject.Term
+            }).ToListAsync();
+
+            return Ok(subjects);
+        }
+
+        [HttpPost]
 		public async Task<IActionResult> AddSubject(CreateSubjectDTO Sub)
 		{
 			if (ModelState.IsValid)
@@ -42,14 +63,15 @@ namespace EducationalPlatform.Controllers
 			else
 				return BadRequest();
 		}
-		[HttpPost("{TeacherId}")]
+
+		[HttpGet("{TeacherId}/subjects")]
 		public async Task<IActionResult> GetAllSubjectsForATeacher(int TeacherId)
 		{
 			if (ModelState.IsValid)
 			{
 			
-					var Subs = await subjectServices.GetAllSubjectsForATeacher(TeacherId);
-				    if(Subs.IsNullOrEmpty())
+				var Subs = await subjectServices.GetAllSubjectsForATeacher(TeacherId);
+				if(Subs.IsNullOrEmpty())
 				{
 					return BadRequest("The Teacher Not Found");
 				}
@@ -63,6 +85,7 @@ namespace EducationalPlatform.Controllers
 				return BadRequest();
 			}
 		}
+
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetSubjectByIdAsync(int id)
 		{
@@ -71,7 +94,6 @@ namespace EducationalPlatform.Controllers
 				return Ok(s);
 			return BadRequest("The Subject Was not Found ");
 		}
-		[HttpGet]
 		
 
 		[HttpDelete("{id}")]
@@ -120,6 +142,7 @@ namespace EducationalPlatform.Controllers
 
             return Ok(quizzes);
         }
+
 		[HttpGet("{subjectId}/Teacher",Name ="Get The Teacher Banner")]
 		public async Task<IActionResult>GetTeacherForAsubject(int subjectId)
 		{
