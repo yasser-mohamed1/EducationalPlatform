@@ -113,7 +113,7 @@ namespace EducationalPlatform.Controllers
                     id = quiz.Id,
                     subjectId = dto.SubjectId,
                     Description = dto.Description,
-                    CreatedDate = DateTime.Now.ToString()
+                    CreatedDate = quiz.CreatedDate
                 }
             );
         }
@@ -183,7 +183,7 @@ namespace EducationalPlatform.Controllers
 
         private bool SubjectExists(int id)
         {
-            return _context.Students.Any(x => x.Id == id);
+            return _context.Subjects.Any(x => x.Id == id);
         }
     }
 }
