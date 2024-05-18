@@ -138,11 +138,11 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Enrollment", b =>
                 {
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectIdd")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
@@ -150,12 +150,15 @@ namespace EducationalPlatform.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("SubjectId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.HasKey("StudentId", "SubjectIdd");
+                    b.Property<int>("SubjectIdd")
+                        .HasColumnType("int");
 
-                    b.HasIndex("SubjectId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectIdd");
 
@@ -540,14 +543,10 @@ namespace EducationalPlatform.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("EducationalPlatform.Entities.Subject", null)
-                        .WithMany("Enrollments")
-                        .HasForeignKey("SubjectId");
-
                     b.HasOne("EducationalPlatform.Entities.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("Enrollments")
                         .HasForeignKey("SubjectIdd")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Student");

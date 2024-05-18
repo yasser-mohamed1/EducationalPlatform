@@ -5,7 +5,7 @@ namespace EducationalPlatform.services
 {
 	public interface IEnrollmentServices
 	{
-		public Task<string> MakeEnrollment(EnrollmentDto Enrollment);
+		public Task<Enrollment> MakeEnrollment(int StudentId,int SubjectId);
 		public Task RemoveEnrollment(int  EnrollmentId);
 		public Task<List<StudentDTO>>GetAllStudentsEnrolledInSubject(int SubjectId);
 

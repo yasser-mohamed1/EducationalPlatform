@@ -1,5 +1,6 @@
 ﻿using EducationalPlatform.Data;
 using EducationalPlatform.DTO;
+using EducationalPlatform.Entities;
 using EducationalPlatform.services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +22,19 @@ namespace EducationalPlatform.Controllers
 			SubjectServices = subjectServices;
 		}
 		[HttpPost]
-		public async Task<IActionResult> MakeEnrollment([FromForm]EnrollmentDto enrollment)
+		public async Task<IActionResult> MakeEnrollment(int StudentId,int SubjectId)
 		{
 			if (ModelState.IsValid)
 			{
 				try
 				{
-					 string s=await EnrollmentServices.MakeEnrollment(enrollment);
-					return Ok(enrollment);
+					 Enrollment E=await EnrollmentServices.MakeEnrollment(StudentId,SubjectId);
+					return Ok(new
+					{
+						success = true,
+						message = "Enrollment created successfully.",
+						data = E
+					});
 				}
 				catch (Exception ex)
 				{
@@ -53,5 +59,6 @@ namespace EducationalPlatform.Controllers
 				return BadRequest(ex.Message);
 			}
 		}
+		
 	}
 }

@@ -33,7 +33,7 @@ namespace EducationalPlatform.Data
                 .HasPrincipalKey<ApplicationUser>(u => u.userId);
             //Enrollment Handling 
             modelBuilder.Entity<Enrollment>()
-                .HasKey(c => new { c.StudentId, c.SubjectIdd });
+                .HasKey(u => u.Id);
             modelBuilder.Entity<Enrollment>()
                 .HasOne(c => c.Student)
                 .WithMany(c => c.Enrollments)
@@ -51,11 +51,7 @@ namespace EducationalPlatform.Data
             modelBuilder.Entity<AnswerResult>()
                 .HasKey(a => a.AnswerId);
 
-		  modelBuilder.Entity<Enrollment>()
-		 .HasOne(e => e.Subject)
-		 .WithMany()
-		 .HasForeignKey(e => e.SubjectIdd)
-		 .OnDelete(DeleteBehavior.Restrict);// or DeleteBehavior.SetNull, depending on your requirements
+		 
 
          modelBuilder.Entity<Student>()
                 .HasMany(e=>e.Enrollments)
