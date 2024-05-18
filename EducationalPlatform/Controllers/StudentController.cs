@@ -205,10 +205,12 @@ namespace EducationalPlatform.Controllers
         [HttpGet("search")]
         public IActionResult SearchTeachers(string searchQuery = null, string Governorate = null)
         {
-            if (!string.IsNullOrEmpty(searchQuery))
+            if (!string.IsNullOrEmpty(searchQuery) && string.IsNullOrEmpty(Governorate))
             {
                 var querys = _context.Subjects.Include(s => s.Teacher)
-                    .Where(s => s.subjName.Contains(searchQuery))
+                    .AsEnumerable()
+                    //.Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && searchQuery.Length > 3)
+                    .Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsAtLeastTwoConsecutiveChars(s.subjName, searchQuery))
                     .Select(s => new SearchSubjectDto()
                     {
                         Id = s.Id,
@@ -216,13 +218,13 @@ namespace EducationalPlatform.Controllers
                         Level = s.Level,
                         Describtion = s.Describtion,
                         pricePerHour = s.pricePerHour,
+                        TeacherId = s.TeacherId,
                         teacherName = s.Teacher.FirstName + " " + s.Teacher.LastName,
-                        profileImageUrl = s.Teacher.ProfileImageUrl,
-                        TeacherId = s.TeacherId
+                        profileImageUrl = s.Teacher.ProfileImageUrl
                     }).AsQueryable();
                 var results = querys.ToList();
 
-                if(results.Count > 0)
+                if (results.Count > 0)
                 {
                     return Ok(results);
                 }
@@ -240,7 +242,7 @@ namespace EducationalPlatform.Controllers
                     Phone = t.User.PhoneNumber,
                     Governorate = t.Governorate,
                     Subjects = t.Subjects.Select(s => new SubjectDto()
-                    { 
+                    {
                         Id = s.Id,
                         subjName = s.subjName,
                         Level = s.Level,
@@ -249,27 +251,107 @@ namespace EducationalPlatform.Controllers
                     })
                     .ToList()
                 })
-                .AsQueryable();
+                .AsEnumerable();
 
             if (!string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(searchQuery) &&
+                query = query.Where(t => ((t.FirstName + t.LastName).LevenshteinDistance(searchQuery) <= 3 ||
+                t.FirstName.LevenshteinDistance(searchQuery) <= 1 ||
+                t.LastName.LevenshteinDistance(searchQuery) <= 1) &&
                 t.Governorate == Governorate);
             }
 
-            if(!string.IsNullOrEmpty(Governorate) && string.IsNullOrEmpty(searchQuery))
+            if (!string.IsNullOrEmpty(Governorate) && string.IsNullOrEmpty(searchQuery))
             {
                 query = query.Where(t => t.Governorate == Governorate);
             }
 
             if (string.IsNullOrEmpty(Governorate) && !string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(t => (t.FirstName + " " + t.LastName).Contains(searchQuery));
+                query = query.Where(t => (t.FirstName + t.LastName).LevenshteinDistance(searchQuery) <= 3 ||
+                t.FirstName.LevenshteinDistance(searchQuery) <= 1 ||
+                t.LastName.LevenshteinDistance(searchQuery) <= 1);
             }
 
             var result = query.ToList();
 
             return Ok(result);
+        }
+
+        private bool ContainsAtLeastTwoConsecutiveChars(string str1, string str2)
+        {
+            if (str1 == null || str2 == null)
+            {
+                return false;
+            }
+
+            if (str2.Length == 1)
+            {
+                return str1.Contains(str2);
+            }
+
+            int ctr = 0;
+
+            int mn = str1.Length <= str2.Length ? str1.Length : str2.Length;
+
+            for (int i = 0; i < mn; i++)
+            {
+                if (str1[i] == str2[i])
+                {
+                    ++ctr;
+                }
+                else
+                {
+                    ctr = 0;
+                }
+                if (mn <= 3)
+                {
+                    if (ctr == 2)
+                        return true;
+                }
+                else
+                {
+                    if (mn <= 5)
+                    {
+                        if (ctr == 3)
+                            return true;
+                    }
+                    else
+                    {
+                        if (ctr == 4)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+    public static class StringExtensions
+    {
+        public static int LevenshteinDistance(this string a, string b)
+        {
+            if (string.IsNullOrEmpty(a)) return b.Length;
+            if (string.IsNullOrEmpty(b)) return a.Length;
+
+            int[,] costs = new int[a.Length + 1, b.Length + 1];
+
+            for (int i = 0; i <= a.Length; i++)
+                costs[i, 0] = i;
+
+            for (int j = 0; j <= b.Length; j++)
+                costs[0, j] = j;
+
+            for (int i = 1; i <= a.Length; i++)
+            {
+                for (int j = 1; j <= b.Length; j++)
+                {
+                    int cost = (b[j - 1] == a[i - 1]) ? 0 : 1;
+                    costs[i, j] = Math.Min(Math.Min(costs[i - 1, j] + 1, costs[i, j - 1] + 1), costs[i - 1, j - 1] + cost);
+                }
+            }
+
+            return costs[a.Length, b.Length];
         }
     }
 }

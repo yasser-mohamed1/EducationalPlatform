@@ -26,8 +26,17 @@ namespace EducationalPlatform.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				await subjectServices.CreateSubjectAsync(Sub);
-				return Ok(Sub);
+				int id = await subjectServices.CreateSubjectAsync(Sub);
+				return Ok(new
+				{
+					subjectId = id,
+					subjName = Sub.subjName,
+					Level = Sub.Level,
+					Describtion = Sub.Describtion,
+					pricePerHour = Sub.pricePerHour,
+					teacherId = Sub.TeacherId,
+					addinTime = Sub.AddingTime
+				});
 			}
 			else
 				return BadRequest();
