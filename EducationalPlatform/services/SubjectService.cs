@@ -63,9 +63,8 @@ namespace EducationalPlatform.services
 			}
 		}
 
-		public async Task CreateSubjectAsync(CreateSubjectDTO subject)
+		public async Task<int> CreateSubjectAsync(CreateSubjectDTO subject)
 		{
-
 			Subject s = new Subject
 			{
 				pricePerHour = subject.pricePerHour,
@@ -77,7 +76,7 @@ namespace EducationalPlatform.services
 			};
 			Context.Subjects.Add(s);
 			await Context.SaveChangesAsync();
-		   
+			return s.Id;
 		}
 
 		public async Task<SubjectDto> GetSubjectByIdAsync(int id)
