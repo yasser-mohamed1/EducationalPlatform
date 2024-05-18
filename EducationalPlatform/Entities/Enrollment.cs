@@ -6,10 +6,9 @@ namespace EducationalPlatform.Entities
 {
 	public class Enrollment
 	{
-		public int id { get; set; }
 		public DateTime EnrollmentDate { get; set; }
 		public DateTime ExpirationDate { get; set; }
-		public string EnrollmentMethod { get; set; }
+		
 		[ForeignKey("Subject")]
 		public int SubjectIdd { get; set; }
 		public Subject? Subject { get; set; }

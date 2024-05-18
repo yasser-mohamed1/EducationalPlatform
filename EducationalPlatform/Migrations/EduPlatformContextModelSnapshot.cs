@@ -33,6 +33,10 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<string>("StudentAnswer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
@@ -134,57 +138,28 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Enrollment", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<DateTime>("EnrollmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EnrollmentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectIdd")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<DateTime>("EnrollmentDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("StudentId");
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "SubjectIdd");
+
+                    b.HasIndex("SubjectId");
 
                     b.HasIndex("SubjectIdd");
 
                     b.ToTable("Enrollments");
-                });
-
-            modelBuilder.Entity("EducationalPlatform.Entities.Option", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Question", b =>
@@ -199,28 +174,34 @@ namespace EducationalPlatform.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Option1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Option2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Option3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Option4")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("QuizId");
+
                     b.ToTable("Questiones");
-                });
-
-            modelBuilder.Entity("EducationalPlatform.Entities.QuestionCorrectAnswer", b =>
-                {
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OptionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionId", "OptionId");
-
-                    b.HasIndex("OptionId")
-                        .IsUnique();
-
-                    b.HasIndex("QuestionId")
-                        .IsUnique();
-
-                    b.ToTable("QuestionCorrectAnswers");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Quiz", b =>
@@ -231,8 +212,9 @@ namespace EducationalPlatform.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -246,21 +228,6 @@ namespace EducationalPlatform.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Quizzes");
-                });
-
-            modelBuilder.Entity("EducationalPlatform.Entities.QuizQuestion", b =>
-                {
-                    b.Property<int?>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("QuizId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionId", "QuizId");
-
-                    b.HasIndex("QuizId");
-
-                    b.ToTable("QuizQuestions");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.QuizStudent", b =>
@@ -328,19 +295,6 @@ namespace EducationalPlatform.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("EducationalPlatform.Entities.StudentAnswer", b =>
-                {
-                    b.Property<int>("AnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("_StudentAnswer")
-                        .HasColumnType("int");
-
-                    b.HasKey("AnswerId", "_StudentAnswer");
-
-                    b.ToTable("StudentAnswers");
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
                     b.Property<int>("Id")
@@ -355,9 +309,6 @@ namespace EducationalPlatform.Migrations
                     b.Property<string>("Describtion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Enrollmentid")
-                        .HasColumnType("int");
 
                     b.Property<string>("Level")
                         .IsRequired()
@@ -374,8 +325,6 @@ namespace EducationalPlatform.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Enrollmentid");
 
                     b.HasIndex("TeacherId");
 
@@ -591,6 +540,10 @@ namespace EducationalPlatform.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("EducationalPlatform.Entities.Subject", null)
+                        .WithMany("Enrollments")
+                        .HasForeignKey("SubjectId");
+
                     b.HasOne("EducationalPlatform.Entities.Subject", "Subject")
                         .WithMany()
                         .HasForeignKey("SubjectIdd")
@@ -602,34 +555,15 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("EducationalPlatform.Entities.Option", b =>
+            modelBuilder.Entity("EducationalPlatform.Entities.Question", b =>
                 {
-                    b.HasOne("EducationalPlatform.Entities.Question", "Question")
-                        .WithMany("Options")
-                        .HasForeignKey("QuestionId")
+                    b.HasOne("EducationalPlatform.Entities.Quiz", "Quiz")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("EducationalPlatform.Entities.QuestionCorrectAnswer", b =>
-                {
-                    b.HasOne("EducationalPlatform.Entities.Option", "Option")
-                        .WithOne("correctAnswer")
-                        .HasForeignKey("EducationalPlatform.Entities.QuestionCorrectAnswer", "OptionId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Question", "Question")
-                        .WithOne("CorrectAnswer")
-                        .HasForeignKey("EducationalPlatform.Entities.QuestionCorrectAnswer", "QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Option");
-
-                    b.Navigation("Question");
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Quiz", b =>
@@ -639,25 +573,6 @@ namespace EducationalPlatform.Migrations
                         .HasForeignKey("SubjectId");
 
                     b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("EducationalPlatform.Entities.QuizQuestion", b =>
-                {
-                    b.HasOne("EducationalPlatform.Entities.Question", "Question")
-                        .WithMany("QuizQuestions")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EducationalPlatform.Entities.Quiz", "Quiz")
-                        .WithMany("QuizQuestions")
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-
-                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.QuizStudent", b =>
@@ -710,30 +625,13 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EducationalPlatform.Entities.StudentAnswer", b =>
-                {
-                    b.HasOne("EducationalPlatform.Entities.Answer", "Answer")
-                        .WithMany("StudentAnswers")
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Answer");
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
-                    b.HasOne("EducationalPlatform.Entities.Enrollment", "Enrollment")
-                        .WithMany()
-                        .HasForeignKey("Enrollmentid");
-
                     b.HasOne("EducationalPlatform.Entities.Teacher", "Teacher")
                         .WithMany("Subjects")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Enrollment");
 
                     b.Navigation("Teacher");
                 });
@@ -805,8 +703,6 @@ namespace EducationalPlatform.Migrations
                 {
                     b.Navigation("AnswerResult")
                         .IsRequired();
-
-                    b.Navigation("StudentAnswers");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.ApplicationUser", b =>
@@ -816,26 +712,15 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("EducationalPlatform.Entities.Option", b =>
-                {
-                    b.Navigation("correctAnswer");
-                });
-
             modelBuilder.Entity("EducationalPlatform.Entities.Question", b =>
                 {
                     b.Navigation("Answer")
                         .IsRequired();
-
-                    b.Navigation("CorrectAnswer");
-
-                    b.Navigation("Options");
-
-                    b.Navigation("QuizQuestions");
                 });
 
             modelBuilder.Entity("EducationalPlatform.Entities.Quiz", b =>
                 {
-                    b.Navigation("QuizQuestions");
+                    b.Navigation("Questions");
 
                     b.Navigation("QuizStudents");
                 });
@@ -856,6 +741,8 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
+                    b.Navigation("Enrollments");
+
                     b.Navigation("Quizs");
                 });
 

@@ -21,13 +21,13 @@ namespace EducationalPlatform.Controllers
 			SubjectServices = subjectServices;
 		}
 		[HttpPost]
-		public async Task<IActionResult> MakeEnrollment(int id, [FromForm]EnrollmentDto enrollment)
+		public async Task<IActionResult> MakeEnrollment([FromForm]EnrollmentDto enrollment)
 		{
 			if (ModelState.IsValid)
 			{
 				try
 				{
-					await EnrollmentServices.MakeEnrollment(id, enrollment);
+					 string s=await EnrollmentServices.MakeEnrollment(enrollment);
 					return Ok(enrollment);
 				}
 				catch (Exception ex)

@@ -53,34 +53,34 @@ namespace EducationalPlatform.Controllers
 
         // POST: api/question
         [HttpPost]
-        public async Task<ActionResult<QuestionDto>> CreateQuestion(CreateQuestionDTO dto)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //public async Task<ActionResult<QuestionDto>> CreateQuestion(CreateQuestionDTO dto)
+        //{
+        //    if(!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (!QuizExists(dto.QuizId))
-            {
-                return NotFound($"No Quiz was found with this : {dto.QuizId}");
-            }
+        //    if (!QuizExists(dto.QuizId))
+        //    {
+        //        return NotFound($"No Quiz was found with this : {dto.QuizId}");
+        //    }
 
-            var question = new Question
-            {
-                Content = dto.Content
-            };
+        //    var question = new Question
+        //    {
+        //        Content = dto.Content
+        //    };
             
-            _context.Questiones.Add(question);
-            await _context.SaveChangesAsync();
+        //    _context.Questiones.Add(question);
+        //    await _context.SaveChangesAsync();
 
-            QuizQuestion quizQuestion = new();
-            quizQuestion.QuizId = dto.QuizId;
-            quizQuestion.QuestionId = question.Id;
-            _context.QuizQuestions.Add(quizQuestion);
-            question.QuizQuestions.Add(quizQuestion);
-            await _context.SaveChangesAsync();
-            return Ok(dto);
-        }
+        //    QuizQuestion quizQuestion = new();
+        //    quizQuestion.QuizId = dto.QuizId;
+        //    quizQuestion.QuestionId = question.Id;
+        //    _context.QuizQuestions.Add(quizQuestion);
+        //    question.QuizQuestions.Add(quizQuestion);
+        //    await _context.SaveChangesAsync();
+        //    return Ok(dto);
+        //}
 
         // PUT: api/question/{id}
         [HttpPut("{id}")]

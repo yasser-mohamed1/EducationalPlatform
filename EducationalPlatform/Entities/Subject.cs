@@ -17,6 +17,7 @@ namespace EducationalPlatform.Entities
         public virtual Teacher Teacher { get; set; }
         public DateTime? AddingTime { get; set; }
         public virtual List<Quiz>? Quizs { get; set; } = new List<Quiz>();
-        public virtual Enrollment? Enrollment { get; set; }
+        public virtual List<Enrollment>? Enrollments { get; set; }
+
     }
 }

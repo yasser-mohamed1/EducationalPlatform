@@ -31,62 +31,53 @@ namespace EducationalPlatform.Data
                 .WithOne(t => t.User)
                 .HasForeignKey<Teacher>(t => t.Id)
                 .HasPrincipalKey<ApplicationUser>(u => u.userId);
-
-		   
+            //Enrollment Handling 
+            modelBuilder.Entity<Enrollment>()
+                .HasKey(c => new { c.StudentId, c.SubjectIdd });
+            modelBuilder.Entity<Enrollment>()
+                .HasOne(c => c.Student)
+                .WithMany(c => c.Enrollments)
+                .HasForeignKey(c => c.StudentId);
+            modelBuilder.Entity<Enrollment>()
+                .HasOne(c => c.Subject)
+                .WithMany(c => c.Enrollments)
+                .HasForeignKey(c => c.SubjectIdd);
+	
 			modelBuilder.Entity<Result>()
                 .HasOne(r=>r.Student)
                 .WithMany(s=>s.Result)
                 .HasForeignKey(e=>e.StudentId);
+
             modelBuilder.Entity<AnswerResult>()
                 .HasKey(a => a.AnswerId);
-			modelBuilder.Entity<Enrollment>()
+
+		  modelBuilder.Entity<Enrollment>()
 		 .HasOne(e => e.Subject)
 		 .WithMany()
 		 .HasForeignKey(e => e.SubjectIdd)
 		 .OnDelete(DeleteBehavior.Restrict);// or DeleteBehavior.SetNull, depending on your requirements
+
          modelBuilder.Entity<Student>()
                 .HasMany(e=>e.Enrollments)
                 .WithOne(e=>e.Student)
                 .HasForeignKey(e=>e.StudentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
-			modelBuilder.Entity<StudentAnswer>()
-				.HasKey(e => new { e.AnswerId, e._StudentAnswer });
-			modelBuilder.Entity<QuestionCorrectAnswer>()
-				.HasKey(e => new { e.QuestionId,e.OptionId });
-            modelBuilder.Entity<QuestionCorrectAnswer>()
-           .HasOne(qca => qca.Question)
-           .WithOne(q => q.CorrectAnswer)
-           .HasForeignKey<QuestionCorrectAnswer>(qca => qca.QuestionId);
-
-            modelBuilder.Entity<QuestionCorrectAnswer>()
-                .HasOne(qca => qca.Option)
-                .WithOne(o => o.correctAnswer)
-                .HasForeignKey<QuestionCorrectAnswer>(qca => qca.OptionId)
-                .OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.Entity<QuizStudent>()
                 .HasKey(p => new {p.StudentId,p.QuizId});
+
             modelBuilder.Entity<QuizStudent>()
                 .HasOne(p => p.Student)
                 .WithMany(p => p.quizStudents)
                 .HasForeignKey(p=>p.StudentId);
+
             modelBuilder.Entity<QuizStudent>()
                .HasOne(p => p.Quiz)
                .WithMany(p => p.QuizStudents)
                .HasForeignKey(p => p.QuizId);
-            modelBuilder.Entity<QuizQuestion>()
-                .HasKey(p => new { p.QuestionId, p.QuizId });
-            modelBuilder.Entity<QuizQuestion>()
-                .HasOne(p => p.Question)
-                .WithMany(p => p.QuizQuestions)
-                .HasForeignKey(p => p.QuestionId);
-			modelBuilder.Entity<QuizQuestion>()
-			  .HasOne(p => p.Quiz)
-			  .WithMany(p => p.QuizQuestions)
-			  .HasForeignKey(p => p.QuizId);
-			base.OnModelCreating(modelBuilder);
+
+
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
@@ -96,11 +87,10 @@ namespace EducationalPlatform.Data
 		public DbSet<Answer> Answers { get; set; }
 		public DbSet<AnswerResult> AnswerResults { get; set; }
 		public DbSet<Enrollment> Enrollments { get; set; }
-		public DbSet<Option> Options { get; set; }
-		public DbSet<QuestionCorrectAnswer> QuestionCorrectAnswers { get; set; }
+	
 		public DbSet<Result> Results { get; set; }
-		public DbSet<StudentAnswer> StudentAnswers { get; set; }
-        public DbSet<QuizQuestion>QuizQuestions { get; set; }
+		
+       
         public DbSet<QuizStudent>QuizStudents { get; set; }
 
 	}

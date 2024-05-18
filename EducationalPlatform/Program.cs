@@ -49,8 +49,8 @@ namespace EducationalPlatform
            );
             builder.Services.AddDbContext<EduPlatformContext>();
             builder.Services.AddScoped<ISubjectServices, SubjectService>();
-            builder.Services.AddScoped<IEnrollmentServices,EnrollmentServices>();
-            builder.Services.AddScoped<IOptionServices,OptionServices>();
+          
+            
 			builder.Services.AddScoped<Func<HttpContext, UserManager<ApplicationUser>>>(serviceProvider =>
             {
                 var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();

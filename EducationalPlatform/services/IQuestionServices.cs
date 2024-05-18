@@ -10,7 +10,6 @@ namespace EducationalPlatform.services
 		public Task DeleteQuestion(int QuestionId);
 		public Task UpdateQuestion(Question question);
 		public Task<bool>QuestionExists(int QuestionId);
-		public Task<List<Option>>GetAllOptionsInAQuestion(int QuestionId);
 		public Task<List<string>>GetTheCorrectAnswerForAQuestion(int QuestionId);
 
 	}

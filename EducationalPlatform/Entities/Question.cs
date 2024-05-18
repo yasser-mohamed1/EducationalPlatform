@@ -7,10 +7,16 @@ namespace EducationalPlatform.Entities
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        [Required]
-        public List<QuizQuestion> QuizQuestions { get; set; } 
-        public QuestionCorrectAnswer? CorrectAnswer { get; set; }  
-        public List<Option> Options { get; set; }
+        
+        public string Option1 { get; set; }
+        public string Option2 { get; set; }
+        public string Option3 { get; set; }
+        public string Option4 { get; set; }
+        [ForeignKey("Quiz")]
+        public int QuizId { get; set; }
+
+        public Quiz Quiz { get; set; }
+        public string CorrectAnswer { get; set; }
         public Answer Answer { get; set; }
     }
 }

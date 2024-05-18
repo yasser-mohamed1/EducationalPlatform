@@ -6,7 +6,7 @@ namespace EducationalPlatform.Entities
     public class Answer
     {
         public int Id { get; set; }
-        public List<StudentAnswer> StudentAnswers { get; set;}
+       public string StudentAnswer { get; set; }
         [Required]
         public int QuestionId { get; set; }
           
