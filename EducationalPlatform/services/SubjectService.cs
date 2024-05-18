@@ -46,6 +46,7 @@ namespace EducationalPlatform.services
 					pricePerHour=s.pricePerHour,
 					TeacherId=TeacherId,
 					TeacherName=Teacher.FirstName+" "+Teacher.LastName,
+					Term=s.Term,
 				}).ToList();
 				return subjectDtos;
 			}
@@ -86,6 +87,8 @@ namespace EducationalPlatform.services
 					pricePerHour = s.pricePerHour,
 					ProfileImageURl=s.Teacher.ProfileImageUrl,
 					TeacherName=s.Teacher.FirstName+" "+s.Teacher.LastName,
+					Term=s.Term,
+					
 				};
 			}
 			else

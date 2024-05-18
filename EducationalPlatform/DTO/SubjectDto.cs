@@ -16,6 +16,7 @@ namespace EducationalPlatform.DTO
 		public string? AddingTime { get; set; }
 	    public string ProfileImageURl {  get; set; }
 		public string TeacherName { get; set; }
+		public int Term {  get; set; }
 
 	}
 }

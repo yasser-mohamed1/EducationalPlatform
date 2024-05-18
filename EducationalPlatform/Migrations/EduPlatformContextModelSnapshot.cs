@@ -320,6 +320,9 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Term")
+                        .HasColumnType("int");
+
                     b.Property<int>("pricePerHour")
                         .HasColumnType("int");
 
