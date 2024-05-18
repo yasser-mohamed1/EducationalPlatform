@@ -40,7 +40,8 @@ namespace EducationalPlatform.services
 				throw new Exception("You Have Already Enrolled in That Subject");
 			
 			}
-			else if ((Enrollment!=null && Enrollment.IsActive==false) || Enrollment==null)
+			
+			else if ((Enrollment!=null && Enrollment.IsActive==false) || Enrollment==null )
 			{
 				Enrollment E = new Enrollment
 				{
@@ -48,7 +49,7 @@ namespace EducationalPlatform.services
 					SubjectIdd = SubjectId,
 					StudentId = StudentId,
 					ExpirationDate = DateTime.Now.AddMonths(1),
-
+					
 				};
 				 Context.Enrollments .Add(E);
 				try
@@ -66,9 +67,26 @@ namespace EducationalPlatform.services
 
 		}
 
-		public Task RemoveEnrollment(int EnrollmentId)
+		public async Task RemoveEnrollment(int EnrollmentId)
 		{
-			throw new NotImplementedException();
+			Enrollment En = await Context.Enrollments.FindAsync(EnrollmentId);
+			
+			if(En==null)
+			{
+				throw new Exception("The Enrollment Not Found");
+			}
+			else if(En!=null && En.IsActive==true) 
+			{
+				Context.Enrollments.Remove(En);
+				try
+				{
+					await Context.SaveChangesAsync();
+				}
+				catch (Exception ex)
+				{
+					throw new Exception(ex.InnerException.Message);
+				}
+			}
 		}
 
 	}

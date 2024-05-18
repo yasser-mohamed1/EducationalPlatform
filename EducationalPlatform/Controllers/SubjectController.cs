@@ -5,6 +5,7 @@ using EducationalPlatform.services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EducationalPlatform.Controllers
 {
@@ -41,6 +42,27 @@ namespace EducationalPlatform.Controllers
 			else
 				return BadRequest();
 		}
+		[HttpPost("{TeacherId}")]
+		public async Task<IActionResult> GetAllSubjectsForATeacher(int TeacherId)
+		{
+			if (ModelState.IsValid)
+			{
+			
+					var Subs = await subjectServices.GetAllSubjectsForATeacher(TeacherId);
+				    if(Subs.IsNullOrEmpty())
+				{
+					return BadRequest("The Teacher Not Found");
+				}
+					else
+				{
+					return Ok(Subs);
+				}
+			}
+			else
+			{
+				return BadRequest();
+			}
+		}
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetSubjectByIdAsync(int id)
 		{
@@ -50,16 +72,7 @@ namespace EducationalPlatform.Controllers
 			return BadRequest("The Subject Was not Found ");
 		}
 		[HttpGet]
-		public async Task<IActionResult> GetAllSubject()
-		{
-			if (ModelState.IsValid)
-			{
-				List<SubjectDto> Allsub = await subjectServices.GetAllSubjectAsync();
-
-				return Ok(Allsub);
-			}
-			return BadRequest();
-		}
+		
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteSubject(int id)

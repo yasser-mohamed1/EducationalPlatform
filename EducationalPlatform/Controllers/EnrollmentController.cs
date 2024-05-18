@@ -59,6 +59,19 @@ namespace EducationalPlatform.Controllers
 				return BadRequest(ex.Message);
 			}
 		}
+		[HttpDelete]
+		public async Task<IActionResult>RemoveEnrollment(int Enrollmentid)
+		{
+			try
+			{
+				await EnrollmentServices.RemoveEnrollment(Enrollmentid);
+				return Ok("The Enrollment Removed Successfully");
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
 		
 	}
 }

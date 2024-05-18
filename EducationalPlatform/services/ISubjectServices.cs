@@ -6,7 +6,7 @@ namespace EducationalPlatform.services
 {
 	public interface ISubjectServices
 	{
-		public Task<List<SubjectDto >> GetAllSubjectAsync();
+		public Task<List<SubjectDto >> GetAllSubjectsForATeacher(int TeacherId);
 		public Task DeleteSubjectByIdAsync (int id);
 		public Task UpdateSubjectByIdAsync(int id,SubjectDto ss);
 		public Task<int> CreateSubjectAsync(CreateSubjectDTO subject);

@@ -26,42 +26,34 @@ namespace EducationalPlatform.services
 			}
 		}
 
-		public async Task<List<SubjectDto>> GetAllSubjectAsync()
+		public async Task<List<SubjectDto>> GetAllSubjectsForATeacher(int TeacherId)
 		{
-			List<SubjectDto> Subjects =await Context.Subjects.Include(s => s.Teacher)
-				.Select(s => new SubjectDto
-				{
-					Id = s.Id,
-					pricePerHour = s.pricePerHour,
-					Level = s.Level,
-					TeacherId = s.Teacher.Id,
-					Describtion = s.Describtion,
-					AddingTime = s.AddingTime,
-					subjName = s.subjName,
-				}).ToListAsync();
-
-			return Subjects;
-			// throw new NotImplementedException(); // This line is unnecessary and can be removed.
-		}
-
-		
-		public async Task UpdateSubjectByIdAsync(int id,SubjectDto ss)
-		{
-			Subject s= await Context.Subjects.FirstOrDefaultAsync(s => s.Id == id);
-			if(s != null)
+			Teacher Teacher = await Context.Teachers.Include(t => t.Subjects).FirstOrDefaultAsync(c => c.Id == TeacherId);
+			if(Teacher == null)
 			{
-				s.pricePerHour = ss.pricePerHour;
-				s.Level = ss.Level;
-				s.AddingTime = ss.AddingTime;
-				s.Describtion= ss.Describtion;
-				s.subjName	= ss.subjName;
-				await Context.SaveChangesAsync();				
+				return null;
 			}
 			else
 			{
-				throw new KeyNotFoundException($"Subject with ID {id} not found.");
+				var subjectDtos = Teacher.Subjects.Select(s => new SubjectDto
+				{
+					Id = s.Id,
+					ProfileImageURl=Teacher.ProfileImageUrl,
+					subjName=s.subjName,
+					AddingTime=(s.AddingTime).ToString(),
+					Describtion=s.Describtion,
+					Level=s.Level,
+					pricePerHour=s.pricePerHour,
+					TeacherId=TeacherId,
+					TeacherName=Teacher.FirstName+" "+Teacher.LastName,
+				}).ToList();
+				return subjectDtos;
 			}
+			
 		}
+
+
+		
 
 		public async Task<int> CreateSubjectAsync(CreateSubjectDTO subject)
 		{
@@ -70,7 +62,6 @@ namespace EducationalPlatform.services
 				pricePerHour = subject.pricePerHour,
 				Level = subject.Level,
 				subjName = subject.subjName,
-				AddingTime = subject.AddingTime,
 				Describtion = subject.Describtion,
 				TeacherId = subject.TeacherId
 			};
@@ -81,22 +72,24 @@ namespace EducationalPlatform.services
 
 		public async Task<SubjectDto> GetSubjectByIdAsync(int id)
 		{
-			Subject s= await Context.Subjects.FirstOrDefaultAsync(x => x.Id == id);
-			if(s != null)
+			Subject s = await Context.Subjects.Include(c=>c.Teacher).FirstOrDefaultAsync(x => x.Id == id);
+			if (s != null && s.Teacher!=null)
 			{
 				return new SubjectDto
 				{
-					Id = s.Id,	
+					Id = s.Id,
 					subjName = s.subjName,
 					Describtion = s.Describtion,
 					Level = s.Level,
 					TeacherId = s.TeacherId,
-					AddingTime = s.AddingTime,
+					AddingTime =( s.AddingTime).ToString(),
 					pricePerHour = s.pricePerHour,
+					ProfileImageURl=s.Teacher.ProfileImageUrl,
+					TeacherName=s.Teacher.FirstName+" "+s.Teacher.LastName,
 				};
 			}
 			else
-			{ return null; }	
+			{ return null; }
 		}
 
 		public async Task<String> GetTeacherNameForAsubject(int id)
@@ -140,6 +133,11 @@ namespace EducationalPlatform.services
 				}
 				else return null;
 			}
+		}
+
+		public Task UpdateSubjectByIdAsync(int id, SubjectDto ss)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

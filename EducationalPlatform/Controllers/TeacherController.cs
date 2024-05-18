@@ -18,7 +18,7 @@ namespace EducationalPlatform.Controllers
         private readonly EduPlatformContext _context;
         private readonly Func<HttpContext, UserManager<ApplicationUser>> _userManagerFactory;
 
-        public TeacherController(EduPlatformContext context, Func<HttpContext, 
+        public TeacherController(EduPlatformContext context, Func<HttpContext,
             UserManager<ApplicationUser>> userManagerFactory, IWebHostEnvironment env)
         {
             _env = env;
@@ -53,7 +53,7 @@ namespace EducationalPlatform.Controllers
         public async Task<ActionResult> GetTeacher(int id)
         {
             var teacher = await _context.Teachers
-                .Include(t => t.User) 
+                .Include(t => t.User)
                 .Where(t => t.Id == id)
                 .Select(t => new TeacherDTO
                 {
@@ -62,7 +62,7 @@ namespace EducationalPlatform.Controllers
                     LastName = t.LastName,
                     Governorate = t.Governorate,
                     Address = t.Address,
-                    Email = t.User.Email, 
+                    Email = t.User.Email,
                     Phone = t.User.PhoneNumber,
                     ProfileImageUrl = t.ProfileImageUrl
                 })
@@ -77,7 +77,7 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateTeacher(int id, [FromForm]UpdateTeacherDto dto)
+        public IActionResult UpdateTeacher(int id, [FromForm] UpdateTeacherDto dto)
         {
             if (!TeacherExists(id))
             {
@@ -90,20 +90,20 @@ namespace EducationalPlatform.Controllers
             }
 
             var existingTeacher = _context.Teachers.Include(t => t.User).FirstOrDefault(t => t.Id == id);
-            
+
             if (existingTeacher == null)
             {
                 return NotFound();
             }
-            if(!string.IsNullOrEmpty(dto.FirstName))
+            if (!string.IsNullOrEmpty(dto.FirstName))
             {
                 existingTeacher.FirstName = dto.FirstName;
             }
-            if(!string.IsNullOrEmpty(dto.LastName))
+            if (!string.IsNullOrEmpty(dto.LastName))
             {
                 existingTeacher.LastName = dto.LastName;
             }
-            if(!string.IsNullOrEmpty(dto.Phone))
+            if (!string.IsNullOrEmpty(dto.Phone))
             {
                 existingTeacher.User.PhoneNumber = dto.Phone;
             }
@@ -205,31 +205,30 @@ namespace EducationalPlatform.Controllers
         }
 
         // GET: api/teacher/{teacherId}/subjects
-        [HttpGet("{teacherId}/subjects")]
-        public async Task<ActionResult<IEnumerable<SubjectDto>>> GetTeacherSubjects(int teacherId)
-        {
-            var teacher = await _context.Teachers
-                .Include(t => t.Subjects)
-                .FirstOrDefaultAsync(t => t.Id == teacherId);
+        //[HttpGet("{teacherId}/subjects")]
+        //public async Task<ActionResult<IEnumerable<SubjectDto>>> GetTeacherSubjects(int teacherId)
+        //{
+        //    var teacher = await _context.Teachers
+        //        .Include(t => t.Subjects)
+        //        .FirstOrDefaultAsync(t => t.Id == teacherId);
 
-            if (teacher == null)
-            {
-                return NotFound("Teacher not found");
-            }
+        //    if (teacher == null)
+        //    {
+        //        return NotFound("Teacher not found");
+        //    }
 
-            var subjects = teacher.Subjects.Select(s => new SubjectDto
-            {
-                Id = s.Id,
-                subjName = s.subjName,
-                Level = s.Level,
-                Describtion = s.Describtion,
-                pricePerHour = s.pricePerHour,
-                AddingTime = s.AddingTime
-            });
+        //    var subjects = teacher.Subjects.Select(s => new SubjectDto
+        //    {
+        //        Id = s.Id,
+        //        subjName = s.subjName,
+        //        Level = s.Level,
+        //        Describtion = s.Describtion,
+        //        pricePerHour = s.pricePerHour,
+        //        AddingTime = s.AddingTime
+        //    });
 
-            return Ok(subjects);
-        }
+        //    return Ok(subjects);
+        //}
 
-    }
-
+    } 
 }
