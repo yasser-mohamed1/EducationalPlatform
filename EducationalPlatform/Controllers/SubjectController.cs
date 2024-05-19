@@ -35,7 +35,7 @@ namespace EducationalPlatform.Controllers
                 pricePerHour = subject.pricePerHour,
                 TeacherId = subject.TeacherId,
                 AddingTime = subject.AddingTime,
-                ProfileImageURl = subject.Teacher.ProfileImageUrl,
+				ProfileImageUrl = subject.Teacher.ProfileImageUrl,
                 TeacherName = subject.Teacher.FirstName + " " + subject.Teacher.LastName,
                 Term = subject.Term
             }).ToListAsync();

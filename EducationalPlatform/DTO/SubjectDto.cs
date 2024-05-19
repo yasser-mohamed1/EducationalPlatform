@@ -13,7 +13,7 @@ namespace EducationalPlatform.DTO
 		public int pricePerHour { get; set; }
 		public int TeacherId { get; set; }
 		public DateTime? AddingTime { get; set; }
-	    public string ProfileImageURl {  get; set; }
+	    public string ProfileImageUrl {  get; set; }
 		public string TeacherName { get; set; }
 		public int Term {  get; set; }
 

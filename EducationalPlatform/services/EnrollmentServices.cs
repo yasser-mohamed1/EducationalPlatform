@@ -19,14 +19,75 @@ namespace EducationalPlatform.services
 			SubjectServices = _SubjectServices;
 		}
 
-		public Task<List<StudentDTO>> GetAllStudentsEnrolledInSubject(int SubjectId)
+		public async Task<List<EnrollmentDto>> GetAllEnrollmentsForAstudent(int StudentId)
 		{
-			throw new NotImplementedException();
+			bool exists=await Context.Students.AnyAsync(c=>c.Id==StudentId);
+			if (exists)
+			{
+				Student s = await Context.Students.Include(c => c.Enrollments).FirstOrDefaultAsync(c => c.Id == StudentId);
+			
+				
+				List<Enrollment> Enrs = s.Enrollments;
+				if (Enrs.IsNullOrEmpty())
+				{
+					throw new Exception("The student didn't make any enrollment");
+				}
+				else
+				{
+					List<EnrollmentDto> enrollmentDtos = Enrs.Select(enrollment =>
+					new EnrollmentDto
+					{
+						Id = enrollment.Id,
+						EnrollmentDate = (enrollment.EnrollmentDate).ToString(),
+						ExpirationDate = (enrollment.ExpirationDate).ToString(),
+						IsActive = enrollment.IsActive,
+						StudentId = StudentId,
+						SubjectId = enrollment.SubjectIdd,
+
+					}).ToList();
+					return enrollmentDtos;
+
+				}
+			}
+			else
+			{
+				throw new Exception("The Student Not Found");
+			}
 		}
 
-		public Task<bool> IsActive(string date)
+		public async Task<List<StudentEnrollmentDto>> GetAllstudentsEnrolledInAsubject(int subjectId)
 		{
-			throw new NotImplementedException();
+			bool Ex=await Context.Subjects.AnyAsync(c=>c.Id==subjectId);
+			if(!Ex)
+			{
+				throw new Exception("The Subject Not Found");
+			}
+			else
+			{
+				Subject subject = await Context.Subjects.Include(c=>c.Enrollments).FirstOrDefaultAsync(c=>c.Id==subjectId);
+				List<Enrollment> Enrs = subject.Enrollments;
+				if(Enrs.IsNullOrEmpty())
+				{
+					throw new Exception("the Subject Doesn't have Any Enrollment");
+				}
+				else
+				{
+					
+					List<StudentEnrollmentDto>Stu= Enrs.Select(enrollment =>
+					new StudentEnrollmentDto
+					{
+						Id= enrollment.Id,
+						EnrollmentDate=(enrollment.EnrollmentDate).ToString(),
+						StudentId=enrollment.StudentId,
+
+					}).ToList();
+					foreach(var i in Stu)
+					{
+						i.StDto = await GetStudent(i.StudentId);
+					}
+					return Stu;
+				}
+			}
 		}
 
 		public async Task<Enrollment> MakeEnrollment(int StudentId, int SubjectId)
@@ -86,6 +147,26 @@ namespace EducationalPlatform.services
 				{
 					throw new Exception(ex.InnerException.Message);
 				}
+			}
+		}
+		public async Task<StudentDTO> GetStudent(int StudentId)
+		{
+			Student student = await Context.Students.FindAsync(StudentId);
+			if (student==null)
+			{
+				return null;
+			}
+			else
+			{
+				StudentDTO s = new StudentDTO
+				{
+					Id = student.Id,
+					ProfileImageUrl = student.ProfileImageUrl,
+					FirstName = student.FirstName,
+					LastName = student.LastName,
+					Level = student.Level
+				};
+				return s;
 			}
 		}
 

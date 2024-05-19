@@ -38,7 +38,7 @@ namespace EducationalPlatform.services
 				var subjectDtos = Teacher.Subjects.Select(s => new SubjectDto
 				{
 					subjectId = s.Id,
-					ProfileImageURl=Teacher.ProfileImageUrl,
+					ProfileImageUrl = Teacher.ProfileImageUrl,
 					subjName=s.subjName,
 					AddingTime=s.AddingTime,
 					Describtion=s.Describtion,
@@ -84,7 +84,7 @@ namespace EducationalPlatform.services
 					TeacherId = s.TeacherId,
 					AddingTime =s.AddingTime,
 					pricePerHour = s.pricePerHour,
-					ProfileImageURl=s.Teacher.ProfileImageUrl,
+					ProfileImageUrl = s.Teacher.ProfileImageUrl,
 					TeacherName=s.Teacher.FirstName+" "+s.Teacher.LastName,
 					Term=s.Term,
 					

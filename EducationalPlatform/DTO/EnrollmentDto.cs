@@ -6,9 +6,12 @@ namespace EducationalPlatform.DTO
 {
 	public class EnrollmentDto
 	{
-
-		public string EnrollmentMethod { get; set; }
+		public int Id { get; set; }
 		public int SubjectId { get; set; }
 		public int StudentId { get; set; }
+		public string ExpirationDate { get; set; }	
+		public string EnrollmentDate { get; set; }
+		public bool IsActive { get; set; }
+
 	}
 }

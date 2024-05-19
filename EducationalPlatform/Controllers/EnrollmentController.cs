@@ -46,15 +46,15 @@ namespace EducationalPlatform.Controllers
 				return BadRequest();
 			}
 		}
-		[HttpGet]
-		public async Task<IActionResult> GetAllEnrollmentForAStudent(int subjectId)
+		[HttpGet("student/{studentId}")]
+		public async Task<IActionResult> GetAllEnrollmentForAStudent(int studentId)
 		{
 			try
 			{
-				 List<StudentDTO>E= await EnrollmentServices.GetAllStudentsEnrolledInSubject(subjectId);
+				 List<EnrollmentDto>E= await EnrollmentServices.GetAllEnrollmentsForAstudent(studentId);
 				return Ok(E);
 			}
-			catch (Exception ex)
+			catch (Exception ex )
 			{
 				return BadRequest(ex.Message);
 			}
@@ -72,6 +72,20 @@ namespace EducationalPlatform.Controllers
 				return BadRequest(ex.Message);
 			}
 		}
-		
+		[HttpGet("subject/{SubjectId}")]
+		public async Task<IActionResult> GetAllstudentsEnrolledInAsubject(int SubjectId)
+		{
+			try
+			{
+				List<StudentEnrollmentDto> ss = await EnrollmentServices.GetAllstudentsEnrolledInAsubject(SubjectId);
+				return Ok(ss);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+
+
 	}
 }
