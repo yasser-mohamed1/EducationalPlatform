@@ -170,5 +170,22 @@ namespace EducationalPlatform.services
 			}
 		}
 
+		public async Task<bool> IsTheStudentEnrolledInThatSubject(int studentId, int subjectid)
+		{
+			List<EnrollmentDto>Es=await GetAllEnrollmentsForAstudent(studentId);
+			if (Es==null) { return false; }
+			else
+			{
+				foreach(var i in Es)
+				{
+					if(i.IsActive==true && i.SubjectId==subjectid)
+					{
+						return true;
+						break;
+					}
+				}
+			}
+			return false;
+		}
 	}
 }

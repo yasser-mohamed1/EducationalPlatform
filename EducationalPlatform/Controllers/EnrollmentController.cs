@@ -85,6 +85,19 @@ namespace EducationalPlatform.Controllers
 				return BadRequest(ex.Message);
 			}
 		}
+		[HttpGet("{studentId}/{subjectId}")]
+		public async Task<IActionResult> IsTheStudentEnrolledInThatSubject(int studentId,int subjectId)
+		{
+			bool IS=await EnrollmentServices.IsTheStudentEnrolledInThatSubject(studentId,subjectId);
+			if (IS)
+			{
+				return Ok("The Student Enrolled In That Subject");
+			}
+			else
+			{
+				return BadRequest("The Student didn't enrolled in that subject");
+			}
+		}
 
 
 	}
