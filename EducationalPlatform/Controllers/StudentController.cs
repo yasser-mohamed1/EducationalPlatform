@@ -243,7 +243,7 @@ namespace EducationalPlatform.Controllers
                     Governorate = t.Governorate,
                     Subjects = t.Subjects.Select(s => new SubjectDto()
                     {
-                        Id = s.Id,
+                        subjectId = s.Id,
                         subjName = s.subjName,
                         Level = s.Level,
                         Describtion = s.Describtion,

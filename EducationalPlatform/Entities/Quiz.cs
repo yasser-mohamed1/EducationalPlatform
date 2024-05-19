@@ -10,7 +10,7 @@ namespace EducationalPlatform.Entities
         public int? SubjectId { get; set; }
         public Subject? Subject { get; set; }
         public string Description { get; set; }
-        public string CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public List<Question> Questions { get; set; }
         public virtual List<QuizStudent> QuizStudents { get; set;}
     }

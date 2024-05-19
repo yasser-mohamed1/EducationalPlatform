@@ -28,13 +28,13 @@ namespace EducationalPlatform.Controllers
         {
             var subjects = await _context.Subjects.Select(subject => new SubjectDto
             {
-                Id = subject.Id,
+                subjectId = subject.Id,
                 subjName = subject.subjName,
                 Level = subject.Level,
                 Describtion = subject.Describtion,
                 pricePerHour = subject.pricePerHour,
                 TeacherId = subject.TeacherId,
-                AddingTime = subject.AddingTime.ToString(),
+                AddingTime = subject.AddingTime,
                 ProfileImageURl = subject.Teacher.ProfileImageUrl,
                 TeacherName = subject.Teacher.FirstName + " " + subject.Teacher.LastName,
                 Term = subject.Term
@@ -137,7 +137,8 @@ namespace EducationalPlatform.Controllers
             {
                 Id = q.Id,
                 SubjectId = (int)q.SubjectId,
-                Description = q.Description
+                Description = q.Description,
+				CreatedDate = q.CreatedDate
             });
 
             return Ok(quizzes);

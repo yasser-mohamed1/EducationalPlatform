@@ -70,7 +70,7 @@ namespace EducationalPlatform.Controllers
 
             if (quiz == null)
             {
-                return NotFound($"No Quiz with found with this : {id}");
+                return NotFound($"No Quiz was found with this id : {id}");
             }
 
             var quizDto = new QuizDto
@@ -95,14 +95,14 @@ namespace EducationalPlatform.Controllers
 
             if (!SubjectExists(dto.SubjectId))
             {
-                return NotFound($"No Subject with found with this id : {dto.SubjectId}");
+                return NotFound($"No Subject was found with this id : {dto.SubjectId}");
             }
 
             var quiz = new Quiz
             {
                 SubjectId = dto.SubjectId,
                 Description = dto.Description,
-                CreatedDate = DateTime.Now.ToString()
+                CreatedDate = DateTime.Now
             };
 
             _context.Quizzes.Add(quiz);
@@ -112,8 +112,8 @@ namespace EducationalPlatform.Controllers
                 {
                     id = quiz.Id,
                     subjectId = dto.SubjectId,
-                    Description = dto.Description,
-                    CreatedDate = quiz.CreatedDate
+                    description = dto.Description,
+                    createdDate = quiz.CreatedDate
                 }
             );
         }
@@ -157,7 +157,13 @@ namespace EducationalPlatform.Controllers
                 }
             }
 
-            return Ok(quiz);
+            return Ok(new
+            {
+                id= quiz.Id,
+                subjectId= quiz.SubjectId,
+                description= quiz.Description,
+                createdDate = quiz.CreatedDate
+            });
         }
 
         // DELETE: api/quiz/{id}

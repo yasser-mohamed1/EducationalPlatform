@@ -37,10 +37,10 @@ namespace EducationalPlatform.services
 			{
 				var subjectDtos = Teacher.Subjects.Select(s => new SubjectDto
 				{
-					Id = s.Id,
+					subjectId = s.Id,
 					ProfileImageURl=Teacher.ProfileImageUrl,
 					subjName=s.subjName,
-					AddingTime=(s.AddingTime).ToString(),
+					AddingTime=s.AddingTime,
 					Describtion=s.Describtion,
 					Level=s.Level,
 					pricePerHour=s.pricePerHour,
@@ -54,8 +54,6 @@ namespace EducationalPlatform.services
 		}
 
 
-		
-
 		public async Task<int> CreateSubjectAsync(CreateSubjectDTO subject)
 		{
 			Subject s = new Subject
@@ -64,7 +62,8 @@ namespace EducationalPlatform.services
 				Level = subject.Level,
 				subjName = subject.subjName,
 				Describtion = subject.Describtion,
-				TeacherId = subject.TeacherId
+				TeacherId = subject.TeacherId,
+				AddingTime = subject.AddingTime,
 			};
 			Context.Subjects.Add(s);
 			await Context.SaveChangesAsync();
@@ -78,12 +77,12 @@ namespace EducationalPlatform.services
 			{
 				return new SubjectDto
 				{
-					Id = s.Id,
+					subjectId = s.Id,
 					subjName = s.subjName,
 					Describtion = s.Describtion,
 					Level = s.Level,
 					TeacherId = s.TeacherId,
-					AddingTime =( s.AddingTime).ToString(),
+					AddingTime =s.AddingTime,
 					pricePerHour = s.pricePerHour,
 					ProfileImageURl=s.Teacher.ProfileImageUrl,
 					TeacherName=s.Teacher.FirstName+" "+s.Teacher.LastName,
