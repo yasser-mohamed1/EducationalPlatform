@@ -44,21 +44,19 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> AddSubject(CreateSubjectDTO Sub)
+		public async Task<IActionResult> AddSubject([FromForm]CreateSubjectDTO Sub)
 		{
 			if (ModelState.IsValid)
 			{
-				int id = await subjectServices.CreateSubjectAsync(Sub);
-				return Ok(new
+				try
 				{
-					subjectId = id,
-					subjName = Sub.subjName,
-					Level = Sub.Level,
-					Describtion = Sub.Describtion,
-					pricePerHour = Sub.pricePerHour,
-					teacherId = Sub.TeacherId,
-					addinTime = Sub.AddingTime
-				});
+					CreateSubjectDTO s = await subjectServices.CreateSubjectAsync(Sub);
+					return Ok(s);
+				}
+				catch(Exception ex)
+				{
+					return BadRequest(ex.Message);
+				}
 			}
 			else
 				return BadRequest();
@@ -99,23 +97,31 @@ namespace EducationalPlatform.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteSubject(int id)
 		{
-			SubjectDto s=await subjectServices.GetSubjectByIdAsync(id);
-			if(s == null)
-				return BadRequest("Not found");
-			else
+			try
 			{
 				await subjectServices.DeleteSubjectByIdAsync(id);
-				return Ok(s);
+				return Ok("The Subject Removed Successfully ");
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
 			}
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult>UpdateSubjectByid(int id, SubjectDto subject)
+		public async Task<IActionResult>UpdateSubjectByid(int id, UpdateSubjectDto subject)
 		{
 			if (ModelState.IsValid)
 			{
-				await subjectServices.UpdateSubjectByIdAsync(id, subject);
-				return Ok("Subject Updated");
+				try
+				{
+					await subjectServices.UpdateSubjectByIdAsync(id, subject);
+					return Ok("The Subject Updated Successfully");
+				}
+				catch (Exception ex)
+				{
+					throw new Exception(ex.Message);
+				}
 			}
 			return BadRequest();
 		}

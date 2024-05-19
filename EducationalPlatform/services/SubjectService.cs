@@ -18,11 +18,28 @@ namespace EducationalPlatform.services
 		}
 		public async Task DeleteSubjectByIdAsync(int id)
 		{
-			var subject = await Context.Subjects.FirstOrDefaultAsync(x => x.Id == id);
-			if(subject != null)
+			bool exx = await Context.Subjects.AnyAsync(x => x.Id == id);
+			if (!exx)
 			{
-				Context.Subjects.Remove(subject);
-				Context.SaveChanges();
+				throw new Exception("The Subject Was not found");
+			}
+			else
+			{
+				Subject Subj = await Context.Subjects
+										 .Include(c => c.Quizs)
+										 .FirstOrDefaultAsync(c => c.Id == id);
+
+				Context.Quizzes.RemoveRange(Subj.Quizs);
+				Context.Subjects.Remove(Subj);
+				try
+				{
+					await Context.SaveChangesAsync();
+				}
+				catch (Exception ex)
+				{
+					throw new Exception($"The Removing operation failed: {ex.Message}", ex);
+				}
+
 			}
 		}
 
@@ -54,20 +71,44 @@ namespace EducationalPlatform.services
 		}
 
 
-		public async Task<int> CreateSubjectAsync(CreateSubjectDTO subject)
+		public async Task<CreateSubjectDTO> CreateSubjectAsync(CreateSubjectDTO subject)
 		{
-			Subject s = new Subject
+			bool ex1 = await Context.Teachers.AnyAsync(c=>c.Id==subject.TeacherId);
+			if (ex1)
 			{
-				pricePerHour = subject.pricePerHour,
-				Level = subject.Level,
-				subjName = subject.subjName,
-				Describtion = subject.Describtion,
-				TeacherId = subject.TeacherId,
-				AddingTime = subject.AddingTime,
-			};
-			Context.Subjects.Add(s);
-			await Context.SaveChangesAsync();
-			return s.Id;
+				Subject s = new Subject
+				{
+					pricePerHour = subject.pricePerHour,
+					Level = subject.Level,
+					subjName = subject.subjName,
+					Describtion = subject.Describtion,
+					TeacherId = subject.TeacherId,
+					AddingTime = DateTime.Now,
+					Term = subject.Term,
+				};
+				Context.Subjects.Add(s);
+				try
+				{
+					await Context.SaveChangesAsync();
+					return new CreateSubjectDTO
+					{
+						TeacherId = s.TeacherId,
+						Describtion = s.Describtion,
+						Level = s.Level,
+						pricePerHour = s.pricePerHour,
+						subjName = s.subjName,
+						Term = s.Term,
+					};
+				}
+				catch (Exception ex)
+				{
+					throw new Exception("The Operation Failed");
+				}
+			}
+		  else
+			{
+				throw new Exception("Teacher Not Found");
+			}
 		}
 
 		public async Task<SubjectDto> GetSubjectByIdAsync(int id)
@@ -137,9 +178,34 @@ namespace EducationalPlatform.services
 			}
 		}
 
-		public Task UpdateSubjectByIdAsync(int id, SubjectDto ss)
+		public async Task UpdateSubjectByIdAsync(int SubjectId, UpdateSubjectDto ss)
 		{
-			throw new NotImplementedException();
+			bool Exists=await Context.Subjects.AnyAsync(c=>c.Id==SubjectId);
+			if(!Exists)
+			{
+				throw new Exception("The Subject Was not Found");
+			}
+			else
+			{
+				Subject s=await Context.Subjects.FirstOrDefaultAsync(x=>x.Id == SubjectId);
+				 if (s != null)
+				{
+					s.Describtion = ss.Describtion;
+					s.Level = ss.Level;
+					s.subjName = ss.subjName;
+					s.Term = ss.Term;
+					s.pricePerHour = ss.pricePerHour;
+				}
+				Context.Subjects.Update(s);
+				try
+				{
+					await Context.SaveChangesAsync();
+				}
+				catch (Exception ex) {
+
+					throw new Exception("The Operaion Failed");
+				}
+			}
 		}
 	}
 }
