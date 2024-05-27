@@ -23,7 +23,7 @@ namespace EducationalPlatform.Entities
             set;
             get;
 		}
-
+        public virtual List<Chapter> Chapters { get; set; } = [];
 	}
 
 
