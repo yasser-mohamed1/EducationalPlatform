@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "E:\\EducationalPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\data\\eduplatformcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\data\\eduplatformcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\chapterfilescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\chapterfilescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\entities\\chapter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\chapter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\entities\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\entities\\chapterfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\entities\\chapterfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|e:\\educationalplatform\\educationalplatform\\controllers\\chapterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\chapterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,45 +21,6 @@
           "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Subject.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Entities\\Subject.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Subject.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Entities\\Subject.cs",
-              "RelativeToolTip": "EducationalPlatform\\Entities\\Subject.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAABkAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T08:44:15.783Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ChapterFile.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Entities\\ChapterFile.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\ChapterFile.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Entities\\ChapterFile.cs",
-              "RelativeToolTip": "EducationalPlatform\\Entities\\ChapterFile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T09:00:43.369Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EduPlatformContext.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Data\\EduPlatformContext.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\Data\\EduPlatformContext.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Data\\EduPlatformContext.cs",
-              "RelativeToolTip": "EducationalPlatform\\Data\\EduPlatformContext.cs",
-              "ViewState": "AQIAAEYAAAAAAAAAAAAmwE8AAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T09:09:37.534Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
@@ -77,15 +30,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Chapter.cs",
-              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Entities\\Chapter.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\Entities\\Chapter.cs",
-              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Entities\\Chapter.cs",
-              "RelativeToolTip": "EducationalPlatform\\Entities\\Chapter.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "DocumentIndex": 0,
+              "Title": "ChapterFilesController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\ChapterFilesController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\ChapterFilesController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\ChapterFilesController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\ChapterFilesController.cs",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAAAIcAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T08:43:05.347Z",
+              "WhenOpened": "2024-05-27T09:42:41.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChaptersController.cs",
+              "DocumentMoniker": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\ChaptersController.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\ChaptersController.cs",
+              "ToolTip": "E:\\EducationalPlatform\\EducationalPlatform\\Controllers\\ChaptersController.cs",
+              "RelativeToolTip": "EducationalPlatform\\Controllers\\ChaptersController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAAADgAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T09:23:57.872Z",
               "EditorCaption": ""
             }
           ]
