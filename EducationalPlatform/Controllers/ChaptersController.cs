@@ -131,7 +131,7 @@ namespace EducationalPlatform.Controllers
         {
             return _context.Chapters.Any(e => e.Id == id);
         }
-
+        
         // POST: api/Chapters/{id}/upload
         [HttpPost("{id}/upload")]
         public async Task<IActionResult> UploadFile(int id, [FromForm] IFormFile file)

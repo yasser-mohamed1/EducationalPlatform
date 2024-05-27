@@ -54,53 +54,27 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterFileDto);
         }
 
-        // POST: api/ChapterFiles
-        [HttpPost]
-        public async Task<ActionResult<ChapterFileDto>> PostChapterFile(CreateChapterFileDto createChapterFileDto)
-        {
-
-            Chapter? chapter = await _context.Chapters.FindAsync(createChapterFileDto.ChapterId);
-            if (chapter == null)
-            {
-                return NotFound($"No Chapter was found with this id : {createChapterFileDto.ChapterId}");
-            }
-
-            var chapterFile = new ChapterFile
-            {
-                ChapterId = createChapterFileDto.ChapterId,
-                FileName = createChapterFileDto.FileName,
-                ContentType = createChapterFileDto.ContentType,
-                FileContent = createChapterFileDto.FileContent
-            };
-
-            _context.ChapterFiles.Add(chapterFile);
-            await _context.SaveChangesAsync();
-
-            var chapterFileDto = new ChapterFileDto
-            {
-                Id = chapterFile.Id,
-                ChapterId = chapterFile.ChapterId,
-                FileName = chapterFile.FileName,
-                ContentType = chapterFile.ContentType,
-                FileContent = chapterFile.FileContent
-            };
-
-            return Ok(chapterFileDto);
-        }
-
         // PUT: api/ChapterFiles/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChapterFile(int id, UpdateChapterFileDto updateChapterFileDto)
+        public async Task<IActionResult> PutChapterFile(int id, [FromForm] IFormFile file)
         {
             var chapterFile = await _context.ChapterFiles.FindAsync(id);
             if (chapterFile == null)
             {
-                return NotFound($"No Chapter File was found with this id : {id}");
+                return NotFound($"No Chapter File was found with this id: {id}");
             }
 
-            chapterFile.FileName = updateChapterFileDto.FileName;
-            chapterFile.ContentType = updateChapterFileDto.ContentType;
-            chapterFile.FileContent = updateChapterFileDto.FileContent;
+            if (file != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    chapterFile.FileContent = memoryStream.ToArray();
+                }
+
+                chapterFile.FileName = file.FileName;
+                chapterFile.ContentType = file.ContentType;
+            }
 
             _context.Entry(chapterFile).State = EntityState.Modified;
             try
