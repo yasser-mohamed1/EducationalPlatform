@@ -209,7 +209,6 @@ namespace EducationalPlatform.Controllers
             {
                 var querys = _context.Subjects.Include(s => s.Teacher)
                     .AsEnumerable()
-                    //.Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && searchQuery.Length > 3)
                     .Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsMajorityOfCharacters(s.subjName, searchQuery))
                     .Select(s => new SearchSubjectDto()
                     {
@@ -231,6 +230,34 @@ namespace EducationalPlatform.Controllers
                     return Ok(results);
                 }
             }
+
+            if (!string.IsNullOrEmpty(searchQuery) && !string.IsNullOrEmpty(Governorate))
+            {
+                var querys = _context.Subjects.Include(s => s.Teacher)
+                    .AsEnumerable()
+                    .Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsMajorityOfCharacters(s.subjName, searchQuery)
+                    && s.Teacher.Governorate == Governorate)
+                    .Select(s => new SearchSubjectDto()
+                    {
+                        subjectId = s.Id,
+                        subjName = s.subjName,
+                        Level = s.Level,
+                        Describtion = s.Describtion,
+                        pricePerHour = s.pricePerHour,
+                        Term = s.Term,
+                        AddingTime = s.AddingTime,
+                        TeacherId = s.TeacherId,
+                        teacherName = s.Teacher.FirstName + " " + s.Teacher.LastName,
+                        profileImageUrl = s.Teacher.ProfileImageUrl
+                    }).AsQueryable();
+                var results = querys.ToList();
+
+                if (results.Count > 0)
+                {
+                    return Ok(results);
+                }
+            }
+
             var query = _context.Teachers
                 .Include(t => t.Subjects)
                 .Select(t => new TeacherWithSubjectDTO

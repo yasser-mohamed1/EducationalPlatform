@@ -41,10 +41,13 @@ namespace EducationalPlatform.Controllers
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                         claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
 
+                        string userRole = "";
+
                         //Get Roles
                         var roles = await userManager.GetRolesAsync(user);
                         foreach(var role in roles)
                         {
+                            userRole = role;
                             claims.Add(new Claim(ClaimTypes.Role, role));
                         }
 
@@ -66,6 +69,7 @@ namespace EducationalPlatform.Controllers
                         return Ok(new
                         {
                             id = user.userId,
+                            Role = userRole,
                             token = new JwtSecurityTokenHandler().WriteToken(mytoken),
                             expiration = mytoken.ValidTo
                         }
