@@ -136,6 +136,58 @@ namespace EducationalPlatform.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("EducationalPlatform.Entities.Chapter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Chapters");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.ChapterFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("FileContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.ToTable("ChapterFiles");
+                });
+
             modelBuilder.Entity("EducationalPlatform.Entities.Enrollment", b =>
                 {
                     b.Property<int>("Id")
@@ -537,6 +589,28 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Result");
                 });
 
+            modelBuilder.Entity("EducationalPlatform.Entities.Chapter", b =>
+                {
+                    b.HasOne("EducationalPlatform.Entities.Subject", "Subject")
+                        .WithMany("Chapters")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("EducationalPlatform.Entities.ChapterFile", b =>
+                {
+                    b.HasOne("EducationalPlatform.Entities.Chapter", "Chapter")
+                        .WithMany("ChapterFiles")
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+                });
+
             modelBuilder.Entity("EducationalPlatform.Entities.Enrollment", b =>
                 {
                     b.HasOne("EducationalPlatform.Entities.Student", "Student")
@@ -713,6 +787,11 @@ namespace EducationalPlatform.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("EducationalPlatform.Entities.Chapter", b =>
+                {
+                    b.Navigation("ChapterFiles");
+                });
+
             modelBuilder.Entity("EducationalPlatform.Entities.Question", b =>
                 {
                     b.Navigation("Answer")
@@ -742,6 +821,8 @@ namespace EducationalPlatform.Migrations
 
             modelBuilder.Entity("EducationalPlatform.Entities.Subject", b =>
                 {
+                    b.Navigation("Chapters");
+
                     b.Navigation("Enrollments");
 
                     b.Navigation("Quizs");

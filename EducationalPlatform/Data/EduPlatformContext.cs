@@ -83,11 +83,9 @@ namespace EducationalPlatform.Data
 		public DbSet<Answer> Answers { get; set; }
 		public DbSet<AnswerResult> AnswerResults { get; set; }
 		public DbSet<Enrollment> Enrollments { get; set; }
-	
 		public DbSet<Result> Results { get; set; }
-		
-       
         public DbSet<QuizStudent>QuizStudents { get; set; }
-
-	}
+        public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<ChapterFile> ChapterFiles { get; set; }
+    }
 }

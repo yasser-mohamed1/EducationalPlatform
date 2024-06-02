@@ -209,15 +209,16 @@ namespace EducationalPlatform.Controllers
             {
                 var querys = _context.Subjects.Include(s => s.Teacher)
                     .AsEnumerable()
-                    //.Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && searchQuery.Length > 3)
-                    .Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsAtLeastTwoConsecutiveChars(s.subjName, searchQuery))
+                    .Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsMajorityOfCharacters(s.subjName, searchQuery))
                     .Select(s => new SearchSubjectDto()
                     {
-                        Id = s.Id,
+                        subjectId = s.Id,
                         subjName = s.subjName,
                         Level = s.Level,
                         Describtion = s.Describtion,
                         pricePerHour = s.pricePerHour,
+                        Term = s.Term,
+                        AddingTime = s.AddingTime,
                         TeacherId = s.TeacherId,
                         teacherName = s.Teacher.FirstName + " " + s.Teacher.LastName,
                         profileImageUrl = s.Teacher.ProfileImageUrl
@@ -229,6 +230,34 @@ namespace EducationalPlatform.Controllers
                     return Ok(results);
                 }
             }
+
+            if (!string.IsNullOrEmpty(searchQuery) && !string.IsNullOrEmpty(Governorate))
+            {
+                var querys = _context.Subjects.Include(s => s.Teacher)
+                    .AsEnumerable()
+                    .Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsMajorityOfCharacters(s.subjName, searchQuery)
+                    && s.Teacher.Governorate == Governorate)
+                    .Select(s => new SearchSubjectDto()
+                    {
+                        subjectId = s.Id,
+                        subjName = s.subjName,
+                        Level = s.Level,
+                        Describtion = s.Describtion,
+                        pricePerHour = s.pricePerHour,
+                        Term = s.Term,
+                        AddingTime = s.AddingTime,
+                        TeacherId = s.TeacherId,
+                        teacherName = s.Teacher.FirstName + " " + s.Teacher.LastName,
+                        profileImageUrl = s.Teacher.ProfileImageUrl
+                    }).AsQueryable();
+                var results = querys.ToList();
+
+                if (results.Count > 0)
+                {
+                    return Ok(results);
+                }
+            }
+
             var query = _context.Teachers
                 .Include(t => t.Subjects)
                 .Select(t => new TeacherWithSubjectDTO
@@ -248,6 +277,8 @@ namespace EducationalPlatform.Controllers
                         Level = s.Level,
                         Describtion = s.Describtion,
                         pricePerHour = s.pricePerHour,
+                        Term = s.Term,
+                        AddingTime = s.AddingTime,
                     })
                     .ToList()
                 })
@@ -278,6 +309,31 @@ namespace EducationalPlatform.Controllers
             return Ok(result);
         }
 
+        static bool ContainsMajorityOfCharacters(string source, string target)
+        {
+            // Convert source and target to character arrays
+            var sourceChars = source.GroupBy(c => c)
+                                    .ToDictionary(g => g.Key, g => g.Count());
+
+            var targetChars = target.GroupBy(c => c)
+                                    .ToDictionary(g => g.Key, g => g.Count());
+
+            int matchingCharactersCount = 0;
+            int requiredMajorityCount = (int)Math.Ceiling(targetChars.Sum(kv => kv.Value) / 2.0);
+
+            // Count the number of target characters that are present in the source
+            foreach (var targetChar in targetChars)
+            {
+                if (sourceChars.ContainsKey(targetChar.Key))
+                {
+                    matchingCharactersCount += Math.Min(sourceChars[targetChar.Key], targetChar.Value);
+                }
+            }
+
+            // Check if matching characters count is greater than half of the total target characters
+            return matchingCharactersCount >= requiredMajorityCount;
+        }
+
         private bool ContainsAtLeastTwoConsecutiveChars(string str1, string str2)
         {
             if (str1 == null || str2 == null)
@@ -289,7 +345,7 @@ namespace EducationalPlatform.Controllers
             {
                 return str1.Contains(str2);
             }
-
+            
             int ctr = 0;
 
             int mn = str1.Length <= str2.Length ? str1.Length : str2.Length;
