@@ -44,7 +44,7 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> AddSubject([FromForm]CreateSubjectDTO Sub)
+		public async Task<IActionResult> AddSubject(CreateSubjectDTO Sub)
 		{
 			if (ModelState.IsValid)
 			{
