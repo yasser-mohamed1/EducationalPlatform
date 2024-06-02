@@ -90,7 +90,7 @@ namespace EducationalPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             if (!SubjectExists(dto.SubjectId))
