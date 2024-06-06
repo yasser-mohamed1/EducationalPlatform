@@ -18,7 +18,6 @@ namespace EducationalPlatform.Controllers
             _context = context;
         }
 
-        // GET: api/Chapters
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChapterDto>>> GetChapters()
         {
@@ -32,7 +31,6 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterDtos);
         }
 
-        // GET: api/Chapters/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ChapterDto>> GetChapter(int id)
         {
@@ -50,7 +48,6 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterDto);
         }
 
-        // POST: api/Chapters
         [HttpPost]
         public async Task<ActionResult<ChapterDto>> PostChapter(CreateChapterDto createChapterDto)
         {
@@ -78,7 +75,6 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterDto);
         }
 
-        // PUT: api/Chapters/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChapter(int id, CreateChapterDto updateChapterDto)
         {
@@ -111,7 +107,6 @@ namespace EducationalPlatform.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Chapters/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChapter(int id)
         {
@@ -132,7 +127,6 @@ namespace EducationalPlatform.Controllers
             return _context.Chapters.Any(e => e.Id == id);
         }
         
-        // POST: api/Chapters/{id}/upload
         [HttpPost("{id}/upload")]
         public async Task<IActionResult> UploadFile(int id, [FromForm] IFormFile file)
         {
@@ -160,13 +154,12 @@ namespace EducationalPlatform.Controllers
                 _context.ChapterFiles.Add(chapterFile);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { message = "File uploaded successfully." });
+                return Ok(new { id = chapterFile.Id });
             }
 
             return BadRequest(new { message = "Invalid file." });
         }
 
-        // GET: api/Chapters/BySubject/5
         [HttpGet("BySubject/{subjectId}")]
         public async Task<ActionResult<IEnumerable<ChapterDto>>> GetChaptersBySubject(int subjectId)
         {
@@ -189,7 +182,6 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterDtos);
         }
 
-        // GET: api/Chapters/{id}/files
         [HttpGet("{id}/files")]
         public async Task<IActionResult> GetFiles(int id)
         {

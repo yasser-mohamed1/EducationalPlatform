@@ -26,7 +26,6 @@ namespace EducationalPlatform.Controllers
             _userManagerFactory = userManagerFactory;
         }
 
-        // GET: api/Teacher
         [HttpGet]
         public async Task<ActionResult> GetTeachers()
         {
@@ -37,6 +36,7 @@ namespace EducationalPlatform.Controllers
                     Id = t.Id,
                     FirstName = t.FirstName,
                     LastName = t.LastName,
+                    userName = t.User.UserName,
                     Governorate = t.Governorate,
                     Address = t.Address,
                     Email = t.User.Email,
@@ -48,7 +48,6 @@ namespace EducationalPlatform.Controllers
             return Ok(teachers);
         }
 
-        // GET: api/Teacher/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetTeacher(int id)
         {
@@ -60,6 +59,7 @@ namespace EducationalPlatform.Controllers
                     Id = t.Id,
                     FirstName = t.FirstName,
                     LastName = t.LastName,
+                    userName = t.User.UserName,
                     Governorate = t.Governorate,
                     Address = t.Address,
                     Email = t.User.Email,
@@ -114,6 +114,11 @@ namespace EducationalPlatform.Controllers
             if (!string.IsNullOrEmpty(dto.Address))
             {
                 existingTeacher.Address = dto.Address;
+            }
+
+            if (!string.IsNullOrEmpty(dto.Governorate))
+            {
+                existingTeacher.Governorate = dto.Governorate;
             }
 
             if (!string.IsNullOrEmpty(dto.Password))
@@ -173,10 +178,8 @@ namespace EducationalPlatform.Controllers
                 return "";
             }
 
-            // Check if the student already has a profile image
             if (!string.IsNullOrEmpty(teacher.ProfileImageUrl))
             {
-                // Delete the old profile image from the server
                 var oldImagePath = Path.Combine(_env.WebRootPath, teacher.ProfileImageUrl.TrimStart('/'));
                 if (System.IO.File.Exists(oldImagePath))
                 {
@@ -203,32 +206,5 @@ namespace EducationalPlatform.Controllers
 
             return filePath;
         }
-
-        // GET: api/teacher/{teacherId}/subjects
-        //[HttpGet("{teacherId}/subjects")]
-        //public async Task<ActionResult<IEnumerable<SubjectDto>>> GetTeacherSubjects(int teacherId)
-        //{
-        //    var teacher = await _context.Teachers
-        //        .Include(t => t.Subjects)
-        //        .FirstOrDefaultAsync(t => t.Id == teacherId);
-
-        //    if (teacher == null)
-        //    {
-        //        return NotFound("Teacher not found");
-        //    }
-
-        //    var subjects = teacher.Subjects.Select(s => new SubjectDto
-        //    {
-        //        Id = s.Id,
-        //        subjName = s.subjName,
-        //        Level = s.Level,
-        //        Describtion = s.Describtion,
-        //        pricePerHour = s.pricePerHour,
-        //        AddingTime = s.AddingTime
-        //    });
-
-        //    return Ok(subjects);
-        //}
-
     } 
 }

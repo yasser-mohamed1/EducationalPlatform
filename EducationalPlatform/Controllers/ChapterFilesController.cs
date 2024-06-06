@@ -18,7 +18,6 @@ namespace EducationalPlatform.Controllers
             _context = context;
         }
 
-        // GET: api/ChapterFiles
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChapterFileDto>>> GetChapterFiles()
         {
@@ -34,7 +33,6 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterFileDtos);
         }
 
-        // GET: api/ChapterFiles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ChapterFileDto>> GetChapterFile(int id)
         {
@@ -54,7 +52,6 @@ namespace EducationalPlatform.Controllers
             return Ok(chapterFileDto);
         }
 
-        // PUT: api/ChapterFiles/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChapterFile(int id, [FromForm] IFormFile file)
         {
@@ -96,7 +93,6 @@ namespace EducationalPlatform.Controllers
             return NoContent();
         }
 
-        // DELETE: api/ChapterFiles/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChapterFile(int id)
         {

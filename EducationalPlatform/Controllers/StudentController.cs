@@ -24,7 +24,6 @@ namespace EducationalPlatform.Controllers
             _userManagerFactory = userManagerFactory;
         }
 
-        // GET: api/Student
         [HttpGet]
         public async Task<ActionResult> GetStudents()
         {
@@ -35,6 +34,7 @@ namespace EducationalPlatform.Controllers
                     Id = s.Id,
                     FirstName = s.FirstName,
                     LastName = s.LastName,
+                    userName = s.User.UserName,
                     Email = s.User.Email,
                     Phone = s.User.PhoneNumber,
                     ProfileImageUrl = s.ProfileImageUrl,
@@ -45,7 +45,6 @@ namespace EducationalPlatform.Controllers
             return Ok(students);
         }
 
-        // GET: api/Student/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetStudent(int id)
         {
@@ -57,6 +56,7 @@ namespace EducationalPlatform.Controllers
                     Id = s.Id,
                     FirstName = s.FirstName,
                     LastName = s.LastName,
+                    userName = s.User.UserName,
                     Email = s.User.Email,
                     Phone = s.User.PhoneNumber,
                     ProfileImageUrl = s.ProfileImageUrl,
@@ -72,7 +72,6 @@ namespace EducationalPlatform.Controllers
             return Ok(student);
         }
 
-        // PUT: api/Student/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, [FromForm] UpdateStudentDTO dto)
         {
@@ -141,7 +140,6 @@ namespace EducationalPlatform.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Student/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
@@ -171,10 +169,8 @@ namespace EducationalPlatform.Controllers
                 return "";
             }
 
-            // Check if the student already has a profile image
             if (!string.IsNullOrEmpty(student.ProfileImageUrl))
             {
-                // Delete the old profile image from the server
                 var oldImagePath = Path.Combine(_env.WebRootPath, student.ProfileImageUrl.TrimStart('/'));
                 if (System.IO.File.Exists(oldImagePath))
                 {
@@ -196,7 +192,7 @@ namespace EducationalPlatform.Controllers
                  ImageFile.CopyTo(stream);
             }
 
-            student.ProfileImageUrl = "http://edu1.runasp.net/uploads/" + fileName; // Update the profile image URL
+            student.ProfileImageUrl = "http://edu1.runasp.net/uploads/" + fileName;
              _context.SaveChanges();
 
             return filePath;
@@ -311,7 +307,6 @@ namespace EducationalPlatform.Controllers
 
         static bool ContainsMajorityOfCharacters(string source, string target)
         {
-            // Convert source and target to character arrays
             var sourceChars = source.GroupBy(c => c)
                                     .ToDictionary(g => g.Key, g => g.Count());
 
@@ -321,7 +316,6 @@ namespace EducationalPlatform.Controllers
             int matchingCharactersCount = 0;
             int requiredMajorityCount = (int)Math.Ceiling(targetChars.Sum(kv => kv.Value) / 2.0);
 
-            // Count the number of target characters that are present in the source
             foreach (var targetChar in targetChars)
             {
                 if (sourceChars.ContainsKey(targetChar.Key))
@@ -330,56 +324,7 @@ namespace EducationalPlatform.Controllers
                 }
             }
 
-            // Check if matching characters count is greater than half of the total target characters
             return matchingCharactersCount >= requiredMajorityCount;
-        }
-
-        private bool ContainsAtLeastTwoConsecutiveChars(string str1, string str2)
-        {
-            if (str1 == null || str2 == null)
-            {
-                return false;
-            }
-
-            if (str2.Length == 1)
-            {
-                return str1.Contains(str2);
-            }
-            
-            int ctr = 0;
-
-            int mn = str1.Length <= str2.Length ? str1.Length : str2.Length;
-
-            for (int i = 0; i < mn; i++)
-            {
-                if (str1[i] == str2[i])
-                {
-                    ++ctr;
-                }
-                else
-                {
-                    ctr = 0;
-                }
-                if (mn <= 3)
-                {
-                    if (ctr == 2)
-                        return true;
-                }
-                else
-                {
-                    if (mn <= 5)
-                    {
-                        if (ctr == 3)
-                            return true;
-                    }
-                    else
-                    {
-                        if (ctr == 4)
-                            return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 

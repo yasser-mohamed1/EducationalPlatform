@@ -15,6 +15,8 @@ namespace EducationalPlatform.DTO
 
         public string? Address { get; set; }
 
+        public string? Governorate { get; set; }
+
         [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d\\s]).{8,}$")]
         public string? Password { get; set; }
 

@@ -18,7 +18,6 @@ namespace EducationalPlatform.Controllers
             _context = context;
         }
 
-        // GET: api/quiz/{quizId}/questions
         [HttpGet("{quizId}/questions")]
         public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuizQuestions(int quizId)
         {
@@ -47,7 +46,6 @@ namespace EducationalPlatform.Controllers
             return Ok(questions);
         }
 
-        // GET: api/quiz
         [HttpGet]
         public async Task<ActionResult<IEnumerable<QuizDto>>> GetQuizzes()
         {
@@ -62,7 +60,6 @@ namespace EducationalPlatform.Controllers
             return Ok(quizzes);
         }
 
-        // GET: api/quiz/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<QuizDto>> GetQuiz(int id)
         {
@@ -84,7 +81,6 @@ namespace EducationalPlatform.Controllers
             return Ok(quizDto);
         }
 
-        // POST: api/quiz
         [HttpPost]
         public async Task<ActionResult<QuizDto>> CreateQuiz(CreateQuizDTO dto)
         {
@@ -118,7 +114,6 @@ namespace EducationalPlatform.Controllers
             );
         }
 
-        // PUT: api/quiz/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateQuiz(int id, CreateQuizDTO dto)
         {
@@ -166,7 +161,6 @@ namespace EducationalPlatform.Controllers
             });
         }
 
-        // DELETE: api/quiz/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuiz(int id)
         {
