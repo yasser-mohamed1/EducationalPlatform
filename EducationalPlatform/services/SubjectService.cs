@@ -64,6 +64,9 @@ namespace EducationalPlatform.services
 					TeacherId=TeacherId,
 					TeacherName=Teacher.FirstName+" "+Teacher.LastName,
 					Term=s.Term,
+					totalPrice = s.totalPrice,
+					isOnilne = s.isOnilne,
+					isActive=s.isActive
 				}).ToList();
 				return subjectDtos;
 			}
@@ -71,7 +74,7 @@ namespace EducationalPlatform.services
 		}
 
 
-		public async Task<CreateSubjectDTO> CreateSubjectAsync(CreateSubjectDTO subject)
+		public async Task<SubjectDto> CreateSubjectAsync(CreateSubjectDTO subject)
 		{
 			bool ex1 = await Context.Teachers.AnyAsync(c=>c.Id==subject.TeacherId);
 			if (ex1)
@@ -85,20 +88,27 @@ namespace EducationalPlatform.services
 					TeacherId = subject.TeacherId,
 					AddingTime = DateTime.Now,
 					Term = subject.Term,
-				};
+                    totalPrice = subject.totalPrice,
+                    isOnilne = subject.isOnilne,
+                    isActive = subject.isActive
+                };
 				Context.Subjects.Add(s);
 				try
 				{
 					await Context.SaveChangesAsync();
-					return new CreateSubjectDTO
+					return new SubjectDto
 					{
+						subjectId = s.Id,
 						TeacherId = s.TeacherId,
 						Describtion = s.Describtion,
 						Level = s.Level,
 						pricePerHour = s.pricePerHour,
 						subjName = s.subjName,
 						Term = s.Term,
-					};
+                        totalPrice = s.totalPrice,
+                        isOnilne = s.isOnilne,
+                        isActive = s.isActive
+                    };
 				}
 				catch (Exception ex)
 				{
@@ -113,7 +123,7 @@ namespace EducationalPlatform.services
 
 		public async Task<SubjectDto> GetSubjectByIdAsync(int id)
 		{
-			Subject s = await Context.Subjects.Include(c=>c.Teacher).FirstOrDefaultAsync(x => x.Id == id);
+			Subject s = await Context.Subjects.Include(c=>c.Teacher).Include(s=>s.Quizs).FirstOrDefaultAsync(x => x.Id == id);
 			if (s != null && s.Teacher!=null)
 			{
 				return new SubjectDto
@@ -128,8 +138,11 @@ namespace EducationalPlatform.services
 					ProfileImageUrl = s.Teacher.ProfileImageUrl,
 					TeacherName=s.Teacher.FirstName+" "+s.Teacher.LastName,
 					Term=s.Term,
-					
-				};
+                    totalPrice = s.totalPrice,
+                    isOnilne = s.isOnilne,
+                    isActive = s.isActive,
+					quizCount = s.Quizs.Count()
+                };
 			}
 			else
 			{ return null; }
@@ -195,6 +208,9 @@ namespace EducationalPlatform.services
 					s.subjName = ss.subjName;
 					s.Term = ss.Term;
 					s.pricePerHour = ss.pricePerHour;
+					s.totalPrice = s.totalPrice;
+					s.isOnilne = s.isOnilne;
+					s.isActive = s.isActive;
 				}
 				Context.Subjects.Update(s);
 				try

@@ -16,5 +16,9 @@ namespace EducationalPlatform.DTO
 	    public string ProfileImageUrl {  get; set; }
 		public string TeacherName { get; set; }
 		public int Term {  get; set; }
+        public int totalPrice { get; set; }
+        public bool isOnilne { get; set; }
+        public bool isActive { get; set; }
+		public int quizCount { get; set; }
 	}
 }

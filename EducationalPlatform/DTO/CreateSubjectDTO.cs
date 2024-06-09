@@ -8,5 +8,8 @@
 		public int pricePerHour { get; set; }
 		public int TeacherId { get; set; }
 		public int Term { get; set; }
-	}
+        public int totalPrice { get; set; }
+        public bool isOnilne { get; set; }
+        public bool isActive { get; set; }
+    }
 }

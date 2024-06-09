@@ -374,12 +374,21 @@ namespace EducationalPlatform.Migrations
                     b.Property<int>("Term")
                         .HasColumnType("int");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isOnilne")
+                        .HasColumnType("bit");
+
                     b.Property<int>("pricePerHour")
                         .HasColumnType("int");
 
                     b.Property<string>("subjName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("totalPrice")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

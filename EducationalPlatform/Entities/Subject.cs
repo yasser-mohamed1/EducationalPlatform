@@ -10,7 +10,9 @@ namespace EducationalPlatform.Entities
         public string Level { get; set; }
         public string Describtion { get; set; }
         public int pricePerHour { get; set; }
-
+        public int totalPrice { get; set; }
+        public bool isOnilne { get; set; }
+        public bool isActive { get; set; }
         [ForeignKey("Teacher")]
         [Required]
         public int TeacherId { get; set; }

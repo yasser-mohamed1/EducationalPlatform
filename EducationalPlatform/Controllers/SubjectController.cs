@@ -50,7 +50,7 @@ namespace EducationalPlatform.Controllers
 			{
 				try
 				{
-					CreateSubjectDTO s = await subjectServices.CreateSubjectAsync(Sub);
+					SubjectDto s = await subjectServices.CreateSubjectAsync(Sub);
 					return Ok(s);
 				}
 				catch(Exception ex)
