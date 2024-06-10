@@ -20,5 +20,6 @@ namespace EducationalPlatform.DTO
         public bool isOnilne { get; set; }
         public bool isActive { get; set; }
 		public int quizCount { get; set; }
+		public int studentCount { get; set; }
 	}
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Qa2GeK42HlM2Q1malPz9hWE7YT7Gf9OYv+rud0H7bRo=",
+  "Hash": "2YDH5NzxgKAv9Gl9JymAOof8Y7J7gs32KFp0bd+rAGk=",
   "Source": "EducationalPlatform",
   "BasePath": "_content/EducationalPlatform",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "EducationalPlatform\\wwwroot",
       "Source": "EducationalPlatform",
-      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "ContentRoot": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
       "BasePath": "_content/EducationalPlatform",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\f745272b-deec-4e79-95fb-9aeb176d3793.jpg",
+      "Identity": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\wwwroot\\uploads\\f745272b-deec-4e79-95fb-9aeb176d3793.jpg",
       "SourceId": "EducationalPlatform",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
+      "ContentRoot": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\wwwroot\\",
       "BasePath": "_content/EducationalPlatform",
       "RelativePath": "uploads/f745272b-deec-4e79-95fb-9aeb176d3793.jpg",
       "AssetKind": "All",

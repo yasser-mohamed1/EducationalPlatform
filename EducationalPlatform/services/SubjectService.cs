@@ -45,8 +45,13 @@ namespace EducationalPlatform.services
 
 		public async Task<List<SubjectDto>> GetAllSubjectsForATeacher(int TeacherId)
 		{
-			Teacher Teacher = await Context.Teachers.Include(t => t.Subjects).ThenInclude(s=> s.Quizs).FirstOrDefaultAsync(c => c.Id == TeacherId);
-			if(Teacher == null)
+            Teacher Teacher = await Context.Teachers
+                .Include(t => t.Subjects)
+                    .ThenInclude(s => s.Quizs)
+                .Include(t => t.Subjects)
+                    .ThenInclude(s => s.Enrollments)
+                .FirstOrDefaultAsync(c => c.Id == TeacherId);
+            if (Teacher == null)
 			{
 				return null;
 			}
@@ -67,8 +72,9 @@ namespace EducationalPlatform.services
 					totalPrice = s.totalPrice,
 					isOnilne = s.isOnilne,
 					isActive=s.isActive,
-					quizCount = s.Quizs.Count()
-				}).ToList();
+					quizCount = s.Quizs.Count(),
+					studentCount = s.Enrollments.Count()
+            }).ToList();
 				return subjectDtos;
 			}
 			
@@ -124,7 +130,7 @@ namespace EducationalPlatform.services
 
 		public async Task<SubjectDto> GetSubjectByIdAsync(int id)
 		{
-			Subject s = await Context.Subjects.Include(c=>c.Teacher).Include(s=>s.Quizs).FirstOrDefaultAsync(x => x.Id == id);
+			Subject s = await Context.Subjects.Include(c=>c.Teacher).Include(s=>s.Quizs).Include(s=>s.Enrollments).FirstOrDefaultAsync(x => x.Id == id);
 			if (s != null && s.Teacher!=null)
 			{
 				return new SubjectDto
@@ -142,7 +148,8 @@ namespace EducationalPlatform.services
                     totalPrice = s.totalPrice,
                     isOnilne = s.isOnilne,
                     isActive = s.isActive,
-					quizCount = s.Quizs.Count()
+					quizCount = s.Quizs.Count(),
+                    studentCount = s.Enrollments.Count()
                 };
 			}
 			else

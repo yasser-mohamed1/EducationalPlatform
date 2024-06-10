@@ -4564,11 +4564,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\EducationalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
+      "projectUniqueName": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
       "projectName": "EducationalPlatform",
-      "projectPath": "E:\\EducationalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
+      "projectPath": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
       "packagesPath": "C:\\Users\\Ssofian\\.nuget\\packages\\",
-      "outputPath": "E:\\EducationalPlatform\\EducationalPlatform\\obj\\",
+      "outputPath": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
