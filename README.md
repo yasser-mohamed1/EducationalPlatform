@@ -16,11 +16,8 @@ Welcome to the Educational Platform API! This project facilitates an online educ
 - **Book a Class**: Students can book classes with teachers.
 
 ## Entity-Relationship Diagram (ERD)
-
+![ERD](edu._erddrawio-Page-1.drawio.png)
 ## Context Diagram
-
-*add line*
-
-*I will add a file*
+![Context Diagram](Context_level2_final.drawio.png)
 
 Thanks for reading!
