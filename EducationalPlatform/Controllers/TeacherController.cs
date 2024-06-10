@@ -31,7 +31,7 @@ namespace EducationalPlatform.Controllers
         {
             var teachers = await _context.Teachers
                 .Include(t => t.User)
-                .Select(t => new TeacherDTO
+                .Select(t => new TeacherDto
                 {
                     Id = t.Id,
                     FirstName = t.FirstName,
@@ -54,7 +54,7 @@ namespace EducationalPlatform.Controllers
             var teacher = await _context.Teachers
                 .Include(t => t.User)
                 .Where(t => t.Id == id)
-                .Select(t => new TeacherDTO
+                .Select(t => new TeacherDto
                 {
                     Id = t.Id,
                     FirstName = t.FirstName,

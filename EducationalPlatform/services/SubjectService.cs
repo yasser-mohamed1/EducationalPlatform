@@ -45,7 +45,7 @@ namespace EducationalPlatform.services
 
 		public async Task<List<SubjectDto>> GetAllSubjectsForATeacher(int TeacherId)
 		{
-			Teacher Teacher = await Context.Teachers.Include(t => t.Subjects).FirstOrDefaultAsync(c => c.Id == TeacherId);
+			Teacher Teacher = await Context.Teachers.Include(t => t.Subjects).ThenInclude(s=> s.Quizs).FirstOrDefaultAsync(c => c.Id == TeacherId);
 			if(Teacher == null)
 			{
 				return null;
@@ -66,7 +66,8 @@ namespace EducationalPlatform.services
 					Term=s.Term,
 					totalPrice = s.totalPrice,
 					isOnilne = s.isOnilne,
-					isActive=s.isActive
+					isActive=s.isActive,
+					quizCount = s.Quizs.Count()
 				}).ToList();
 				return subjectDtos;
 			}
@@ -184,7 +185,6 @@ namespace EducationalPlatform.services
 						FirstName = T.FirstName,
 						LastName = T.LastName,
 						Id = T.Id,
-
 					};
 				}
 				else return null;
