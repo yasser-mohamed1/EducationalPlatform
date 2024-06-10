@@ -4558,23 +4558,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ssofian\\.nuget\\packages\\": {},
+    "C:\\Users\\Windows 10\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
+      "projectUniqueName": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\EducationalPlatform.csproj",
       "projectName": "EducationalPlatform",
-      "projectPath": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\EducationalPlatform.csproj",
-      "packagesPath": "C:\\Users\\Ssofian\\.nuget\\packages\\",
-      "outputPath": "E:\\edu\\EducationalPlatform\\EducationalPlatform\\obj\\",
+      "projectPath": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\EducationalPlatform.csproj",
+      "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
+      "outputPath": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ssofian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Windows 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
