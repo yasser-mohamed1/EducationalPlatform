@@ -1,4 +1,6 @@
 ﻿using EducationalPlatform.DTO;
+using EducationalPlatform.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EducationalPlatform.Repositories
 {
@@ -6,7 +8,8 @@ namespace EducationalPlatform.Repositories
     {
         Task<List<TeacherDto>> GetTeachersAsync();
         Task<TeacherDto> GetTeacherByIdAsync(int id);
-        Task<bool> UpdateTeacherAsync(int id, UpdateTeacherDto dto);
+        Task<Teacher> GetTeacherUserByIdAsync(int id);
+        Task UpdateTeacherAsync(Teacher teacher);
         Task<bool> DeleteTeacherAsync(int id);
     }
 }

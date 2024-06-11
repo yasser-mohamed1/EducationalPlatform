@@ -215,11 +215,11 @@ namespace EducationalPlatform.services
 					s.subjName = ss.subjName;
 					s.Term = ss.Term;
 					s.pricePerHour = ss.pricePerHour;
-					s.totalPrice = s.totalPrice;
-					s.isOnilne = s.isOnilne;
-					s.isActive = s.isActive;
-				}
-				Context.Subjects.Update(s);
+                    s.totalPrice = ss.totalPrice;
+                    s.isOnilne = ss.isOnilne;
+                    s.isActive = ss.isActive;
+                }
+                Context.Subjects.Update(s);
 				try
 				{
 					await Context.SaveChangesAsync();

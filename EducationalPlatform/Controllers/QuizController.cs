@@ -1,9 +1,8 @@
-﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
-using EducationalPlatform.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using EducationalPlatform.DTO;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EducationalPlatform.Controllers
 {
@@ -11,37 +10,22 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
-        private readonly EduPlatformContext _context;
+        private readonly IQuizService _quizService;
 
-        public QuizController(EduPlatformContext context)
+        public QuizController(IQuizService quizService)
         {
-            _context = context;
+            _quizService = quizService;
         }
 
         [HttpGet("{quizId}/questions")]
         public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuizQuestions(int quizId)
         {
+            var questions = await _quizService.GetQuizQuestionsAsync(quizId);
 
-            var quiz = await _context.Quizzes
-                .Include(q => q.Questions)
-                .FirstOrDefaultAsync(q => q.Id == quizId);
-
-            if (quiz == null)
+            if (questions == null)
             {
-                return NotFound($"No Quiz was found with this id : {quizId}");
+                return NotFound($"No Quiz was found with this id: {quizId}");
             }
-
-            var questions = quiz.Questions.Select(q => new QuestionDto
-            {
-                Id = q.Id,
-                QuizId = q.QuizId,
-                Content = q.Content,
-                option1 = q.Option1,
-                option2 = q.Option2,
-                option3 = q.Option3,
-                option4 = q.Option4,
-                CorrectAnswer = q.CorrectAnswer
-            }).ToList();
 
             return Ok(questions);
         }
@@ -49,36 +33,21 @@ namespace EducationalPlatform.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<QuizDto>>> GetQuizzes()
         {
-            var quizzes = await _context.Quizzes.Select(q => new QuizDto
-            {
-                Id = q.Id,
-                SubjectId = (int)q.SubjectId,
-                Description = q.Description,
-                CreatedDate = q.CreatedDate
-            }).ToListAsync();
-
+            var quizzes = await _quizService.GetQuizzesAsync();
             return Ok(quizzes);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<QuizDto>> GetQuiz(int id)
         {
-            var quiz = await _context.Quizzes.FindAsync(id);
+            var quiz = await _quizService.GetQuizByIdAsync(id);
 
             if (quiz == null)
             {
-                return NotFound($"No Quiz was found with this id : {id}");
+                return NotFound($"No Quiz was found with this id: {id}");
             }
 
-            var quizDto = new QuizDto
-            {
-                Id = quiz.Id,
-                SubjectId = (int)quiz.SubjectId,
-                Description = quiz.Description,
-                CreatedDate = quiz.CreatedDate
-            };
-
-            return Ok(quizDto);
+            return Ok(quiz);
         }
 
         [HttpPost]
@@ -89,102 +58,48 @@ namespace EducationalPlatform.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!SubjectExists(dto.SubjectId))
+            try
             {
-                return NotFound($"No Subject was found with this id : {dto.SubjectId}");
+                var quiz = await _quizService.CreateQuizAsync(dto);
+                return Ok(quiz);
             }
-
-            var quiz = new Quiz
+            catch (KeyNotFoundException ex)
             {
-                SubjectId = dto.SubjectId,
-                Description = dto.Description,
-                CreatedDate = DateTime.Now
-            };
-
-            _context.Quizzes.Add(quiz);
-            await _context.SaveChangesAsync();
-
-            return Ok(new
-                {
-                    id = quiz.Id,
-                    subjectId = dto.SubjectId,
-                    description = dto.Description,
-                    createdDate = quiz.CreatedDate
-                }
-            );
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateQuiz(int id, CreateQuizDTO dto)
         {
-            if (!QuizExists(id))
-            {
-                return NotFound($"No Quiz was found with this id : {id}");
-            }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Quiz? quiz = await _context.Quizzes.FindAsync(id);
-
-            if (!string.IsNullOrEmpty(quiz.Description))
-            {
-                quiz.Description = dto.Description;
-            }
-            if (quiz.SubjectId != null || quiz.SubjectId != 0)
-                quiz.SubjectId = dto.SubjectId;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var quiz = await _quizService.UpdateQuizAsync(id, dto);
+                return Ok(quiz);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException ex)
             {
-                if (!QuizExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(ex.Message);
             }
-
-            return Ok(new
-            {
-                id= quiz.Id,
-                subjectId= quiz.SubjectId,
-                description= quiz.Description,
-                createdDate = quiz.CreatedDate
-            });
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuiz(int id)
         {
-            if (!QuizExists(id))
+            try
             {
-                return NotFound($"No Quiz was found with this id : {id}");
+                await _quizService.DeleteQuizAsync(id);
+                return NoContent();
             }
-
-            var quiz = await _context.Quizzes.FindAsync(id);
-            _context.Quizzes.Remove(quiz);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool QuizExists(int id)
-        {
-            return _context.Quizzes.Any(e => e.Id == id);
-        }
-
-        private bool SubjectExists(int id)
-        {
-            return _context.Subjects.Any(x => x.Id == id);
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }
-

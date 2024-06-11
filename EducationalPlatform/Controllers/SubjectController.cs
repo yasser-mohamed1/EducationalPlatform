@@ -37,7 +37,9 @@ namespace EducationalPlatform.Controllers
                 AddingTime = subject.AddingTime,
 				ProfileImageUrl = subject.Teacher.ProfileImageUrl,
                 TeacherName = subject.Teacher.FirstName + " " + subject.Teacher.LastName,
-                Term = subject.Term
+                Term = subject.Term,
+                isActive = subject.isActive,
+                isOnilne = subject.isOnilne,
             }).ToListAsync();
 
             return Ok(subjects);

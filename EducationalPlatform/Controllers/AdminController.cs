@@ -1,10 +1,7 @@
-﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
-using EducationalPlatform.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using EducationalPlatform.DTO;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EducationalPlatform.Controllers
 {
@@ -13,50 +10,40 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly EduPlatformContext context;
+        private readonly IAdminService _adminService;
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> _userManager, EduPlatformContext _context)
+        public AdminController(IAdminService adminService)
         {
-            this.roleManager = roleManager;
-            userManager = _userManager;
-            context = _context;
+            _adminService = adminService;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Registeration(RegisterAdminDto adminDto)
+        public async Task<IActionResult> Registration(RegisterAdminDto adminDto)
         {
-            if(ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                ApplicationUser user = new();
-                user.UserName = adminDto.Username;
-                user.Email = adminDto.Email;
-                user.PhoneNumber = adminDto.Phone;
-                IdentityResult result = await userManager.CreateAsync(user, adminDto.Password);
-                if(result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Admin");
-                    return Ok("Admin Registeration Success");
-                }
-                return BadRequest(result.Errors);
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
+
+            var result = await _adminService.RegisterAdminAsync(adminDto);
+            if (result != "Admin Registration Success")
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
 
         [HttpPost("addrole")]
-        public async Task<IActionResult> CreateRole(string _role)
+        public async Task<IActionResult> CreateRole(string role)
         {
-            var role = new IdentityRole(_role);
-            IdentityResult result = await roleManager.CreateAsync(role);
-            if(result.Succeeded)
+            var result = await _adminService.CreateRoleAsync(role);
+            if (result != "Role Created Successfully")
             {
-                return Ok("Role Created Successfully");
+                return BadRequest(result);
             }
-            else
-            {
-                return BadRequest(result.Errors);
-            }
+
+            return Ok(result);
         }
     }
 }

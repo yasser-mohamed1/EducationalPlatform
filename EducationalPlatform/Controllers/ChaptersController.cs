@@ -1,9 +1,6 @@
-﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
-using EducationalPlatform.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using EducationalPlatform.DTO;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EducationalPlatform.Controllers
 {
@@ -11,199 +8,115 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class ChaptersController : ControllerBase
     {
-        private readonly EduPlatformContext _context;
+        private readonly IChapterService _chapterService;
 
-        public ChaptersController(EduPlatformContext context)
+        public ChaptersController(IChapterService chapterService)
         {
-            _context = context;
+            _chapterService = chapterService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChapterDto>>> GetChapters()
         {
-            var chapters = await _context.Chapters.ToListAsync();
-            var chapterDtos = chapters.Select(c => new ChapterDto
-            {
-                Id = c.Id,
-                Name = c.Name,
-                SubjectId = c.SubjectId
-            }).ToList();
-            return Ok(chapterDtos);
+            var chapters = await _chapterService.GetChaptersAsync();
+            return Ok(chapters);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ChapterDto>> GetChapter(int id)
         {
-            var chapter = await _context.Chapters.FindAsync(id);
+            var chapter = await _chapterService.GetChapterByIdAsync(id);
+
             if (chapter == null)
             {
-                return NotFound($"No Chapter was found with this id : {id}");
+                return NotFound($"No Chapter was found with this id: {id}");
             }
-            var chapterDto = new ChapterDto
-            {
-                Id = chapter.Id,
-                Name = chapter.Name,
-                SubjectId = chapter.SubjectId
-            };
-            return Ok(chapterDto);
+
+            return Ok(chapter);
         }
 
         [HttpPost]
         public async Task<ActionResult<ChapterDto>> PostChapter(CreateChapterDto createChapterDto)
         {
-            Subject? subject = await _context.Subjects.FindAsync(createChapterDto.SubjectId);
-            if(subject == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound($"No Subject was found with this id : {createChapterDto.SubjectId}");
+                return BadRequest(ModelState);
             }
-            var chapter = new Chapter
+
+            try
             {
-                Name = createChapterDto.Name,
-                SubjectId = createChapterDto.SubjectId
-            };
-
-            _context.Chapters.Add(chapter);
-            await _context.SaveChangesAsync();
-
-            var chapterDto = new ChapterDto
+                var chapter = await _chapterService.CreateChapterAsync(createChapterDto);
+                return Ok(chapter);
+            }
+            catch (KeyNotFoundException ex)
             {
-                Id = chapter.Id,
-                Name = chapter.Name,
-                SubjectId = chapter.SubjectId
-            };
-
-            return Ok(chapterDto);
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChapter(int id, CreateChapterDto updateChapterDto)
         {
-            var chapter = await _context.Chapters.FindAsync(id);
-            if (chapter == null)
+            if (id <= 0)
             {
-                return NotFound($"No Chapter was found with this id : {id}");
+                return BadRequest();
             }
 
-            chapter.Name = updateChapterDto.Name;
-            chapter.SubjectId = updateChapterDto.SubjectId;
-
-            _context.Entry(chapter).State = EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
+                await _chapterService.UpdateChapterAsync(id, updateChapterDto);
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException ex)
             {
-                if (!ChapterExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(ex.Message);
             }
-
-            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChapter(int id)
         {
-            var chapter = await _context.Chapters.FindAsync(id);
-            if (chapter == null)
-            {
-                return NotFound($"No Chapter was found with this id : {id}");
-            }
-
-            _context.Chapters.Remove(chapter);
-            await _context.SaveChangesAsync();
-
+            await _chapterService.DeleteChapterAsync(id);
             return NoContent();
-        }
-
-        private bool ChapterExists(int id)
-        {
-            return _context.Chapters.Any(e => e.Id == id);
-        }
-        
-        [HttpPost("{id}/upload")]
-        public async Task<IActionResult> UploadFile(int id, [FromForm] IFormFile file)
-        {
-            var chapter = await _context.Chapters.FindAsync(id);
-            if (chapter == null)
-            {
-                return NotFound($"No Chapter was found with this id : {id}");
-            }
-
-            if (file != null && file.Length > 0)
-            {
-                var chapterFile = new ChapterFile
-                {
-                    ChapterId = chapter.Id,
-                    FileName = file.FileName,
-                    ContentType = file.ContentType
-                };
-
-                using (var memoryStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(memoryStream);
-                    chapterFile.FileContent = memoryStream.ToArray();
-                }
-
-                _context.ChapterFiles.Add(chapterFile);
-                await _context.SaveChangesAsync();
-
-                return Ok(new { id = chapterFile.Id });
-            }
-
-            return BadRequest(new { message = "Invalid file." });
         }
 
         [HttpGet("BySubject/{subjectId}")]
         public async Task<ActionResult<IEnumerable<ChapterDto>>> GetChaptersBySubject(int subjectId)
         {
-            var chapters = await _context.Chapters
-                                         .Where(c => c.SubjectId == subjectId)
-                                         .ToListAsync();
+            var chapters = await _chapterService.GetChaptersBySubjectIdAsync(subjectId);
 
             if (chapters == null || !chapters.Any())
             {
-                return NotFound($"No Chapters were found with this Subject id : {subjectId}");
+                return NotFound($"No Chapters were found with this Subject id: {subjectId}");
             }
 
-            var chapterDtos = chapters.Select(c => new ChapterDto
-            {
-                Id = c.Id,
-                Name = c.Name,
-                SubjectId = c.SubjectId
-            }).ToList();
+            return Ok(chapters);
+        }
 
-            return Ok(chapterDtos);
+
+        [HttpPost("{id}/upload")]
+        public async Task<IActionResult> UploadFile(int id, [FromForm] IFormFile file)
+        {
+            var chapterExists = await _chapterService.GetChapterByIdAsync(id) != null;
+            if (!chapterExists)
+            {
+                return NotFound($"No Chapter was found with this id : {id}");
+            }
+
+            await _chapterService.UploadFileAsync(id, file);
+            return Ok(new { message = "File uploaded successfully" });
         }
 
         [HttpGet("{id}/files")]
         public async Task<IActionResult> GetFiles(int id)
         {
-            var chapterFiles = await _context.ChapterFiles
-                .Where(cf => cf.ChapterId == id)
-                .Select(cf => new ChapterFileDto()
-                {
-                    Id = cf.Id,
-                    FileName = cf.FileName,
-                    ContentType = cf.ContentType,
-                    ChapterId = cf.ChapterId,
-                    FileContent = cf.FileContent
-                })
-                .ToListAsync();
-
-            if (!chapterFiles.Any())
+            var chapterFiles = await _chapterService.GetFilesByChapterIdAsync(id);
+            if (chapterFiles == null || !chapterFiles.Any())
             {
                 return NotFound($"No Chapter Files were found with this Chapter id : {id}");
             }
 
             return Ok(chapterFiles);
         }
-
     }
 }

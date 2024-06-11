@@ -1,6 +1,8 @@
 using EducationalPlatform.Data;
 using EducationalPlatform.Entities;
+using EducationalPlatform.Repositories;
 using EducationalPlatform.services;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -56,7 +58,37 @@ namespace EducationalPlatform
                 var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
                 return httpContext => httpContextAccessor.HttpContext?.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
             });
-           
+
+            builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
+            builder.Services.AddScoped<ITeacherService, TeacherService>();
+
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddScoped<IStudentService, StudentService>();
+
+            builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+            builder.Services.AddScoped<IQuizService, QuizService>();
+
+            builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+            builder.Services.AddScoped<IQuestionService, QuestionService>();
+
+            builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
+            builder.Services.AddScoped<IChapterService, ChapterService>();
+
+            builder.Services.AddScoped<IChapterFileRepository, ChapterFileRepository>();
+            builder.Services.AddScoped<IChapterFileService, ChapterFileService>();
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+
+            builder.Services.AddScoped<ITeacherAccountRepository, TeacherAccountRepository>();
+            builder.Services.AddScoped<ITeacherAccountService, TeacherAccountService>();
+            
+            builder.Services.AddScoped<IStudentAccountRepository, StudentAccountRepository>();
+            builder.Services.AddScoped<IStudentAccountService, StudentAccountService>();
+
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
+            
 
             builder.Services.AddCors(corsOptions => {
                 corsOptions.AddPolicy("MyPolicy", corsPolicyBuilder =>

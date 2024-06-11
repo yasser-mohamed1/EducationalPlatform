@@ -1,9 +1,6 @@
-﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
-using EducationalPlatform.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using EducationalPlatform.DTO;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EducationalPlatform.Controllers
 {
@@ -11,106 +8,56 @@ namespace EducationalPlatform.Controllers
     [ApiController]
     public class ChapterFilesController : ControllerBase
     {
-        private readonly EduPlatformContext _context;
+        private readonly IChapterFileService _chapterFileService;
 
-        public ChapterFilesController(EduPlatformContext context)
+        public ChapterFilesController(IChapterFileService chapterFileService)
         {
-            _context = context;
+            _chapterFileService = chapterFileService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChapterFileDto>>> GetChapterFiles()
         {
-            var chapterFiles = await _context.ChapterFiles.ToListAsync();
-            var chapterFileDtos = chapterFiles.Select(cf => new ChapterFileDto
-            {
-                Id = cf.Id,
-                ChapterId = cf.ChapterId,
-                FileName = cf.FileName,
-                ContentType = cf.ContentType,
-                FileContent = cf.FileContent
-            }).ToList();
-            return Ok(chapterFileDtos);
+            var chapterFiles = await _chapterFileService.GetChapterFilesAsync();
+            return Ok(chapterFiles);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ChapterFileDto>> GetChapterFile(int id)
         {
-            var chapterFile = await _context.ChapterFiles.FindAsync(id);
+            var chapterFile = await _chapterFileService.GetChapterFileByIdAsync(id);
             if (chapterFile == null)
             {
                 return NotFound($"No Chapter File was found with this id : {id}");
             }
-            var chapterFileDto = new ChapterFileDto
-            {
-                Id = chapterFile.Id,
-                ChapterId = chapterFile.ChapterId,
-                FileName = chapterFile.FileName,
-                ContentType = chapterFile.ContentType,
-                FileContent = chapterFile.FileContent
-            };
-            return Ok(chapterFileDto);
+            return Ok(chapterFile);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChapterFile(int id, [FromForm] IFormFile file)
         {
-            var chapterFile = await _context.ChapterFiles.FindAsync(id);
-            if (chapterFile == null)
+            var chapterFileExists = await _chapterFileService.ChapterFileExistsAsync(id);
+            if (!chapterFileExists)
             {
                 return NotFound($"No Chapter File was found with this id: {id}");
             }
 
-            if (file != null)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(memoryStream);
-                    chapterFile.FileContent = memoryStream.ToArray();
-                }
-
-                chapterFile.FileName = file.FileName;
-                chapterFile.ContentType = file.ContentType;
-            }
-
-            _context.Entry(chapterFile).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ChapterFileExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _chapterFileService.UpdateChapterFileAsync(id, file);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChapterFile(int id)
         {
-            var chapterFile = await _context.ChapterFiles.FindAsync(id);
-            if (chapterFile == null)
+            var chapterFileExists = await _chapterFileService.ChapterFileExistsAsync(id);
+            if (!chapterFileExists)
             {
                 return NotFound($"No Chapter File was found with this id : {id}");
             }
 
-            _context.ChapterFiles.Remove(chapterFile);
-            await _context.SaveChangesAsync();
-
+            await _chapterFileService.DeleteChapterFileAsync(id);
             return NoContent();
         }
 
-        private bool ChapterFileExists(int id)
-        {
-            return _context.ChapterFiles.Any(e => e.Id == id);
-        }
     }
 }

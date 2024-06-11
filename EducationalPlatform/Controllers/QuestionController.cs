@@ -1,64 +1,37 @@
-﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
-using EducationalPlatform.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using EducationalPlatform.DTO;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 namespace EducationalPlatform.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly EduPlatformContext _context;
+        private readonly IQuestionService _questionService;
 
-        public QuestionsController(EduPlatformContext context)
+        public QuestionsController(IQuestionService questionService)
         {
-            _context = context;
+            _questionService = questionService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuestions()
         {
-            var questions = await _context.Questiones.Select(q => new QuestionDto
-            {
-                Id = q.Id,
-                Content = q.Content,
-                option1 = q.Option1,
-                option2 = q.Option2,
-                option3 = q.Option3,
-                option4 = q.Option4,
-                QuizId = q.QuizId,
-                CorrectAnswer = q.CorrectAnswer,
-            }).ToListAsync();
-
+            var questions = await _questionService.GetQuestionsAsync();
             return Ok(questions);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<QuestionDto>> GetQuestion(int id)
         {
-            var question = await _context.Questiones.FindAsync(id);
+            var question = await _questionService.GetQuestionByIdAsync(id);
 
             if (question == null)
             {
-                return NotFound($"No Question was found with this id : {id}");
+                return NotFound($"No Question was found with this id: {id}");
             }
 
-            var questionDto = new QuestionDto
-            {
-                Id = question.Id,
-                Content = question.Content,
-                option1 = question.Option1,
-                option2 = question.Option2,
-                option3 = question.Option3,
-                option4 = question.Option4,
-                QuizId = question.QuizId,
-                CorrectAnswer = question.CorrectAnswer,
-            };
-
-            return Ok(questionDto);
+            return Ok(question);
         }
 
         [HttpPost]
@@ -69,38 +42,15 @@ namespace EducationalPlatform.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!QuizExists(dto.QuizId))
+            try
             {
-                return NotFound($"No Quiz was found with this id : {dto.QuizId}");
+                var question = await _questionService.CreateQuestionAsync(dto);
+                return Ok(question);
             }
-
-            var question = new Question
+            catch (KeyNotFoundException ex)
             {
-                Content = dto.Content,
-                Option1 = dto.option1,
-                Option2 = dto.option2,
-                Option3 = dto.option3,
-                Option4 = dto.option4,
-                QuizId = dto.QuizId,
-                CorrectAnswer = dto.CorrectAnswer
-            };
-
-            _context.Questiones.Add(question);
-            await _context.SaveChangesAsync();
-
-            var questionDto = new QuestionDto
-            {
-                Id = question.Id,
-                Content = question.Content,
-                option1 = question.Option1,
-                option2 = question.Option2,
-                option3 = question.Option3,
-                option4 = question.Option4,
-                QuizId = question.QuizId,
-                CorrectAnswer = question.CorrectAnswer,
-            };
-
-            return Ok(questionDto);
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
@@ -111,69 +61,35 @@ namespace EducationalPlatform.Controllers
                 return BadRequest();
             }
 
-            var question = await _context.Questiones.FindAsync(id);
-            if (question == null)
+            try
             {
-                return NotFound($"No Question was found with this id : {id}");
+                await _questionService.UpdateQuestionAsync(id, dto);
+                return NoContent();
             }
-
-            question.Content = dto.Content;
-            question.Option1 = dto.option1;
-            question.Option2 = dto.option2;
-            question.Option3 = dto.option3;
-            question.Option4 = dto.option4;
-            question.CorrectAnswer = dto.CorrectAnswer;
-
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {
-            var question = await _context.Questiones.FindAsync(id);
-            if (question == null)
-            {
-                return NotFound($"No Question was found with this id : {id}");
-            }
-
-            _context.Questiones.Remove(question);
-            await _context.SaveChangesAsync();
-
+            await _questionService.DeleteQuestionAsync(id);
             return NoContent();
         }
 
         [HttpGet("ByQuiz/{quizId}")]
         public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuestionsByQuizId(int quizId)
         {
-            if (!QuizExists(quizId))
+            var questions = await _questionService.GetQuestionsByQuizIdAsync(quizId);
+
+            if (questions == null)
             {
                 return NotFound($"No Quiz was found with this ID: {quizId}");
             }
 
-            var questions = await _context.Questiones
-                                          .Where(q => q.QuizId == quizId)
-                                          .Select(q => new QuestionDto
-                                          {
-                                              Id = q.Id,
-                                              Content = q.Content,
-                                              option1 = q.Option1,
-                                              option2 = q.Option2,
-                                              option3 = q.Option3,
-                                              option4 = q.Option4,
-                                              QuizId = q.QuizId,
-                                              CorrectAnswer = q.CorrectAnswer,
-                                          }).ToListAsync();
-
             return Ok(questions);
         }
-
-
-        private bool QuizExists(int id)
-        {
-            return _context.Quizzes.Any(e => e.Id == id);
-        }
     }
-
 }
