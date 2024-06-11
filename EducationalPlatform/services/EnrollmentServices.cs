@@ -95,22 +95,8 @@ namespace EducationalPlatform.services
 			Enrollment Enrollment=await 
 				Context.Enrollments
 				.OrderByDescending(x=>x.EnrollmentDate)
-				.FirstOrDefaultAsync(x=>x.SubjectIdd==SubjectId&&x.StudentId==StudentId);
-            bool ex1 = await Context.Subjects.AnyAsync(c => c.Id == SubjectId);
-            bool ex2 = await Context.Students.AnyAsync(c => c.Id == StudentId);
-            if (!ex1 && !ex2)
-            {
-                throw new Exception("The Student and The Subject are Not found");
-            }
-            if (!ex1)
-            {
-                throw new Exception("The Subject Not Found");
-            }
-            else if (!ex2)
-            {
-                throw new Exception("The Student Not Found");
-            }
-            if (Enrollment != null && Enrollment.IsActive==true)
+				.FirstOrDefaultAsync(x=>x.SubjectIdd==SubjectId&&x.StudentId==StudentId);  
+			if (Enrollment != null && Enrollment.IsActive==true)
 			{
 				throw new Exception("You Have Already Enrolled in That Subject");
 			
