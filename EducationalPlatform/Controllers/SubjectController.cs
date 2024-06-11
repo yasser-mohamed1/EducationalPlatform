@@ -165,5 +165,18 @@ namespace EducationalPlatform.Controllers
 				return BadRequest("The Teacher Not Found");
 			}
 		}
+		[HttpGet("Subjects/{studid}")]
+		public async Task<IActionResult>GetAllsubjectsforastudent(int studid)
+		{
+			try
+			{
+				List<SubjectDto> ss = await subjectServices.GetAllSubjectsEnrolledByAstudnt(studid);
+				return Ok(ss);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
     }
 }

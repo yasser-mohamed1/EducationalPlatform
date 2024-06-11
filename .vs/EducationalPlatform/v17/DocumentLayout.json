@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\Field Training Project\\New folder\\New folder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\services\\enrollmentservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\services\\enrollmentservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\services\\subjectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\services\\subjectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\services\\enrollmentservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\services\\enrollmentservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\services\\isubjectservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|solutionrelative:educationalplatform\\services\\isubjectservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BC9D4441-317B-4306-8F11-3150169F2542}|EducationalPlatform\\EducationalPlatform.csproj|d:\\field training project\\new folder\\new folder\\educationalplatform\\dto\\enrollmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,21 +34,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EnrollmentServices.cs",
-              "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\EnrollmentServices.cs",
-              "RelativeDocumentMoniker": "EducationalPlatform\\services\\EnrollmentServices.cs",
-              "ToolTip": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\EnrollmentServices.cs",
-              "RelativeToolTip": "EducationalPlatform\\services\\EnrollmentServices.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAkwGYAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T14:33:16.927Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -71,32 +62,59 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ISubjectServices.cs",
+              "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\ISubjectServices.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\services\\ISubjectServices.cs",
+              "ToolTip": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\ISubjectServices.cs",
+              "RelativeToolTip": "EducationalPlatform\\services\\ISubjectServices.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAuwBAAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-11T04:54:16.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnrollmentServices.cs",
+              "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\EnrollmentServices.cs",
+              "RelativeDocumentMoniker": "EducationalPlatform\\services\\EnrollmentServices.cs",
+              "ToolTip": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\EnrollmentServices.cs",
+              "RelativeToolTip": "EducationalPlatform\\services\\EnrollmentServices.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGYAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T14:33:16.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "SubjectService.cs",
               "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\SubjectService.cs",
               "RelativeDocumentMoniker": "EducationalPlatform\\services\\SubjectService.cs",
               "ToolTip": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\services\\SubjectService.cs",
               "RelativeToolTip": "EducationalPlatform\\services\\SubjectService.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAgwFMAAABDAAAA",
+              "ViewState": "AQIAAOEAAAAAAAAAAAAuwO8AAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T11:56:04.305Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "SubjectController.cs",
               "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\Controllers\\SubjectController.cs",
               "RelativeDocumentMoniker": "EducationalPlatform\\Controllers\\SubjectController.cs",
               "ToolTip": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\Controllers\\SubjectController.cs",
               "RelativeToolTip": "EducationalPlatform\\Controllers\\SubjectController.cs",
-              "ViewState": "AQIAAGoAAAAAAAAAAAAwwCkAAAAhAAAA",
+              "ViewState": "AQIAAKMAAAAAAAAAAAAuwLEAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T11:49:56.718Z"
+              "WhenOpened": "2024-06-10T11:49:56.718Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "20240610114545_upd.cs",
               "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\Migrations\\20240610114545_upd.cs",
               "RelativeDocumentMoniker": "EducationalPlatform\\Migrations\\20240610114545_upd.cs",
@@ -108,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "EnrollmentDto.cs",
               "DocumentMoniker": "D:\\Field Training Project\\New folder\\New folder\\EducationalPlatform\\DTO\\EnrollmentDto.cs",
               "RelativeDocumentMoniker": "EducationalPlatform\\DTO\\EnrollmentDto.cs",

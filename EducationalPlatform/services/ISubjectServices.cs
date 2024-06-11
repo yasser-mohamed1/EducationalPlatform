@@ -14,5 +14,6 @@ namespace EducationalPlatform.services
         public Task<string> GetTeacherNameForAsubject(int id);
 		public bool SubjectExists(int id);
 		public Task<TeacherBannerDto> GetTheTeacherForAsubject(int subid);
+		public Task<List<SubjectDto>> GetAllSubjectsEnrolledByAstudnt(int StudentId);
 	}
 }

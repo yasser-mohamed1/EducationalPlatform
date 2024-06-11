@@ -97,7 +97,7 @@ namespace EducationalPlatform.services
 					Term = subject.Term,
                     totalPrice = subject.totalPrice,
                     isOnilne = subject.isOnilne,
-                    isActive = subject.isActive
+                    isActive = subject.isActive,
                 };
 				Context.Subjects.Add(s);
 				try
@@ -227,6 +227,38 @@ namespace EducationalPlatform.services
 				catch (Exception ex) {
 
 					throw new Exception("The Operaion Failed");
+				}
+			}
+		}
+		public async Task<List<SubjectDto>>GetAllSubjectsEnrolledByAstudnt(int Studentid)
+		{
+			bool exis=await Context.Students.AnyAsync(c=>c.Id== Studentid);
+			if(!exis) { throw new Exception("The Student Not Found"); }
+			else
+			{
+	
+				List<Enrollment> En = await Context.Enrollments.Where(c => c.StudentId == Studentid ).ToListAsync();
+				if (En == null || En.Count == 0)
+				{
+					throw new Exception("The student is not enrolled in any subjects.");
+				}
+				else
+				{
+					List<SubjectDto> subjectList = new List<SubjectDto>();
+					foreach (var enrollment in En)
+					{
+						SubjectDto subject = await GetSubjectByIdAsync(enrollment.SubjectIdd);
+						if (subject != null)
+						{
+							subjectList.Add(subject);
+						}
+						else
+						{
+							throw new Exception($"Subject with ID {enrollment.SubjectIdd} not found.");
+						}
+					}
+
+					return subjectList;
 				}
 			}
 		}
