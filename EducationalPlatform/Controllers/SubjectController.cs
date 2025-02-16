@@ -38,13 +38,8 @@ namespace EducationalPlatform.Controllers
 				ProfileImageUrl = subject.Teacher.ProfileImageUrl,
                 TeacherName = subject.Teacher.FirstName + " " + subject.Teacher.LastName,
                 Term = subject.Term,
-<<<<<<< HEAD
                 isActive = subject.isActive,
                 isOnilne = subject.isOnilne,
-=======
-				isActive=subject.isActive,
-				isOnilne = subject.isOnilne,	
->>>>>>> b863bce590f6fa5168780ed6dd2b221c080a6bdc
             }).ToListAsync();
 
             return Ok(subjects);
