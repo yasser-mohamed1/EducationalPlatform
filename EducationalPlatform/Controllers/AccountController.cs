@@ -1,7 +1,6 @@
 ﻿using EducationalPlatform.DTO;
 using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace EducationalPlatform.Controllers
 {
