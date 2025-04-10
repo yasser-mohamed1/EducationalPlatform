@@ -15,6 +15,17 @@ namespace EducationalPlatform.Services
 
         public async Task<string> RegisterStudentAsync(RegisterStudentDto studentDto)
         {
+            // Check if username or email already exists (this could be done by calling the repository)
+            if (await _studentRepository.IsUsernameTakenAsync(studentDto.Username))
+            {
+                return "Username already exists";
+            }
+
+            if (await _studentRepository.IsEmailTakenAsync(studentDto.Email))
+            {
+                return "Email is already registered";
+            }
+
             var user = new ApplicationUser
             {
                 UserName = studentDto.Username,
@@ -28,6 +39,7 @@ namespace EducationalPlatform.Services
                 }
             };
 
+            // Create user in the repository
             var result = await _studentRepository.CreateUserAsync(user, studentDto.Password);
 
             if (!result.Succeeded)
@@ -36,12 +48,9 @@ namespace EducationalPlatform.Services
             }
 
             await _studentRepository.AddUserToRoleAsync(user, "Student");
-            //await _studentRepository.AddStudentAsync(user.Student);
             await _studentRepository.SaveChangesAsync();
 
             return "Student Registration Success";
         }
-
-       
     }
 }
