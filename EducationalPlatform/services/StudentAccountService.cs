@@ -15,7 +15,6 @@ namespace EducationalPlatform.Services
 
         public async Task<string> RegisterStudentAsync(RegisterStudentDto studentDto)
         {
-            // Check if username or email already exists (this could be done by calling the repository)
             if (await _studentRepository.IsUsernameTakenAsync(studentDto.Username))
             {
                 return "Username already exists";
@@ -24,6 +23,11 @@ namespace EducationalPlatform.Services
             if (await _studentRepository.IsEmailTakenAsync(studentDto.Email))
             {
                 return "Email is already registered";
+            }
+
+            if (studentDto.Password.Length < 8)
+            {
+                return "Weak password";
             }
 
             var user = new ApplicationUser

@@ -31,7 +31,7 @@ namespace EducationalPlatform.Tests.Services
             var result = await _service.RegisterStudentAsync(dto);
 
             // Assert
-            Assert.AreEqual("Username already exists", result);
+            Assert.That(result, Is.EqualTo("Username already exists"));
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace EducationalPlatform.Tests.Services
             var result = await _service.RegisterStudentAsync(dto);
 
             // Assert
-            Assert.AreEqual("Email is already registered", result);
+            Assert.That(result, Is.EqualTo("Email is already registered"));
         }
 
         [Test]
@@ -53,17 +53,13 @@ namespace EducationalPlatform.Tests.Services
         {
             // Arrange
             var dto = CreateValidStudentDto();
-
-            IdentityResult identityResult = IdentityResult.Failed(new IdentityError { Description = "Weak password" });
-
-            _mockStudentRepository.Setup(r => r.CreateUserAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
-                .ReturnsAsync(identityResult);
+            dto.Password = "123";
 
             // Act
             var result = await _service.RegisterStudentAsync(dto);
 
             // Assert
-            Assert.AreEqual("Weak password", result);
+            Assert.That(result, Is.EqualTo("Weak password"));
         }
 
         [Test]
@@ -71,17 +67,14 @@ namespace EducationalPlatform.Tests.Services
         {
             // Arrange
             var dto = CreateValidStudentDto();
-
-            IdentityResult identityResult = IdentityResult.Success;
+            var identityResult = IdentityResult.Success;
 
             _mockStudentRepository.Setup(r => r.IsUsernameTakenAsync(dto.Username)).ReturnsAsync(false);
             _mockStudentRepository.Setup(r => r.IsEmailTakenAsync(dto.Email)).ReturnsAsync(false);
-            _mockStudentRepository.Setup(r => r.CreateUserAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+            _mockStudentRepository.Setup(r => r.CreateUserAsync(It.IsAny<ApplicationUser>(), dto.Password))
                 .ReturnsAsync(identityResult);
-
             _mockStudentRepository.Setup(r => r.AddUserToRoleAsync(It.IsAny<ApplicationUser>(), "Student"))
-                .Returns(Task.FromResult(identityResult));
-
+                .ReturnsAsync(identityResult);
             _mockStudentRepository.Setup(r => r.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
@@ -89,7 +82,7 @@ namespace EducationalPlatform.Tests.Services
             var result = await _service.RegisterStudentAsync(dto);
 
             // Assert
-            Assert.AreEqual("Student Registration Success", result);
+            Assert.That(result, Is.EqualTo("Student Registration Success"));
         }
 
         private RegisterStudentDto CreateValidStudentDto()
@@ -102,9 +95,8 @@ namespace EducationalPlatform.Tests.Services
                 Email = "john.doe@example.com",
                 Phone = "+201234567890",
                 Level = "Beginner",
-                Password = "password123"
+                Password = "password123A!"
             };
         }
-
     }
 }
