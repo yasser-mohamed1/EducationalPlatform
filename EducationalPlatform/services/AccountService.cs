@@ -18,7 +18,7 @@ namespace EducationalPlatform.Services
             _config = config;
         }
 
-        public async Task<object> LoginAsync(LoginUserDto userDto)
+        public async Task<LoginResponseDto> LoginAsync(LoginUserDto userDto)
         {
             var user = await _userRepository.FindByNameAsync(userDto.userName);
             if (user == null || !await _userRepository.CheckPasswordAsync(user, userDto.Password))
@@ -50,12 +50,12 @@ namespace EducationalPlatform.Services
                 signingCredentials: signingCredentials
             );
 
-            return new
+            return new LoginResponseDto
             {
-                id = user.userId,
+                Id = user.userId,
                 Role = userRole,
-                token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = token.ValidTo
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = token.ValidTo
             };
         }
     }

@@ -4,6 +4,6 @@ namespace EducationalPlatform.Services
 {
     public interface IAccountService
     {
-        Task<object> LoginAsync(LoginUserDto userDto);
+        Task<LoginResponseDto> LoginAsync(LoginUserDto userDto);
     }
 }
