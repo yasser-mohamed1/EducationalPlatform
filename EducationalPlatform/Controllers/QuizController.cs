@@ -82,7 +82,7 @@ namespace EducationalPlatform.Controllers
                 var quiz = await _quizService.UpdateQuizAsync(id, dto);
                 return Ok(quiz);
             }
-            catch (KeyNotFoundException ex)
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
@@ -96,7 +96,7 @@ namespace EducationalPlatform.Controllers
                 await _quizService.DeleteQuizAsync(id);
                 return NoContent();
             }
-            catch (KeyNotFoundException ex)
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }

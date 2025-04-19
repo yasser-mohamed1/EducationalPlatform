@@ -34,13 +34,20 @@ public class TeacherController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTeacher(int id, [FromForm] UpdateTeacherDto dto)
     {
-        var result = await _teacherService.UpdateTeacherAsync(id, dto, HttpContext);
-        if (!result)
+        try
         {
-            return NotFound($"No Teacher was found with id : {id}");
-        }
+            var result = await _teacherService.UpdateTeacherAsync(id, dto, HttpContext);
+            if (!result)
+            {
+                return NotFound($"No Teacher was found with id : {id}");
+            }
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     [HttpDelete("{id}")]

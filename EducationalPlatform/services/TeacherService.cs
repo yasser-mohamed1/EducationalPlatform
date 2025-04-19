@@ -84,11 +84,24 @@ public class TeacherService : ITeacherService
         return _teacherRepository.DeleteTeacherAsync(id);
     }
 
-    private async Task<string> UploadProfileImageAsync(int id, IFormFile imageFile)
+    public async Task<string> UploadProfileImageAsync(int id, IFormFile imageFile)
     {
         var teacher = await _teacherRepository.GetTeacherByIdAsync(id);
         if (teacher == null)
             return "";
+
+        var permittedMimeTypes = new[] { "image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp" };
+        if (imageFile == null || imageFile.Length == 0 || !permittedMimeTypes.Contains(imageFile.ContentType))
+        {
+            throw new Exception("Provide a valid image format");
+        }
+
+        var permittedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp" };
+        var extension = Path.GetExtension(imageFile.FileName).ToLowerInvariant();
+        if (!permittedExtensions.Contains(extension))
+        {
+            return "";
+        }
 
         if (!string.IsNullOrEmpty(teacher.ProfileImageUrl))
         {
@@ -105,7 +118,7 @@ public class TeacherService : ITeacherService
             Directory.CreateDirectory(uploadsFolder);
         }
 
-        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+        var fileName = Guid.NewGuid().ToString() + extension;
         var filePath = Path.Combine(uploadsFolder, fileName);
 
         using (var stream = new FileStream(filePath, FileMode.Create))

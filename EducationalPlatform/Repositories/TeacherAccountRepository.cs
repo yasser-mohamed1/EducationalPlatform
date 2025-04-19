@@ -1,6 +1,7 @@
 ﻿using EducationalPlatform.Data;
 using EducationalPlatform.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducationalPlatform.Repositories
 {
@@ -13,6 +14,16 @@ namespace EducationalPlatform.Repositories
         {
             _userManager = userManager;
             _context = context;
+        }
+
+        public async Task<bool> IsUsernameTakenAsync(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName == username);
+        }
+
+        public async Task<bool> IsEmailTakenAsync(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
         }
 
         public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password)

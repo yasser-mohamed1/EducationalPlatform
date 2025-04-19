@@ -95,17 +95,22 @@ namespace EducationalPlatform.Repositories
         {
             var query = _context.Subjects.Include(s => s.Teacher).AsQueryable();
 
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                query = query.Where(s => (s.subjName.LevenshteinDistance(searchQuery) <= 3) && ContainsMajorityOfCharacters(s.subjName, searchQuery));
-            }
-
             if (!string.IsNullOrEmpty(governorate))
             {
                 query = query.Where(s => s.Teacher.Governorate == governorate);
             }
 
-            return await query.Select(s => new SearchSubjectDto
+            var subjects = await query.ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                subjects = subjects
+                    .Where(s => s.subjName.LevenshteinDistance(searchQuery) <= 3 &&
+                                ContainsMajorityOfCharacters(s.subjName, searchQuery))
+                    .ToList();
+            }
+
+            return subjects.Select(s => new SearchSubjectDto
             {
                 subjectId = s.Id,
                 subjName = s.subjName,
@@ -117,34 +122,42 @@ namespace EducationalPlatform.Repositories
                 TeacherId = s.TeacherId,
                 teacherName = s.Teacher.FirstName + " " + s.Teacher.LastName,
                 profileImageUrl = s.Teacher.ProfileImageUrl
-            }).ToListAsync();
+            });
         }
 
         public async Task<IEnumerable<TeacherWithSubjectDTO>> SearchTeachers(string searchQuery, string governorate)
         {
-            var query = _context.Teachers.Include(t => t.Subjects).AsQueryable();
-
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                query = query.Where(t => (t.FirstName + t.LastName).LevenshteinDistance(searchQuery) <= 3 ||
-                                          t.FirstName.LevenshteinDistance(searchQuery) <= 1 ||
-                                          t.LastName.LevenshteinDistance(searchQuery) <= 1);
-            }
+            var query = _context.Teachers
+                                .Include(t => t.Subjects)
+                                .Include(t => t.User)
+                                .AsQueryable();
 
             if (!string.IsNullOrEmpty(governorate))
             {
                 query = query.Where(t => t.Governorate == governorate);
             }
 
-            return await query.Select(t => new TeacherWithSubjectDTO
+            var teachers = await query.ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                teachers = teachers
+                    .Where(t =>
+                        (t.FirstName + t.LastName).LevenshteinDistance(searchQuery) <= 3 ||
+                        t.FirstName.LevenshteinDistance(searchQuery) <= 1 ||
+                        t.LastName.LevenshteinDistance(searchQuery) <= 1)
+                    .ToList();
+            }
+
+            return teachers.Select(t => new TeacherWithSubjectDTO
             {
                 Id = t.Id,
                 FirstName = t.FirstName,
                 LastName = t.LastName,
                 ProfileImageUrl = t.ProfileImageUrl,
                 Address = t.Address,
-                Email = t.User.Email,
-                Phone = t.User.PhoneNumber,
+                Email = t.User?.Email,
+                Phone = t.User?.PhoneNumber,
                 Governorate = t.Governorate,
                 Subjects = t.Subjects.Select(s => new SubjectDto
                 {
@@ -156,7 +169,7 @@ namespace EducationalPlatform.Repositories
                     Term = s.Term,
                     AddingTime = s.AddingTime
                 }).ToList()
-            }).ToListAsync();
+            });
         }
 
         private static bool ContainsMajorityOfCharacters(string source, string target)

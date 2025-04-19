@@ -15,6 +15,21 @@ namespace EducationalPlatform.Services
 
         public async Task<string> RegisterTeacherAsync(RegisterTeacherDto teacherDto)
         {
+            if (await _teacherRepository.IsUsernameTakenAsync(teacherDto.Username))
+            {
+                return "Username already exists";
+            }
+
+            if (await _teacherRepository.IsEmailTakenAsync(teacherDto.Email))
+            {
+                return "Email is already registered";
+            }
+
+            if (teacherDto.Password.Length < 8)
+            {
+                return "Weak password";
+            }
+
             var user = new ApplicationUser
             {
                 UserName = teacherDto.Username,
