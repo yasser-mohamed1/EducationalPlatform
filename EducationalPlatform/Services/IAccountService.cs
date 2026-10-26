@@ -1,0 +1,9 @@
+﻿using EducationalPlatform.Dtos;
+
+namespace EducationalPlatform.Services
+{
+    public interface IAccountService
+    {
+        Task<LoginResponseDto> LoginAsync(LoginUserDto userDto);
+    }
+}

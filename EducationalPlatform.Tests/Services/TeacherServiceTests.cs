@@ -1,4 +1,4 @@
-﻿using EducationalPlatform.DTO;
+﻿using EducationalPlatform.Dtos;
 using EducationalPlatform.Entities;
 using EducationalPlatform.Repositories;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +21,7 @@ namespace EducationalPlatform.Tests.Services
         {
             _mockRepo = new Mock<ITeacherRepository>();
             _mockEnv = new Mock<IWebHostEnvironment>();
-            _mockEnv.Setup(e => e.WebRootPath).Returns("/test/path");
+            _mockEnv.Setup(e => e.WebRootPath).Returns("./test/path");
 
             var store = new Mock<IUserStore<ApplicationUser>>();
             _mockUserManager = new Mock<UserManager<ApplicationUser>>(

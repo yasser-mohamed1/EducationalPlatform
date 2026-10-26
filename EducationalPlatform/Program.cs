@@ -1,7 +1,7 @@
 using EducationalPlatform.Data;
 using EducationalPlatform.Entities;
 using EducationalPlatform.Repositories;
-using EducationalPlatform.services;
+using EducationalPlatform.Services;
 using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;

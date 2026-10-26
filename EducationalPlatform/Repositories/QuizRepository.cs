@@ -1,5 +1,5 @@
 ﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
+using EducationalPlatform.Dtos;
 using EducationalPlatform.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
