@@ -1,4 +1,4 @@
-﻿using EducationalPlatform.DTO;
+﻿using EducationalPlatform.Dtos;
 using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

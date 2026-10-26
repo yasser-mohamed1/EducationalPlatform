@@ -1,4 +1,4 @@
-﻿using EducationalPlatform.DTO;
+﻿using EducationalPlatform.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/[controller]")]

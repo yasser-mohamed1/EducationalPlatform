@@ -1,4 +1,4 @@
-﻿using EducationalPlatform.DTO;
+﻿using EducationalPlatform.Dtos;
 using EducationalPlatform.Repositories;
 using EducationalPlatform.Services;
 using Moq;

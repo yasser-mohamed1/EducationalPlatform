@@ -1,4 +1,4 @@
-﻿using EducationalPlatform.DTO;
+﻿using EducationalPlatform.Dtos;
 using EducationalPlatform.Entities;
 
 namespace EducationalPlatform.Repositories

@@ -1,7 +1,7 @@
 ﻿using EducationalPlatform.Data;
-using EducationalPlatform.DTO;
+using EducationalPlatform.Dtos;
 using EducationalPlatform.Entities;
-using EducationalPlatform.services;
+using EducationalPlatform.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

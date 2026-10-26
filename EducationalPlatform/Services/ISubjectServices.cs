@@ -1,0 +1,19 @@
+﻿using EducationalPlatform.Dtos;
+using EducationalPlatform.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace EducationalPlatform.Services
+{
+	public interface ISubjectServices
+	{
+		public Task<List<SubjectDto >> GetAllSubjectsForATeacher(int TeacherId);
+		public Task DeleteSubjectByIdAsync (int id);
+		public Task UpdateSubjectByIdAsync(int id, UpdateSubjectDto ss);
+		public Task<SubjectDto> CreateSubjectAsync(CreateSubjectDTO subject);
+		public Task<SubjectDto> GetSubjectByIdAsync(int id);
+        public Task<string> GetTeacherNameForAsubject(int id);
+		public bool SubjectExists(int id);
+		public Task<TeacherBannerDto> GetTheTeacherForAsubject(int subid);
+		public Task<List<SubjectDto>> GetAllSubjectsEnrolledByAstudnt(int StudentId);
+	}
+}
